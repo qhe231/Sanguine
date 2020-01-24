@@ -1,3 +1,5 @@
+package ictgradschool.project;
+
 import ictgradschool.project.User;
 
 import java.sql.*;
