@@ -6,29 +6,62 @@
   Time: 3:10 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
+
+    <style>
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li a:hover {
+            color: blue;
+        }
+
+        nav {
+            background-color: grey;
+            overflow: hidden;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-bottom: 2px solid black;
+        }
+
+        nav a {
+            color: white;
+            text-align: center;
+            padding:  30px;
+            text-decoration: none;
+            font-size: 25px;
+            float: left;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+
+    </style>
+
     <title>Title</title>
 </head>
 <body>
 
 <nav>
     <ul>
-        <li>Main</li>
-
-        <c:choose>
-            <c:when test="">
-        <li>Homepage</li>
-        <li>User account</li>
-            </c:when>
-
-            <c:otherwise>
-        <li>Login</li>
-         <li>Signup</li>
-            </c:otherwise>
-
-        </c:choose>
+        <li class="left"><a href="defaultlink.jsp">Articles</a></li>
+        <li class="right"><a href="defaultlink.jsp">User account</a></li>
+        <li class="right"><a href="defaultlink.jsp">User home</a></li>
+        <li class="right"><a href="defaultlink.jsp">Sign up</a></li>
+        <li class="right"><a href="defaultlink.jsp">Log in</a></li>
     </ul>
 </nav>
 
