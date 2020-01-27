@@ -10,10 +10,23 @@
 <html>
 <head>
     <title>Account Settings</title>
+
+
+    <style>
+        .avatar {
+            width: 100px;
+        }
+
+        .avatar:hover {
+            width:300px;
+        }
+
+    </style>
+
     <script type="text/javascript">
 
         //Make the form to change username visible, hide change button
-        async function showChangeUsername() {
+        function showChangeUsername() {
             const div = document.getElementById("changeUsername");
             div.style.display = "initial";
 
@@ -22,26 +35,34 @@
         }
 
         //Make the form to change password visible, hide change button
-        async function showChangePassword() {
+        function showChangePassword() {
             const div = document.getElementById("changePassword");
             div.style.display = "initial";
 
             const btn = document.getElementById("passwordBtn");
             btn.style.display = "none";
-
         }
 
-        //Make the form to change avatar visible, hide change button
-        async function showChangeAvatar() {
-            const div = document.getElementById("changeAvatar");
+        //Make the form to upload new avatar visible, hide change button
+        function showUploadAvatar() {
+            const div = document.getElementById("uploadAvatar");
             div.style.display = "initial";
 
-            const btn = document.getElementById("avatarBtn");
+            const btn = document.getElementById("uploadAvatarBtn");
+            btn.style.display = "none";
+        }
+
+        //Make the form to choose avatar visible, hide change button
+        function showChooseAvatar() {
+            const div = document.getElementById("chooseAvatar");
+            div.style.display = "initial";
+
+            const btn = document.getElementById("chooseAvatarBtn");
             btn.style.display = "none";
         }
 
         //Make the form to change blogname visible, hide change button
-        async function showChangeBlogname() {
+        function showChangeBlogname() {
             const div = document.getElementById("changeBlogname");
             div.style.display = "initial";
 
@@ -50,7 +71,7 @@
         }
 
         //Make the form to delete account visible, hide delete button
-        async function showDeleteAccount() {
+         function showDeleteAccount() {
             const div = document.getElementById("deleteAccount");
             div.style.display = "initial";
 
@@ -67,8 +88,6 @@
 <%--Button to change username--%>
 <h2>Username</h2>
 ${username} <%-- TODO display username--%>
-Kitty123 <%-- dummy username--%>
-<br><br>
 <button onclick="showChangeUsername()" id="usernameBtn">Change</button>
 
 <%--Form to change username--%>
@@ -109,13 +128,27 @@ Kitty123 <%-- dummy username--%>
 
 <%--Button to change avatar--%>
 <h2>Avatar</h2>
-<button onclick="showChangeAvatar()" id="avatarBtn">Change</button>
+<button onclick="showUploadAvatar()" id="uploadAvatarBtn">Upload avatar</button>
 
-<div style="display: none" id="changeAvatar">
+<div style="display: none" id="uploadAvatar">
     <form action="./"> <%--TODO--%>
-
         Upload new avatar: <input type="file" name="newavatar" accept="image/*">
         <br><br>
+        <input type="submit">
+        <br><br>
+    </form>
+</div>
+
+<button onclick="showChooseAvatar()" id="chooseAvatarBtn">Select default avatar</button>
+
+<div style="display: none" id="chooseAvatar">
+    <form action="./"> <%--TODO--%>
+        Select default avatar: <br>
+        <img src="./images/lion.jpg" alt="Lion" class="avatar">
+        <input type="radio" name="avatar" value="lion"> Lion <br>
+        <img src="./images/cat.jpg" alt="Cat" class="avatar">
+        <input type="radio" name="avatar" value="cat"> Cat <br>
+        <br>
         <input type="submit">
     </form>
 </div>
@@ -126,7 +159,6 @@ Kitty123 <%-- dummy username--%>
 
 <div style="display: none" id="changeBlogname">
     <form action="./ChangeBlogname">
-
         New blogname: <input type="text" name="newblogname">
         <br><br>
         <input type="submit">
@@ -139,7 +171,6 @@ Kitty123 <%-- dummy username--%>
 
 <h2>Account</h2>
 <button onclick="showDeleteAccount()" id="deleteBtn">Delete</button>
-
 
 <div style="display: none" id="deleteAccount">
     <form action="./DeleteAccount">
