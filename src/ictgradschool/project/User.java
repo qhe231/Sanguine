@@ -1,8 +1,11 @@
 package ictgradschool.project;
 
+//@author: Peter He
+
 public class User {
     Integer userId;
     String userName;
+    String blogName;
     String avatarUrl;
     String hashedPassword;
     String salt;
@@ -43,6 +46,14 @@ public class User {
 
     public Integer getHashNum() {
         return hashNum;
+    }
+
+    public String getBlogName() {
+        return blogName;
+    }
+
+    public void setBlogName(String blogName) {
+        this.blogName = blogName;
     }
 
     public void setUserId(Integer userId) {
