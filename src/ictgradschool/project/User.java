@@ -3,13 +3,13 @@ package ictgradschool.project;
 //@author: Peter He
 
 public class User {
-    Integer userId;
-    String userName;
-    String blogName;
-    String avatarUrl;
-    String hashedPassword;
-    String salt;
-    Integer hashNum;
+   private Integer userId;
+   private String userName;
+   private String blogName;
+   private String avatarUrl;
+   private String hashedPassword;
+   private String salt;
+   private Integer hashNum;
 
     public User(){
 
