@@ -19,11 +19,11 @@ public class ChangeBlognameServlet extends HttpServlet {
 
         String newBlogname = req.getParameter("newblogname");
 
-        String message = "Unable to update blogname";
-        req.setAttribute("changeBlognameMessage", message);
-
 //          TODO update blogname method call:
 //        UserDAO.updateBlogname(userId, newBlogname);
+
+        String message = "Unable to update blogname";
+        req.setAttribute("changeBlognameMessage", message);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
         dispatcher.forward(req, resp);
