@@ -61,7 +61,7 @@
     <c:forEach var="article" items="${articles}">
         <tr>
             <td><a href="">${article.title}</a></td>
-            <td>username + avatar</td>
+            <td><span>${article.userI}</span> <span><img src=""></span></td>
             <td>CommentsNum</td>
             <td>${article.datePosted}</td>
         </tr>
