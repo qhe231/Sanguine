@@ -58,10 +58,21 @@
 <nav>
     <ul>
         <li class="left"><a href="defaultlink.jsp">Articles</a></li>
+
+        <c:choose>
+
+            <c:when test="${user} != null">
         <li class="right"><a href="defaultlink.jsp">User account</a></li>
         <li class="right"><a href="defaultlink.jsp">User home</a></li>
+        <li class="right"><a href="defaultlink.jsp">Log out</a></li>
+            </c:when>
+
+            <c:otherwise>
         <li class="right"><a href="defaultlink.jsp">Sign up</a></li>
         <li class="right"><a href="defaultlink.jsp">Log in</a></li>
+            </c:otherwise>
+
+        </c:choose>
     </ul>
 </nav>
 
