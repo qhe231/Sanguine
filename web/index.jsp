@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Temporary Landing Page</title>
+    <title>JESP Blog</title>
     <style type="text/css">
         body {
             width: 600px;
@@ -45,12 +45,33 @@
 </head>
 <body>
 
+<h1>Welcome to JESP Blog</h1>
 
-<h1>Temporary Landing Page</h1>
+<table>
+    <caption>Newest Articles</caption>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Comments</th>
+        <th>Posted Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="article" items="${articles}">
+        <tr>
+            <td><a href="">${article.title}</a></td>
+            <td>username + avatar</td>
+            <td>CommentsNum</td>
+            <td>${article.datePosted}</td>
+        </tr>
+        <tr>
+            <td colspan="4">Excerpt</td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
 
-<p>TODO: Replace or modify this page with an appropriate homepage for your project.</p>
-
-<p><a href="<c:url value="/HelloWorld"/>">Hello, world!</a></p>
 
 </body>
 </html>
