@@ -17,9 +17,9 @@ public class Article implements Serializable {
 
     private int parentId;
 
-    public Article(int articleId, int authorId, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
+    public Article(int articleId, UserInfo author, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
         this.articleId = articleId;
-        this.author = UserInfoDAO.getUserInfo(authorId);
+        this.author = author;
         this.title = title;
         this.content = content;
         this.postedTimeStamp = postedTimeStamp;
@@ -27,8 +27,8 @@ public class Article implements Serializable {
         this.parentId = parentId;
     }
 
-    public Article(int authorId, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
-        this.author = UserInfoDAO.getUserInfo(authorId);
+    public Article(UserInfo author, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
+        this.author = author;
         this.title = title;
         this.content = content;
         this.postedTimeStamp = postedTimeStamp;

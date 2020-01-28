@@ -40,7 +40,7 @@ public class ArticleServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
+/*
     private Article getTestData() {
         List<Article> thread = new ArrayList<>();
         List<Article> subThread = new ArrayList<>();
@@ -49,5 +49,5 @@ public class ArticleServlet extends HttpServlet {
         thread.add(new Article(1, 1, "Comment", "visible?", new Timestamp(2020, 1, 27, 11, 45, 0, 0), subThread, 0));
         Article a = new Article(0, 0, "Head of Page", "This is garbage", new Timestamp(2020, 1, 27, 11, 10, 57, 0), thread, -1);
         return a;
-    }
+    }*/
 }

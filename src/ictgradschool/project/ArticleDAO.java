@@ -34,7 +34,8 @@ public class ArticleDAO {
             try (ResultSet r = s.getResultSet()) {
                 while (r.next()) {
                     int articleId = r.getInt(1);
-                    Article a = new Article(articleId, r.getInt(6), r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId);
+                    UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
+                    Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId);
                     articles.add(a);
                 }
             }
@@ -56,7 +57,8 @@ public class ArticleDAO {
             s.execute();
             try (ResultSet r = s.getResultSet()) {
                 if (r.next()) {
-                    return new Article(articleId, r.getInt(6), r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), r.getInt(5));
+                    UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
+                    return new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), r.getInt(5));
                 }
             }
         }
@@ -77,7 +79,7 @@ public class ArticleDAO {
             s.setString(2, article.getTitle());
             s.setString(3, article.getContent());
             s.setInt(4, article.getParentId());
-            s.setInt(5, article.getAuthor().get);
+            s.setInt(5, article.getAuthor().getUserId());
 
             int rowsAffected = s.executeUpdate();
 
