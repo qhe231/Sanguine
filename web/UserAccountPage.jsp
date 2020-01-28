@@ -345,6 +345,10 @@ ${DOB}
 </select>
 </div>
 
+<c:if test="${changeDOBMessage != null}">
+    <div>${changeDOBMessage}</div>
+</c:if>
+
 <h2>Account</h2>
 <button onclick="showForm('deleteAccount', 'deleteBtn')" id="deleteBtn">Delete</button>
 
