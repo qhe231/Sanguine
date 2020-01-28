@@ -31,7 +31,7 @@
             userNames.add("asdf");
             const possibleUserName = document.getElementById("userName").value;
 
-            for (var i = 0; i < userNames.length; i++) {
+            for (let i = 0; i < userNames.length; i++) {
 
                 if (userNames[i] !== possibleUserName) {
                     document.getElementById("userNameMessage").style.color = 'green';
@@ -57,7 +57,7 @@
             <input name="lastName" value=""><br>
 
             <label>User Name: </label>
-            <input name="userName" value="" onkeyup="checkUserName()"><br>
+            <input name="userName" onkeyup="checkUserName()" id="userName"><br>
             <span id="userNameMessage"></span>
                 <br>
 
