@@ -7,7 +7,7 @@ import java.sql.*;
 public class UserInfoDAO {
 
     public static UserInfo getUserInfoById(Connection conn, int userId) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user_info WHERE userId = ? ")) {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user_info INNER JOIN user_authentication USING (userId) WHERE userId = ?")) {
             stmt.setInt(1, userId);
             try (ResultSet rs = stmt.executeQuery()) {
                 rs.next();
@@ -17,13 +17,14 @@ public class UserInfoDAO {
                         rs.getString(4),
                         rs.getDate(5),
                         rs.getString(6),
-                        rs.getString(7));
+                        rs.getString(7),
+                        rs.getString(8));
             }
         }
     }
 
 
-    public static boolean insertANewUserAuthentication(UserInfo ui, Connection conn) throws SQLException {
+    public static boolean insertANewUserInfo(UserInfo ui, Connection conn) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_info VALUES (?,?,?,?,?,?,?)")) {
             stmt.setInt(1, ui.getUserId());
             stmt.setString(2, ui.getBlogName());
