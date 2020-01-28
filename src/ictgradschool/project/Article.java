@@ -8,7 +8,7 @@ import java.util.List;
 public class Article implements Serializable {
 
     private int articleId;
-    private int authorId;
+    private UserInfo Author;
     private String title;
     private String content;
     private Timestamp postedTimeStamp;
@@ -19,7 +19,7 @@ public class Article implements Serializable {
 
     public Article(int articleId, int authorId, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
         this.articleId = articleId;
-        this.authorId = authorId;
+        this.author = UserInfoDAO.getUserInfo(authorId);
         this.title = title;
         this.content = content;
         this.postedTimeStamp = postedTimeStamp;
@@ -28,7 +28,7 @@ public class Article implements Serializable {
     }
 
     public Article(int authorId, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
-        this.authorId = authorId;
+        this.author = UserInfoDAO.getUserInfo(authorId);
         this.title = title;
         this.content = content;
         this.postedTimeStamp = postedTimeStamp;
@@ -44,12 +44,12 @@ public class Article implements Serializable {
         this.articleId = articleId;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public UserInfo getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthor(UserInfo author) {
+        this.author = author;
     }
 
     public String getTitle() {

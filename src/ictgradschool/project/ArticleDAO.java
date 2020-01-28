@@ -77,7 +77,7 @@ public class ArticleDAO {
             s.setString(2, article.getTitle());
             s.setString(3, article.getContent());
             s.setInt(4, article.getParentId());
-            s.setInt(5, article.getAuthorId());
+            s.setInt(5, article.getAuthor().get);
 
             int rowsAffected = s.executeUpdate();
 
