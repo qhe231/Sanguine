@@ -14,14 +14,14 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-@WebServlet(name="postArticle", urlPatterns = {"postArticle"})
+@WebServlet(name="postArticle", urlPatterns = {"/postArticle"})
 public class PostArticleServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Article article = new Article((UserInfo)(req.getSession(true).getAttribute("user")).getUserName(),
+        Article article = new Article(((UserInfo)req.getSession(true).getAttribute("user")),
                 req.getParameter("title"), req.getParameter("content"), new Timestamp((new Date()).getTime()),
-                new ArrayList<Article>(), req.getParameter("parentArticle"));
+                new ArrayList<>(), Integer.parseInt(req.getParameter("parentArticle")));
 
         try (Connection conn = DBConnectionUtils.getConnectionFromWebInf(this, "./WEB-INF/connection.properties")) {
             ArticleDAO.insertArticle(conn, article);
