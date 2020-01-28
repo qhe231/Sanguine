@@ -174,8 +174,11 @@ ${description}
 
 <h2>Date of Birth</h2>
 ${DOB}
+<button onclick="showForm('changeDateOfBirth', 'dobBtn')" id="dobBtn">Change</button>
 
-<div style="display: none" id="changeDOB">
+
+<div style="display: none" id="changeDateOfBirth">
+    <form action="./ChangeDateOfBirth">
 <select name="dob-day" id="dob-day">
     <option value="">Day</option>
     <option value="">---</option>
@@ -343,6 +346,8 @@ ${DOB}
     <option value="1901">1901</option>
     <option value="1900">1900</option>
 </select>
+        <input type="submit">
+    </form>
 </div>
 
 <c:if test="${changeDOBMessage != null}">
