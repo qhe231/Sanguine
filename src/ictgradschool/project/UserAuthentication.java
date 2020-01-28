@@ -15,7 +15,7 @@ public class UserAuthentication implements Serializable {
 
     }
 
-    public UserAuthentication(Integer userId, String userName, String avatarUrl, String hashedPassword, String salt, Integer hashNum) {
+    public UserAuthentication(Integer userId, String userName, String hashedPassword, String salt, Integer hashNum) {
         this.userId = userId;
         this.userName = userName;
         this.hashedPassword = hashedPassword;

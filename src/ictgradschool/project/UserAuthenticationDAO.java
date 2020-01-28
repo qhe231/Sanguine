@@ -9,6 +9,21 @@ import java.util.Arrays;
 
 public class UserAuthenticationDAO {
 
+    public static UserAuthentication getUserAuthenticationByUserName(Connection conn, String userName) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user_authentication WHERE userName = ?")) {
+            stmt.setString(1, userName);
+            try (ResultSet rs = stmt.executeQuery()) {
+                rs.next();
+                return new UserAuthentication(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5));
+            }
+
+        }
+    }
+
     public static boolean insertANewUserAuthentication(UserAuthentication ua, Connection conn) throws SQLException {
 
 //        insert ua without an ID number.
