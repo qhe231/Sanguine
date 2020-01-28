@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS user_info
 (
   userId      INT PRIMARY KEY NOT NULL,
   blogName    VARCHAR(100),
-  firstName   VARCHAR(50) NOT NULL,
-  lastName    VARCHAR(50) NOT NULL,
-  dateOfBirth DATE NOT NULL,
+  firstName   VARCHAR(50)     NOT NULL,
+  lastName    VARCHAR(50)     NOT NULL,
+  dateOfBirth DATE            NOT NULL,
   avatarURL   TEXT,
   profile     TEXT,
   FOREIGN KEY (userId) REFERENCES user_authentication (userId) ON DELETE CASCADE

@@ -13,13 +13,15 @@ public class UserInfo implements Serializable {
     private Date dateOfBirth;
     private String avatarURL;
     private String profile;
+    private String userName;
 
-    public UserInfo(){
+    public UserInfo() {
 
     }
 
-    public UserInfo(Integer userId, String blogName, String firstName, String lastName, Date dateOfBirth, String avatarURL, String profile){
+    public UserInfo(Integer userId, String blogName, String firstName, String lastName, Date dateOfBirth, String avatarURL, String profile, String userName) {
         this.userId = userId;
+        this.userName = userName;
         this.blogName = blogName;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -54,6 +56,14 @@ public class UserInfo implements Serializable {
 
     public String getProfile() {
         return profile;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public void setUserId(Integer userId) {
