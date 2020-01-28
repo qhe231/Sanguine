@@ -50,7 +50,13 @@
 
 <p>TODO: Replace or modify this page with an appropriate homepage for your project.</p>
 
+<p><a href="Login.jsp">Login</a> </p>
+<p><a href="SignUp.jsp">Sign Up</a> </p>
+
+
 <p><a href="<c:url value="/HelloWorld"/>">Hello, world!</a></p>
+
+
 
 </body>
 </html>
