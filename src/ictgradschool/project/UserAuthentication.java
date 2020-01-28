@@ -2,23 +2,22 @@ package ictgradschool.project;
 
 //@author: Peter He
 
-public class User {
+import java.io.Serializable;
+
+public class UserAuthentication implements Serializable {
    private Integer userId;
    private String userName;
-   private String blogName;
-   private String avatarUrl;
    private String hashedPassword;
    private String salt;
    private Integer hashNum;
 
-    public User(){
+    public UserAuthentication(){
 
     }
 
-    public User(Integer userId, String userName, String avatarUrl, String hashedPassword, String salt, Integer hashNum) {
+    public UserAuthentication(Integer userId, String userName, String avatarUrl, String hashedPassword, String salt, Integer hashNum) {
         this.userId = userId;
         this.userName = userName;
-        this.avatarUrl = avatarUrl;
         this.hashedPassword = hashedPassword;
         this.salt = salt;
         this.hashNum = hashNum;
@@ -30,10 +29,6 @@ public class User {
 
     public String getUserName() {
         return userName;
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
     }
 
     public String getHashedPassword() {
@@ -48,24 +43,12 @@ public class User {
         return hashNum;
     }
 
-    public String getBlogName() {
-        return blogName;
-    }
-
-    public void setBlogName(String blogName) {
-        this.blogName = blogName;
-    }
-
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
     }
 
     public void setHashedPassword(String hashedPassword) {
