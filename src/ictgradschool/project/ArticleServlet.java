@@ -11,10 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 @WebServlet(name="article", urlPatterns = {"/article"})
@@ -41,5 +37,4 @@ public class ArticleServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 }
