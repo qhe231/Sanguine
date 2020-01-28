@@ -8,7 +8,7 @@ import java.util.List;
 public class Article implements Serializable {
 
     private int articleId;
-    private UserInfo Author;
+    private UserInfo author;
     private String title;
     private String content;
     private Timestamp postedTimeStamp;
