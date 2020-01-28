@@ -11,12 +11,16 @@
 <head>
     <title>Account Settings</title>
 
+
     <style>
+
+        <%--Style avatar thumbnail--%>
         .avatar {
             width: 100px;
             height: 100px;
         }
 
+        /*When hovered over, thumbnail enlarges*/
         .avatar:hover {
             width:200px;
             height: 200px;
@@ -35,7 +39,7 @@
             btn.style.display = "none";
         }
 
-        //Make the form to change firstname visible, hide change button
+        //Make the form to change first name visible, hide change button
         function showChangeFirstname() {
             const div = document.getElementById("changeFirstname");
             div.style.display = "initial";
@@ -44,7 +48,7 @@
             btn.style.display = "none";
         }
 
-        //Make the form to change lastname visible, hide change button
+        //Make the form to change last name visible, hide change button
         function showChangeLastname() {
             const div = document.getElementById("changeLastname");
             div.style.display = "initial";
@@ -87,6 +91,9 @@
 
             const btn = document.getElementById("chooseAvatarBtn");
             btn.style.display = "none";
+
+            const uploadBtn = document.getElementById("uploadAvatarBtn");
+            uploadBtn.style.display = "none";
         }
 
         //Make the form to change blogname visible, hide change button
