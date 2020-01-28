@@ -2,13 +2,12 @@ package ictgradschool.project;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 public class Article implements Serializable {
 
     private int articleId;
-    private int authorId;
+    private UserInfo author;
     private String title;
     private String content;
     private Timestamp postedTimeStamp;
@@ -17,9 +16,9 @@ public class Article implements Serializable {
 
     private int parentId;
 
-    public Article(int articleId, int authorId, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
+    public Article(int articleId, UserInfo author, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
         this.articleId = articleId;
-        this.authorId = authorId;
+        this.author = author;
         this.title = title;
         this.content = content;
         this.postedTimeStamp = postedTimeStamp;
@@ -27,8 +26,8 @@ public class Article implements Serializable {
         this.parentId = parentId;
     }
 
-    public Article(int authorId, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
-        this.authorId = authorId;
+    public Article(UserInfo author, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
+        this.author = author;
         this.title = title;
         this.content = content;
         this.postedTimeStamp = postedTimeStamp;
@@ -44,12 +43,12 @@ public class Article implements Serializable {
         this.articleId = articleId;
     }
 
-    public int getAuthorId() {
-        return authorId;
+    public UserInfo getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(int authorId) {
-        this.authorId = authorId;
+    public void setAuthor(UserInfo author) {
+        this.author = author;
     }
 
     public String getTitle() {
