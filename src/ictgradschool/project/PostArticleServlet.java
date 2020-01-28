@@ -14,12 +14,12 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-@WebServlet(name="postArticle", urlPatterns = {"/postArticle"})
+@WebServlet(name = "postArticle", urlPatterns = {"/postArticle"})
 public class PostArticleServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Article article = new Article(((UserInfo)req.getSession(true).getAttribute("user")),
+        Article article = new Article(((UserInfo) req.getSession(true).getAttribute("user")),
                 req.getParameter("title"), req.getParameter("content"), new Timestamp((new Date()).getTime()),
                 new ArrayList<>(), Integer.parseInt(req.getParameter("parentArticle")));
 
@@ -28,8 +28,7 @@ public class PostArticleServlet extends HttpServlet {
             req.setAttribute("article", article);
 
             req.getRequestDispatcher("/article").forward(req, resp);
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
