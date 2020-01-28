@@ -35,7 +35,7 @@ public class DeleteAccountServlet extends HttpServlet {
 //        TODO if password does match, delete the account
 //        } else {
 
-//        UserDAO.deleteAccount(userId);
+//        UserAuthenticationDAO.deleteAccount(userId);
 
 //        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
 //        dispatcher.forward(req, resp);

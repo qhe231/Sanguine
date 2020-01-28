@@ -17,14 +17,14 @@ public class ChangeUsernameServlet extends HttpServlet  {
 //        TODO get userID off session:
 //        int userId = req.getSession().getAttribute("user").getId();
 
-        String newname = req.getParameter("newname");
+        String newName = req.getParameter("newname");
 
 //        TODO Error message?
 //        String someError = "Unable to update username";
 //        req.setAttribute("changeUsernameError", someError);
 
 //          TODO update username method call:
-//        UserDAO.updateUsername(userId, newname);
+//        UserAuthenticationDAO.updateUsername(userId, newName);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
         dispatcher.forward(req, resp);

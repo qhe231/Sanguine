@@ -20,7 +20,7 @@ public class ChangeBlognameServlet extends HttpServlet {
         String newBlogname = req.getParameter("newblogname");
 
 //          TODO update blogname method call:
-//        UserDAO.updateBlogname(userId, newBlogname);
+//        UserInfoDAO.updateBlogname(userId, newBlogname);
 
         String message = "Unable to update blogname";
         req.setAttribute("changeBlognameMessage", message);

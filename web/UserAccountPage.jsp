@@ -11,14 +11,15 @@
 <head>
     <title>Account Settings</title>
 
-
     <style>
         .avatar {
             width: 100px;
+            height: 100px;
         }
 
         .avatar:hover {
-            width:300px;
+            width:200px;
+            height: 200px;
         }
 
     </style>
@@ -34,7 +35,34 @@
             btn.style.display = "none";
         }
 
-        //Make the form to change password visible, hide change button
+        //Make the form to change firstname visible, hide change button
+        function showChangeFirstname() {
+            const div = document.getElementById("changeFirstname");
+            div.style.display = "initial";
+
+            const btn = document.getElementById("firstnameBtn");
+            btn.style.display = "none";
+        }
+
+        //Make the form to change lastname visible, hide change button
+        function showChangeLastname() {
+            const div = document.getElementById("changeLastname");
+            div.style.display = "initial";
+
+            const btn = document.getElementById("lastnameBtn");
+            btn.style.display = "none";
+        }
+
+        //Make the form to change description visible, hide change button
+        function showChangeDesc() {
+            const div = document.getElementById("changeDesc");
+            div.style.display = "initial";
+
+            const btn = document.getElementById("descBtn");
+            btn.style.display = "none";
+        }
+
+            //Make the form to change password visible, hide change button
         function showChangePassword() {
             const div = document.getElementById("changePassword");
             div.style.display = "initial";
@@ -52,7 +80,7 @@
             btn.style.display = "none";
         }
 
-        //Make the form to choose avatar visible, hide change button
+        //Make the form to choose avatar from list visible, hide change button
         function showChooseAvatar() {
             const div = document.getElementById("chooseAvatar");
             div.style.display = "initial";
@@ -104,6 +132,45 @@ ${username} <%-- TODO display username--%>
     <div>Error changing username: ${changeUsernameError}</div>
 </c:if>
 
+<%--Button to change first name--%>
+<h2>First Name</h2>
+<button onclick="showChangeFirstname()" id="firstnameBtn">Change</button>
+
+<%--Form to change first name--%>
+<div style="display: none" id="changeFirstname">
+    <form action="./ChangeFirstname">
+        New first name: <input type="text" name="firstname">
+        <br><br>
+        <input type="submit">
+    </form>
+</div>
+
+<%--Button to change last name--%>
+<h2>Last Name</h2>
+<button onclick="showChangeLastname()" id="lastnameBtn">Change</button>
+
+<%--Form to change last name--%>
+<div style="display: none" id="changeLastname">
+    <form action="./ChangeLastname">
+        New last name: <input type="text" name="lastname">
+        <br><br>
+        <input type="submit">
+    </form>
+</div>
+
+<%--Button to change description--%>
+<h2>Description</h2>
+<button onclick="showChangeDesc()" id="descBtn">Change</button>
+
+<%--Form to change description--%>
+<div style="display: none" id="changeDesc">
+    <form action="./ChangeDesc">
+        New description: <textarea rows="5"  name="desc"> </textarea>
+        <br><br>
+        <input type="submit">
+    </form>
+</div>
+
 <%--Button to change password--%>
 <h2>Password</h2>
 <button onclick="showChangePassword()" id="passwordBtn">Change</button>
@@ -126,10 +193,11 @@ ${username} <%-- TODO display username--%>
     <div>${changePasswordMessage}</div>
 </c:if>
 
-<%--Button to change avatar--%>
+<%--Button to upload avatar--%>
 <h2>Avatar</h2>
 <button onclick="showUploadAvatar()" id="uploadAvatarBtn">Upload avatar</button>
 
+<%--Form to upload avatar--%>
 <div style="display: none" id="uploadAvatar">
     <form action="./"> <%--TODO--%>
         Upload new avatar: <input type="file" name="newavatar" accept="image/*">
@@ -139,15 +207,18 @@ ${username} <%-- TODO display username--%>
     </form>
 </div>
 
+<%--Button to select avatar from list--%>
+<br><br>
 <button onclick="showChooseAvatar()" id="chooseAvatarBtn">Select default avatar</button>
 
+<%--Button to choose avatar from list--%>
 <div style="display: none" id="chooseAvatar">
     <form action="./"> <%--TODO--%>
-        Select default avatar: <br>
+        <br> Select default avatar: <br><br>
         <img src="./images/lion.jpg" alt="Lion" class="avatar">
-        <input type="radio" name="avatar" value="lion"> Lion <br>
+        <input type="radio" name="avatar" value="lion"> Lion <br><br>
         <img src="./images/cat.jpg" alt="Cat" class="avatar">
-        <input type="radio" name="avatar" value="cat"> Cat <br>
+        <input type="radio" name="avatar" value="cat"> Cat <br><br>
         <br>
         <input type="submit">
     </form>
@@ -157,6 +228,7 @@ ${username} <%-- TODO display username--%>
 <h2>Blogname</h2>
 <button onclick="showChangeBlogname()" id="blognameBtn">Change</button>
 
+<%--Form to change blogname--%>
 <div style="display: none" id="changeBlogname">
     <form action="./ChangeBlogname">
         New blogname: <input type="text" name="newblogname">
