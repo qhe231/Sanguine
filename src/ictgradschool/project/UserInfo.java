@@ -3,6 +3,8 @@ package ictgradschool.project;
 import java.io.Serializable;
 import java.util.Date;
 
+//@author: Peter He
+
 public class UserInfo implements Serializable {
     private Integer userId;
     private String blogName;

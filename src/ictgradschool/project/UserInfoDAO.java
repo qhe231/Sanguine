@@ -5,6 +5,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+//@author: Peter He
+
 public class UserInfoDAO {
 
     public static boolean insertANewUserAuthentication(UserInfo ui, Connection conn) throws SQLException {
