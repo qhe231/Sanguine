@@ -46,7 +46,7 @@ ${user.userName}
 <%--Form to change username--%>
 <div style="display: none" id="changeUsername">
     <form action="./ChangeUsername">
-        New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20">
+        New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20" >
         <br><br>
         <input type="submit">
     </form>

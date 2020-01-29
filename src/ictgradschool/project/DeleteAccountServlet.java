@@ -22,11 +22,14 @@ public class DeleteAccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        UserAuthentication ua = (UserAuthentication) session.getAttribute("user");
+        UserAuthentication ua = (UserAuthentication) session.getAttribute("user_auth");
 
         String password = req.getParameter("password");
 
-        boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(password.toCharArray(), ua.getSalt().getBytes(), ua.getHashedPassword().getBytes());
+        byte[] salt = PasswordUtil.base64Decode(ua.getSalt());
+        byte[] expectedHash = PasswordUtil.base64Decode(ua.getHashedPassword());
+
+        boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(password.toCharArray(), salt, ua.getHashNum(), expectedHash);
 
 //        If user entered correct password, delete the account
         if (isPasswordCorrect) {

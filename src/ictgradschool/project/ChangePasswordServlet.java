@@ -22,12 +22,15 @@ public class ChangePasswordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        UserAuthentication ua = (UserAuthentication) session.getAttribute("user");
+        UserAuthentication ua = (UserAuthentication) session.getAttribute("user_auth");
 
         String currentPassword = req.getParameter("currentPassword");
         String newPassword = req.getParameter("newPassword");
 
-        boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPassword.toCharArray(), ua.getSalt().getBytes(), ua.getHashedPassword().getBytes());
+        byte[] salt = PasswordUtil.base64Decode(ua.getSalt());
+        byte[] expectedHash = PasswordUtil.base64Decode(ua.getHashedPassword());
+
+        boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPassword.toCharArray(), salt, ua.getHashNum(), expectedHash);
 
 //          If user entered correct password, update password and set success message
         if (isPasswordCorrect) {
@@ -36,8 +39,11 @@ public class ChangePasswordServlet extends HttpServlet {
 
                 UserAuthenticationDAO.updatePassword(ua, conn, newPassword);
 
-            } catch (SQLException e) {
+                String message = "Password was successfully changed";
+                req.setAttribute("changePasswordMessage", message);
 
+            } catch (SQLException e) {
+                e.printStackTrace();
                 String message = "Password could not be changed";
                 req.setAttribute("changePasswordMessage", message);
 

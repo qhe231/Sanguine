@@ -12,37 +12,33 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet(name = "ChangeUsernameServlet", urlPatterns = { "/ChangeUsername" })
-public class ChangeUsernameServlet extends HttpServlet  {
+@WebServlet(name = "ChangeDescriptionServlet", urlPatterns = { "/ChangeDesc" })
+
+public class ChangeDescriptionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
-        UserAuthentication ua = (UserAuthentication) session.getAttribute("user_auth");
+        UserInfo ui = (UserInfo) session.getAttribute("user");
 
-        String newName = req.getParameter("newName");
+        String desc = req.getParameter("desc");
 
-//        Update username, set message depending on success or failure
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
-            UserAuthenticationDAO.updateUserName(ua, conn, newName);
+            UserInfoDAO.updateProfile(ui, conn, desc);
 
-            String message = "Username successfully updated to: " + newName;
-            req.setAttribute("changeUsernameMessage", message);
+            String message = "Description successfully updated to " + desc;
+            req.setAttribute("changeDescMessage", message);
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            String message = "Unable to update username";
-            req.setAttribute("changeUsernameMessage", message);
+
+            String message = "Unable to update description";
+            req.setAttribute("changeDescMessage", message);
         }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
         dispatcher.forward(req, resp);
-
-
     }
-
 }
