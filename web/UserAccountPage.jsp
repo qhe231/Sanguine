@@ -36,11 +36,15 @@
 </head>
 <body>
 
+<jsp:include page="./WEB-INF/NavigationBar.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include> <br>
+
 <h1>Account settings</h1>
 
 <%--Button to change username--%>
 <h2>Username</h2>
-${user.userName}
+${user_auth.userName} <br><br>
 <button onclick="showForm('changeUsername', 'usernameBtn')" id="usernameBtn">Change</button>
 
 <%--Form to change username--%>
@@ -59,7 +63,7 @@ ${user.userName}
 
 <%--Button to change name--%>
 <h2>Name</h2>
-${user.firstName} ${user.lastName}
+${user.firstName} ${user.lastName} <br><br>
 <button onclick="showForm('changeName', 'nameBtn')" id="nameBtn">Change</button>
 
 <%--Form to change name--%>
@@ -80,7 +84,7 @@ ${user.firstName} ${user.lastName}
 
 <%--Button to change description--%>
 <h2>Description</h2>
-${user.profile}
+${user.profile}<br><br>
 <button onclick="showForm('changeDesc', 'descBtn')" id="descBtn">Change</button>
 
 <%--Form to change description--%>
@@ -103,7 +107,7 @@ ${user.profile}
 
 <%--Form to change password--%>
 <div style="display: none" id="changePassword">
-    <form action="./ChangePassword">
+    <form action="./ChangePassword" method="post">
         Current password: <input type="password" name="currentPassword">
         <br> <br>
         New password: <input type="password" name="newPassword">
@@ -155,7 +159,7 @@ ${user.avatarURL}
 
 <%--Button to change blogname--%>
 <h2>Blog name</h2>
-${user.blogName}
+${user.blogName}<br><br>
 <button onclick="showForm('changeBlogName', 'blogNameBtn')" id="blogNameBtn">Change</button>
 
 <%--Form to change blogname--%>
@@ -172,7 +176,7 @@ ${user.blogName}
 </c:if>
 
 <h2>Date of Birth</h2>
-${user.dateOfBirth}
+${user.dateOfBirth}<br><br>
 <button onclick="showForm('changeDateOfBirth', 'dobBtn')" id="dobBtn">Change</button>
 
 

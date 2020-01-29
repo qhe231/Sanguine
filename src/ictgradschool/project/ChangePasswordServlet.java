@@ -19,7 +19,7 @@ import java.sql.SQLException;
 public class ChangePasswordServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
         UserAuthentication ua = (UserAuthentication) session.getAttribute("user_auth");
