@@ -1,5 +1,6 @@
 package ictgradschool.project;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import ictgradschool.project.util.PasswordUtil;
 
 import java.sql.*;
@@ -46,6 +47,9 @@ public class UserAuthenticationDAO {
             stmt.setString(2, ua.getHashedPassword());
             stmt.setString(3, ua.getSalt());
             stmt.setInt(4, ua.getHashNum());
+
+            System.out.println(ua.getHashedPassword().length());
+            System.out.println(ua.getSalt().length());
 
             int rowsAffected = stmt.executeUpdate();
 

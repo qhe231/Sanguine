@@ -1,4 +1,4 @@
-package ictgradschool.project.util;
+package ictgradschool.project;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
