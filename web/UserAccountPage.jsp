@@ -11,19 +11,12 @@
 <head>
     <title>Account Settings</title>
 
-
     <style>
 
         /*Style avatar thumbnail*/
         .avatar {
             width: 100px;
             height: 100px;
-        }
-
-        /*When hovered over, thumbnail enlarges*/
-        .avatar:hover {
-            width:200px;
-            height: 200px;
         }
 
     </style>
@@ -47,7 +40,7 @@
 
 <%--Button to change username--%>
 <h2>Username</h2>
-${user.getuserName}
+${user.userName}
 <button onclick="showForm('changeUsername', 'usernameBtn')" id="usernameBtn">Change</button>
 
 <%--Form to change username--%>
@@ -66,7 +59,7 @@ ${user.getuserName}
 
 <%--Button to change name--%>
 <h2>Name</h2>
-${firstName} ${lastName}
+${user.firstName} ${user.lastName}
 <button onclick="showForm('changeName', 'nameBtn')" id="nameBtn">Change</button>
 
 <%--Form to change name--%>
@@ -87,7 +80,7 @@ ${firstName} ${lastName}
 
 <%--Button to change description--%>
 <h2>Description</h2>
-${description}
+${user.profile}
 <button onclick="showForm('changeDesc', 'descBtn')" id="descBtn">Change</button>
 
 <%--Form to change description--%>
@@ -126,6 +119,7 @@ ${description}
 
 <%--Button to upload avatar--%>
 <h2>Avatar</h2>
+${user.avatarURL}
 <button onclick="showForm('uploadAvatar', 'uploadAvatarBtn')" id="uploadAvatarBtn">Upload avatar</button>
 
 <%--Form to upload avatar--%>
@@ -161,6 +155,7 @@ ${description}
 
 <%--Button to change blogname--%>
 <h2>Blog name</h2>
+${user.blogName}
 <button onclick="showForm('changeBlogName', 'blogNameBtn')" id="blogNameBtn">Change</button>
 
 <%--Form to change blogname--%>
@@ -177,7 +172,7 @@ ${description}
 </c:if>
 
 <h2>Date of Birth</h2>
-${DOB}
+${user.dateOfBirth}
 <button onclick="showForm('changeDateOfBirth', 'dobBtn')" id="dobBtn">Change</button>
 
 
