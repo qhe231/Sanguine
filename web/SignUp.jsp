@@ -50,6 +50,11 @@
     </script>
 </head>
 <body>
+
+<jsp:include page="./WEB-INF/NavigationBar.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include> <br>
+
 <div id="contain">
     <form action="./SignUp" method="post">
         <fieldset>
