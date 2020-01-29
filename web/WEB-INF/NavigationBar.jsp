@@ -64,19 +64,19 @@
 
 <nav>
     <ul>
-        <li class="left"><a href="../index.jsp">Home</a></li>
+        <li class="left"><a href="./index">Home</a></li>
 
         <c:choose>
 
-            <c:when test="${user_auth.userName != null}">
-                <li class="right"><a href="./">Log out</a></li>
-                <li class="right"><a href="../UserAccountPage.jsp">Account</a></li>
-                <li class="right"><a href="../userHomePage.jsp">${user.blogName}</a></li>
-            </c:when>
+        <c:when test="${user.userName != null}">
+        <li class="right"><a href="./">Log out</a></li>
+        <li class="right"><a href="./UserAccountPage.jsp">Account</a></li>
+        <li class="right"><a href="./userHomePage?owner=${user.userName}">${user.blogName}</a></li>
+        </c:when>
 
-            <c:otherwise>
-                <li class="right"><a href="../SignUp.jsp">Sign up</a></li>
-                <li class="right"><a href="../login.jsp">Log in</a></li>
+        <c:otherwise>
+        <li class="right"><a href="./SignUp.jsp">Sign up</a></li>
+        <li class="right"><a href="./login.jsp">Log in</a></li>
             </c:otherwise>
 
         </c:choose>

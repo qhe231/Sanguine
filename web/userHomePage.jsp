@@ -44,15 +44,15 @@
     <tbody>
     <c:forEach var="article" items="${articles}">
         <tr>
-            <td><a href="">${article.title}</a></td>
-            <td>${article.datePosted}</td>
+            <td><a href="./article?articleId=${article.articleId}">${article.title}</a></td>
+            <td>${article.postedTimeStamp}</td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 
 <c:if test="${user.userId == owner.userId}">
-    <form action="" method="post">
+    <form action="./newArticle.jsp" method="post">
         <input type="submit" name="postANewArticle" value="Post a New Article">
     </form>
 </c:if>

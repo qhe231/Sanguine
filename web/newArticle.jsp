@@ -12,7 +12,7 @@
     <title>New Article</title>
 </head>
 <body>
-<jsp:include page="articleEditor.jsp" />
+<jsp:include page="WEB-INF/articleEditor.jsp" />
 
 </body>
 </html>

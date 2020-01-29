@@ -64,13 +64,16 @@
     <tbody>
     <c:forEach var="article" items="${articles}">
         <tr>
-            <td><a href="">${article.title}</a></td>
-            <td>username + avatar</td>
-            <td>CommentsNum</td>
-            <td>${article.datePosted}</td>
+            <td><a href="./article?articleId=${article.articleId}">${article.title}</a></td>
+            <td>
+                <span>${article.author.getUserName()}</span>
+                <span><img src="./images/${article.author.getAvatarURL()}"></span>
+            </td>
+            <td>${article.children.size()}</td>
+        <td>${article.postedTimeStamp}</td>
         </tr>
         <tr>
-            <td colspan="4">Excerpt</td>
+            <td colspan="4">${article.content}</td>
         </tr>
     </c:forEach>
     </tbody>
