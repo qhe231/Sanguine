@@ -16,7 +16,7 @@
 <body>
 <div id="container">
     <div id="box">
-        <form action="./Login" method="post">
+        <form action="./login" method="post">
             <p class="main">
                 <label>User Name: </label>
                 <input name="username" value=""><br>

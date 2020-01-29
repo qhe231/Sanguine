@@ -22,6 +22,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("TEST");
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
@@ -31,33 +32,30 @@ public class LoginServlet extends HttpServlet {
 
             UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, username);
             if (ua == null) {
-                resp.getWriter().println("<script>alert('The user is not exist!')</script>");
-
-                RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/login.jsp");
                 requestDispatcher.forward(req, resp);
 
                 return;
             } else {
                 char[] passwordChar = password.toCharArray();
-                byte [] salt = ua.getSalt().getBytes();
+                byte[] salt = PasswordUtil.base64Decode(ua.getSalt());
                 int hashNum = ua.getHashNum();
-                byte [] expectedHash = ua.getHashedPassword().getBytes();
+                byte[] expectedHash = PasswordUtil.base64Decode(ua.getHashedPassword());
                 isPassword = PasswordUtil.isExpectedPassword(passwordChar, salt, hashNum, expectedHash);
             }
 
 
             if (isPassword) {
+                UserInfo ui = UserInfoDAO.getUserInfoById(conn, ua.getUserId());
+                req.getSession().setAttribute("user", ui);
+                req.setAttribute("user", ui);
+                req.setAttribute("owner", ui);
 
-                req.getSession().setAttribute("user", ua);
-
-                RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/userHomePage.jsp");
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/userHomePage.jsp");
                 requestDispatcher.forward(req, resp);
 
             } else {
-
-                resp.getWriter().println("<script>alert('Wrong Password')</script>");
-
-                RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/login.jsp");
                 requestDispatcher.forward(req, resp);
             }
 

@@ -48,9 +48,6 @@ public class UserAuthenticationDAO {
             stmt.setString(3, ua.getSalt());
             stmt.setInt(4, ua.getHashNum());
 
-            System.out.println(ua.getHashedPassword().length());
-            System.out.println(ua.getSalt().length());
-
             int rowsAffected = stmt.executeUpdate();
 
             if (rowsAffected == 0) {

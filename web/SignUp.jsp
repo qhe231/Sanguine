@@ -251,8 +251,8 @@
             <input type="file" name="avatar" value="uploadAvatar" accept="image/*"> <br>
 
             <label>Choose Avatar From List: </label>
-            <input type="radio" name="avatar" value="/images/lion.jpg" id="lionAvatar">Lion
-            <input type="radio" name="avatar" value="/images/monkey.jpg" id="monkeyAvatar">Monkey
+            <input type="radio" name="avatar" value="./images/lion.jpg" id="lionAvatar">Lion
+            <input type="radio" name="avatar" value="./images/monkey.jpg" id="monkeyAvatar">Monkey
             <br>
             <input type="submit" id="submit">
         </fieldset>

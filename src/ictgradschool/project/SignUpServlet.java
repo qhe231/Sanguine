@@ -35,7 +35,8 @@ public class SignUpServlet extends HttpServlet {
 
         if (avatarURL == "uploadPic") {
             String uploadPic = req.getParameter("uploadAvatar");
-            avatarURL = uploadPic;
+            //insert method call here to upload image
+            avatarURL = "./images/"+uploadPic;
         }
 
         byte[] saltByte = PasswordUtil.getNextSalt();
@@ -56,8 +57,11 @@ public class SignUpServlet extends HttpServlet {
                 boolean insertUiSuccessfully = UserInfoDAO.insertANewUserInfo(ui, conn);
                 if (insertUiSuccessfully) {
                     req.getSession().setAttribute("user", ui);
+                    req.setAttribute("user", ui);
+                    req.setAttribute("owner", ui);
 
-                    resp.sendRedirect("/userHomePage.jsp");
+                    req.getRequestDispatcher("./userHomePage.jsp").forward(req, resp);
+                    //resp.sendRedirect("/userHomePage.jsp");
                 } else {
                     signUpFailed(req, resp);
                 }

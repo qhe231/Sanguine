@@ -10,17 +10,17 @@
 <html>
 <head>
     <c:choose>
-        <c:when test="$user.blogName != null}">
-            <title>${user.blogName}</title>
+        <c:when test="${owner.blogName != null}">
+            <title>${owner.blogName}</title>
         </c:when>
         <c:otherwise>
-            <title>${user.userName}'s Blog</title>
+            <title>${owner.userName}'s Blog</title>
         </c:otherwise>
     </c:choose>
 </head>
 <body>
 <c:choose>
-    <c:when test="$user.blogName != null}">
+    <c:when test="${owner.blogName != null}">
         <h1>${owner.blogName}</h1>
     </c:when>
     <c:otherwise>
@@ -46,7 +46,7 @@
     </tbody>
 </table>
 
-<c:if test="${reader.userId == owner.userId}">
+<c:if test="${user.userId == owner.userId}">
     <form action="" method="post">
         <input type="submit" name="postANewArticle" value="Post a New Article">
     </form>
