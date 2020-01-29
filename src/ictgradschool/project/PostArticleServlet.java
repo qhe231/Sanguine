@@ -14,21 +14,32 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-@WebServlet(name = "postArticle", urlPatterns = {"/postArticle"})
+@WebServlet(name="postArticle", urlPatterns = {"/postArticle"})
 public class PostArticleServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Article article = new Article(((UserInfo) req.getSession(true).getAttribute("user")),
-                req.getParameter("title"), req.getParameter("content"), new Timestamp((new Date()).getTime()),
-                new ArrayList<>(), Integer.parseInt(req.getParameter("parentArticle")));
+        int parentArticle;
+        try {
+            parentArticle = Integer.parseInt(req.getParameter("parentArticle"));
+        }
+        catch (NumberFormatException e) {
+            parentArticle = -1;
+        }
 
-        try (Connection conn = DBConnectionUtils.getConnectionFromWebInf(this, "./WEB-INF/connection.properties")) {
+        Article article = new Article(((UserInfo)req.getSession(false).getAttribute("user")),
+                req.getParameter("title"), req.getParameter("content"), new Timestamp((new Date()).getTime()),
+                new ArrayList<>(), parentArticle);
+
+
+        try (Connection conn = DBConnectionUtils.getConnectionFromWebInf(this, "./res/connection.properties")) {
             ArticleDAO.insertArticle(conn, article);
-            req.setAttribute("article", article);
+
+            req.setAttribute("articleID", article.getArticleId());
 
             req.getRequestDispatcher("/article").forward(req, resp);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
