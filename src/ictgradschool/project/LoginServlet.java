@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet {
             if (isPassword) {
                 UserInfo ui = UserInfoDAO.getUserInfoById(conn, ua.getUserId());
                 req.getSession().setAttribute("user", ui);
+                req.getSession().setAttribute("user_auth", ua);
                 req.setAttribute("user", ui);
                 req.setAttribute("owner", ui);
 
