@@ -1,24 +1,39 @@
 package ictgradschool.project;
 
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import ictgradschool.project.util.PasswordUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 //@author: Peter He
 
 public class UserAuthenticationDAO {
 
+    public static List<UserAuthentication> getAllUserAuthentications(Connection conn) throws SQLException {
+        List<UserAuthentication> allUAs = new ArrayList<>();
+        try (Statement stmt = conn.createStatement()) {
+            try (ResultSet rs = stmt.executeQuery("SELECT * FROM user_authentication")) {
+                while (rs.next()) {
+                    allUAs.add(createANewUserAuthentication(rs));
+                }
+            }
+        }
+
+        return allUAs;
+    }
+
     public static UserAuthentication getUserAuthenticationByUserName(Connection conn, String userName) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user_authentication WHERE userName = ?")) {
             stmt.setString(1, userName);
             try (ResultSet rs = stmt.executeQuery()) {
-                rs.next();
-                return new UserAuthentication(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getInt(5));
+                if (rs.next()) {
+                    return createANewUserAuthentication(rs);
+                } else {
+                    return null;
+                }
             }
 
         }
@@ -99,5 +114,16 @@ public class UserAuthenticationDAO {
 
             return rowsAffected != 0;
         }
+
+
+    }
+
+//    create a new UserAuthentication by the resultSet
+    private static UserAuthentication createANewUserAuthentication(ResultSet rs) throws SQLException {
+        return new UserAuthentication(rs.getInt(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getInt(5));
     }
 }
