@@ -19,6 +19,11 @@
     </c:choose>
 </head>
 <body>
+
+<jsp:include page="./WEB-INF/NavigationBar.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include>
+
 <c:choose>
     <c:when test="$user.blogName != null}">
         <h1>${owner.blogName}</h1>

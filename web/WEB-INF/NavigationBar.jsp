@@ -20,6 +20,8 @@
 
         li a:hover {
             color: blue;
+            text-decoration: none;
+
         }
 
         nav {
@@ -39,6 +41,7 @@
             text-decoration: none;
             font-size: 25px;
             float: left;
+            font-family: "Arial", "sans-serif";
         }
 
         .left {
@@ -47,6 +50,10 @@
 
         .right {
             float: right;
+        }
+
+        a:visited, a:active {
+            color: white;
         }
 
     </style>
@@ -62,18 +69,20 @@
         <c:choose>
 
             <c:when test="${user} != null">
-        <li class="right"><a href="defaultlink.jsp">Account</a></li>
-        <li class="right"><a href="defaultlink.jsp">${user.blogName}</a></li>
-        <li class="right"><a href="defaultlink.jsp">Log out</a></li>
+        <li class="right"><a href="./defaultlink.jsp">Account</a></li>
+        <li class="right"><a href="./defaultlink.jsp">${user.blogName}</a></li>
+        <li class="right"><a href="./defaultlink.jsp">Log out</a></li>
             </c:when>
 
             <c:otherwise>
-        <li class="right"><a href="defaultlink.jsp">Sign up</a></li>
-        <li class="right"><a href="defaultlink.jsp">Log in</a></li>
+        <li class="right"><a href="./defaultlink.jsp">Sign up</a></li>
+        <li class="right"><a href="./defaultlink.jsp">Log in</a></li>
             </c:otherwise>
 
         </c:choose>
     </ul>
 </nav>
+
+<br><br><br>
 
 </body>
