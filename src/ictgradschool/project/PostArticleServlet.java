@@ -1,6 +1,5 @@
 package ictgradschool.project;
 
-import ictgradschool.project.test.TestSession;
 import ictgradschool.project.util.DBConnectionUtils;
 
 import javax.servlet.ServletException;
