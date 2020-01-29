@@ -16,7 +16,7 @@ import java.util.List;
 @WebServlet(name = "userHomePage", urlPatterns = {"/userHomePage"})
 public class UserHomePageServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int userId = Integer.parseInt(req.getParameter("userId"));
         int ownerId = Integer.parseInt(req.getParameter("ownerId"));
 
