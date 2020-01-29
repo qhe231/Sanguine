@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -27,14 +28,15 @@ public class ChangeDateOfBirthServlet extends HttpServlet {
         HttpSession session = req.getSession();
         UserInfo ui = (UserInfo) session.getAttribute("user");
 
+
         int day = Integer.parseInt(req.getParameter("dob-day"));
         int month = Integer.parseInt(req.getParameter("dob-month"));
         int year = Integer.parseInt(req.getParameter("dob-year"));
 
         LocalDate d = LocalDate.of(year, month, day);
-
         Date date = Date.valueOf(d);
 
+//        Update date of birth, set message depending on success or failure
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
             UserInfoDAO.updateDateOfBirth(ui, conn, date);

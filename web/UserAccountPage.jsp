@@ -47,7 +47,7 @@
 
 <%--Button to change username--%>
 <h2>Username</h2>
-${userName}
+${user.getuserName}
 <button onclick="showForm('changeUsername', 'usernameBtn')" id="usernameBtn">Change</button>
 
 <%--Form to change username--%>
@@ -155,6 +155,10 @@ ${description}
     </form>
 </div>
 
+<c:if test="${changeAvatarMessage!= null}">
+    <div>${changeAvatarMessage}</div>
+</c:if>
+
 <%--Button to change blogname--%>
 <h2>Blog name</h2>
 <button onclick="showForm('changeBlogName', 'blogNameBtn')" id="blogNameBtn">Change</button>
@@ -179,9 +183,14 @@ ${DOB}
 
 <div style="display: none" id="changeDateOfBirth">
     <form action="./ChangeDateOfBirth">
-<select name="dob-day" id="dob-day">
-    <option value="">Day</option>
-    <option value="">---</option>
+        <option value="">Day</option>
+        <option value="">---</option>
+
+        <%--<% for(int i = 01; i < 31; i++) { %>--%>
+        <%--<option value="i">i</option>--%>
+        <%--<% } %>--%>
+
+        <select name="dob-day" id="dob-day">
     <option value="01">01</option>
     <option value="02">02</option>
     <option value="03">03</option>

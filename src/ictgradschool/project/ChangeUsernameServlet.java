@@ -25,6 +25,7 @@ public class ChangeUsernameServlet extends HttpServlet  {
 
         String newName = req.getParameter("newName");
 
+//        Update username, set message depending on success or failure
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
             UserAuthenticationDAO.updateUserName(ua, conn, newName);

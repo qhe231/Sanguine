@@ -29,7 +29,7 @@ public class ChangePasswordServlet extends HttpServlet {
 
         boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPassword.toCharArray(), ua.getSalt().getBytes(), ua.getHashedPassword().getBytes());
 
-//          If user entered correct password, update password
+//          If user entered correct password, update password and set success message
         if (isPasswordCorrect) {
 
             try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {

@@ -22,18 +22,26 @@ public class ChooseAvatarServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         UserInfo ui = (UserInfo) session.getAttribute("user");
+
         String newAvatar = req.getParameter("avatar");
 
-
+//      Update avatar, set message depending on success or failure
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
-            UserInfoDAO.updateAvatarURL(ui, conn, newAvatar );
+            UserInfoDAO.updateAvatarURL(ui, conn, newAvatar);
+
+            String message = "Avatar updated successfully";
+            req.setAttribute("changeAvatarMessage", message);
 
         } catch (SQLException e) {
 
+            String message = "Avatar could not be changed";
+            req.setAttribute("changeAvatarMessage", message);
 
         }
 
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
+        dispatcher.forward(req, resp);
 
     }
 }

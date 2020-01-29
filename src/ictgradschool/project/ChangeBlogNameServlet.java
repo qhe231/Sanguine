@@ -19,11 +19,13 @@ public class ChangeBlogNameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
         HttpSession session = req.getSession();
         UserInfo ui = (UserInfo) session.getAttribute("user");
 
         String newBlogName = req.getParameter("newBlogName");
 
+//      Update blog name, set message depending on success or failure
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
            UserInfoDAO.updateBlogName(ui, conn, newBlogName);
