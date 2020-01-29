@@ -2,6 +2,7 @@ package ictgradschool.project;
 
 import ictgradschool.project.util.DBConnectionUtils;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,13 +20,24 @@ public class UserHomePageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int userId = Integer.parseInt(req.getParameter("userId"));
         int ownerId = Integer.parseInt(req.getParameter("ownerId"));
-        List<Article> articles = new ArrayList<>();
 
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
-            articles = ArticleDAO.getArticles(conn, -1, ownerId);
+            List<Article> articles = ArticleDAO.getArticles(conn, -1, ownerId);
+            UserInfo user = UserInfoDAO.getUserInfoById(conn, userId);
+            UserInfo owner = UserInfoDAO.getUserInfoById(conn, ownerId);
+
+            req.setAttribute("articles", articles);
+            req.setAttribute("user", user);
+            req.setAttribute("owner", owner);
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userHomePage.jsp");
+            dispatcher.forward(req, resp);
+
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
     }
 }
