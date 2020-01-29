@@ -35,7 +35,7 @@
 
         a:visited, a:active, a {
             color: dodgerblue;
-            text-decoration: none;
+            text-decogitration: none;
         }
 
         a:hover {

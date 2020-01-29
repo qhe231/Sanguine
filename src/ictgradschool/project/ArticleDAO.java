@@ -1,5 +1,6 @@
 package ictgradschool.project;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,8 @@ public class ArticleDAO {
             try (ResultSet r = s.getResultSet()) {
                 while (r.next()) {
                     int articleId = r.getInt(1);
-                    Article a = new Article(articleId, r.getInt(6), r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId);
+                    UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
+                    Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId);
                     articles.add(a);
                 }
             }
@@ -56,7 +58,8 @@ public class ArticleDAO {
             s.execute();
             try (ResultSet r = s.getResultSet()) {
                 if (r.next()) {
-                    return new Article(articleId, r.getInt(6), r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), r.getInt(5));
+                    UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
+                    return new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), r.getInt(5));
                 }
             }
         }
@@ -72,12 +75,17 @@ public class ArticleDAO {
      * @throws SQLException
      */
     public static boolean insertArticle(Connection conn, Article article) throws SQLException {
-        try (PreparedStatement s = conn.prepareStatement("insert into articles_and_comments (datePosted, title, content, parentId, userBelongedId) values (?, ?, ?, ?, ?);")) {
+        try (PreparedStatement s = conn.prepareStatement("insert into articles_and_comments (datePosted, title, content, parentId, userBelongedId) values (?, ?, ?, ?, ?);",
+                Statement.RETURN_GENERATED_KEYS)) {
             s.setTimestamp(1, article.getPostedTimeStamp());
             s.setString(2, article.getTitle());
             s.setString(3, article.getContent());
-            s.setInt(4, article.getParentId());
-            s.setInt(5, article.getAuthorId());
+            int parentId = article.getParentId();
+            if (parentId == -1)
+                s.setNull(4, Types.INTEGER);
+            else
+                s.setInt(4, parentId);
+            s.setInt(5, article.getAuthor().getUserId());
 
             int rowsAffected = s.executeUpdate();
 
@@ -100,7 +108,7 @@ public class ArticleDAO {
      * @throws SQLException
      */
     public static boolean editArticle(Connection conn, Article article) throws SQLException {
-        try (PreparedStatement s = conn.prepareStatement("update articles_and_comments set title = ?, content = ? where id = ?;")) {
+        try (PreparedStatement s = conn.prepareStatement("update articles_and_comments set title = ?, content = ? where id = ?;", Statement.RETURN_GENERATED_KEYS)) {
             s.setString(1, article.getTitle());
             s.setString(2, article.getContent());
             s.setInt(3, article.getArticleId());
