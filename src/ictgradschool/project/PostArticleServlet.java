@@ -35,9 +35,7 @@ public class PostArticleServlet extends HttpServlet {
         try (Connection conn = DBConnectionUtils.getConnectionFromWebInf(this, "./res/connection.properties")) {
             ArticleDAO.insertArticle(conn, article);
 
-            req.setAttribute("articleID", article.getArticleId());
-
-            req.getRequestDispatcher("/article").forward(req, resp);
+            req.getRequestDispatcher("./article?articleId="+article.getArticleId()).forward(req, resp);
         }
         catch (SQLException e) {
             e.printStackTrace();

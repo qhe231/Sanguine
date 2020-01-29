@@ -21,8 +21,9 @@ public class DeleteAccountServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession();
-        UserAuthentication ua = (UserAuthentication) session.getAttribute("user_auth");
+        UserInfo user = (UserInfo)req.getSession().getAttribute("user");
+        try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+            UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, user.getUserName());
 
         String password = req.getParameter("password");
 
@@ -34,32 +35,31 @@ public class DeleteAccountServlet extends HttpServlet {
 //        If user entered correct password, delete the account
         if (isPasswordCorrect) {
 
-            try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+            UserAuthenticationDAO.deleteUser(ua, conn);
+            req.getSession().invalidate();
 
-                UserAuthenticationDAO.deleteUser(ua, conn);
-
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-                dispatcher.forward(req, resp);
-
-            } catch (SQLException e) {
-
-                String message = "Account could not be deleted";
-                req.setAttribute("deleteAccountMessage", message);
-
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
-                dispatcher.forward(req, resp);
+            resp.sendRedirect("./index");
 
             }
 //          If user entered incorrect password, set error message
-        } else {
+         else {
 
             String message = "Entered password does not match current password";
             req.setAttribute("deleteAccountMessage", message);
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/UserAccountPage.jsp");
             dispatcher.forward(req, resp);
 
         }
+    } catch (SQLException e) {
+
+        String message = "Account could not be deleted";
+        req.setAttribute("deleteAccountMessage", message);
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
+        dispatcher.forward(req, resp);
+
+    }
 
     }
 

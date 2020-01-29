@@ -14,19 +14,18 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 
-@WebServlet(name="article", urlPatterns = {"/article"})
+@WebServlet(name = "article", urlPatterns = {"/article"})
 public class ArticleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try (Connection conn = DBConnectionUtils.getConnectionFromWebInf(this, "./res/connection.properties")) {
-            Article article = ArticleDAO.getSpecificArticle(conn, (int)req.getAttribute("articleID"));
+            Article article = ArticleDAO.getSpecificArticle(conn, Integer.parseInt(req.getParameter("articleId")));
             req.setAttribute("article", article);
 
             RequestDispatcher rd = req.getRequestDispatcher("./WEB-INF/article.jsp");
             rd.forward(req, resp);
-        }
-        catch (SQLException | IOException | NumberFormatException | ServletException e) {
+        } catch (SQLException | IOException | NumberFormatException | ServletException e) {
             System.out.println(e.getMessage());
         }
     }

@@ -14,8 +14,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 
-@WebServlet(name = "index", urlPatterns = {""})
-public class indexServlet extends HttpServlet {
+@WebServlet(name = "index", urlPatterns = {"", "/index"})
+public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {

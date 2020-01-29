@@ -23,6 +23,23 @@ public class UserInfoDAO {
         }
     }
 
+    public static UserInfo getUserInfoByUserName(Connection conn, String userName) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user_info INNER JOIN user_authentication USING (userId) WHERE userName = ?")) {
+            stmt.setString(1, userName);
+            try (ResultSet rs = stmt.executeQuery()) {
+                rs.next();
+                return new UserInfo(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getDate(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8));
+            }
+        }
+    }
+
 
     public static boolean insertANewUserInfo(UserInfo ui, Connection conn) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_info VALUES (?,?,?,?,?,?,?)")) {
