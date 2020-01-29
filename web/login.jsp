@@ -13,7 +13,14 @@
     <meta charset="UTF-8">
     <title>Login</title>
 </head>
+
 <body>
+
+<jsp:include page="./WEB-INF/NavigationBar.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include>
+<br>
+
 <div id="container">
     <div id="box">
         <form action="./login" method="post">
@@ -28,8 +35,6 @@
             </p>
         </form>
     </div>
-
-
 </div>
 
 <c:if test="${Error != null}">
