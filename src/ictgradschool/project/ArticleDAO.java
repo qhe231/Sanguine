@@ -17,14 +17,15 @@ public class ArticleDAO {
     public static List<Article> getArticles(Connection conn, int parentId, int userId) throws SQLException {
         List<Article> articles = new ArrayList<>();
 
-        String sqlString = "select * from articles_and_comments where parentId = ?";
+        String sqlString = "select * from articles_and_comments where parentId " + ((parentId == -1) ? "is":"=") + " ?";
         if (userId != -1)
             sqlString += " and userBelongedId = ?";
         sqlString += " order by datePosted;";
 
         try (PreparedStatement s = conn.prepareStatement(sqlString)) {
-            if (parentId == -1)
+            if (parentId == -1) {
                 s.setNull(1, Types.INTEGER);
+            }
             else
                 s.setInt(1, parentId);
 
