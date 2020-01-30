@@ -9,8 +9,14 @@
                 <div class="articleAuthor">${comment.author.userName}</div>
                 <div class="articlePostTime">${comment.postedTimeStamp}</div>
                 <div class="articleContent">${comment.content}</div>
-                <button name="editArticle">Edit</button>
-                <button name="deleteArticle">Delete</button>
+                <c:if test="${user != null}">
+                    <c:if test="${user.userId == comment.author.userId}">
+                        <button name="editArticle" class="editButton">Edit</button>
+                    </c:if>
+                    <c:if test="${(user.userId == comment.author.userId || user.userId == rootArticle.author.userId)}">
+                    <button name="deleteArticle" onclick="window.location.href = './DeleteArticle?articleId=${comment.articleId}'">Delete</button>
+                    </c:if>
+                </c:if>
             </div>
             <c:set var="comment" value="${comment}" scope="request" />
             <jsp:include page="comment.jsp" />
