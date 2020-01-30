@@ -26,12 +26,11 @@
 
         function checkUserName() {
 
-            let userNames = [];
-            // userNames = UserDAO.getListUsernames;
-            // userNames.add("1245");
-            // userNames.add("asdf");
-            userNames[0] = "1234";
-            userNames[1] = "asdf";
+            // let userNames = [];
+            // userNames[0] = "1234";
+            // userNames[1] = "asdf";
+
+            let userNames = req.getAttribute("userNames");
             const possibleUserName = document.getElementById("userName").value;
 
             for (let i = 0; i < userNames.length; i++) {
