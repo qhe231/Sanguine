@@ -25,6 +25,7 @@
         }
 
         function checkUserName() {
+
             let userNames = [];
             // userNames = UserDAO.getListUsernames;
             // userNames.add("1245");
