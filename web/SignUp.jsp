@@ -1,3 +1,6 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: jluo669
@@ -30,7 +33,8 @@
             // userNames[0] = "1234";
             // userNames[1] = "asdf";
 
-            let userNames = req.getAttribute("userNames");
+
+            // let userNames = (ArrayList<String>) request.getAttribute("userNames");
             const possibleUserName = document.getElementById("userName").value;
 
             for (let i = 0; i < userNames.length; i++) {
