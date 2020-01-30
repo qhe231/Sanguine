@@ -60,7 +60,10 @@ public class ArticleDAO {
             try (ResultSet r = s.getResultSet()) {
                 if (r.next()) {
                     UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
-                    return new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), r.getInt(5));
+                    int parentId = r.getInt(5);
+                    if (r.wasNull())
+                        parentId = -1;
+                    return new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId);
                 }
             }
         }

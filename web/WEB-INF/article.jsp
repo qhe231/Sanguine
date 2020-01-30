@@ -17,10 +17,14 @@
     <div class="articleAuthor">${article.author.userName}</div>
     <div class="articlePostTime">${article.postedTimeStamp}</div>
     <div class="articleContent">${article.content}</div>
-    <button name="editArticle">Edit</button>
-    <button name="deleteArticle">Delete</button>
+    <c:if test="${user != null && user.userId == article.author.userId}">
+        <button name="editArticle" class="editButton">Edit</button>
+        <button name="deleteArticle" onclick="window.location.href = './DeleteArticle?articleId=${article.articleId}'">Delete</button>
+    </c:if>
 </div>
 <c:set var="comment" value="${article}" scope="request" />
+<c:set var="rootArticle" value="${article}" scope="request" />
+<c:set var="user" value="${user}" scope="request" />
 <jsp:include page="comment.jsp" />
 </body>
 </html>
