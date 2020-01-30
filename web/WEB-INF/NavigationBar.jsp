@@ -69,7 +69,7 @@
         <c:choose>
 
         <c:when test="${user.userName != null}">
-        <li class="right"><a href="./">Log out</a></li>
+        <li class="right"><a href="./logout">Log out</a></li>
         <li class="right"><a href="./UserAccountPage.jsp">Account</a></li>
         <li class="right"><a href="./userHomePage?owner=${user.userName}">${user.blogName}</a></li>
         </c:when>
