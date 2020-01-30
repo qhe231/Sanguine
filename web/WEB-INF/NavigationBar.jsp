@@ -52,7 +52,7 @@
             float: right;
         }
 
-        a:visited, a:active {
+        nav a:visited, nav a:active {
             color: white;
         }
 

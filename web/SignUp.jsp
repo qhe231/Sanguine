@@ -54,7 +54,8 @@
 
 <jsp:include page="./WEB-INF/NavigationBar.jsp">
     <jsp:param name="user" value="${user}"/>
-</jsp:include> <br>
+</jsp:include>
+<br>
 
 <div id="contain">
     <form action="./SignUp" method="post">
@@ -257,9 +258,18 @@
             <input type="file" name="avatar" value="uploadAvatar" accept="image/*"> <br>
 
             <label>Choose Avatar From List: </label>
-            <input type="radio" name="avatar" value="./images/lion.jpg" id="lionAvatar">Lion
-            <input type="radio" name="avatar" value="./images/monkey.jpg" id="monkeyAvatar">Monkey
+            <input type="radio" name="avatar" value="./images/1.png" class="avatar"><img src="./images/1.png">
+            <input type="radio" name="avatar" value="./images/2.png" class="avatar"><img src="./images/2.png">
+            <input type="radio" name="avatar" value="./images/3.png" class="avatar"><img src="./images/3.png">
+            <input type="radio" name="avatar" value="./images/4.png" class="avatar"><img src="./images/4.png">
+            <input type="radio" name="avatar" value="./images/5.png" class="avatar"><img src="./images/5.png">
+            <input type="radio" name="avatar" value="./images/6.png" class="avatar"><img src="./images/6.png">
+            <input type="radio" name="avatar" value="./images/7.png" class="avatar"><img src="./images/7.png">
+            <input type="radio" name="avatar" value="./images/8.png" class="avatar"><img src="./images/8.png">
+            <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img src="./images/9.png">
+            <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img src="./images/10.png">
             <br>
+            <p>These avatars are from <strong>Hopnguyen Mr</strong> at <a href = "https://www.iconfinder.com/iconsets/business-avatar-1"><em>slack</em></a></p>
             <input type="submit" id="submit">
         </fieldset>
     </form>

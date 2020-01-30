@@ -142,12 +142,18 @@ ${user.avatarURL}
 
 <%--Button to choose avatar from list--%>
 <div style="display: none" id="chooseAvatar">
-    <form action="./"> <%--TODO--%>
+    <form action="./">
         <br> Select default avatar: <br><br>
-        <img src="./images/lion.jpg" alt="Lion" class="avatar">
-        <input type="radio" name="avatar" value="lion"> Lion <br><br>
-        <img src="./images/cat.jpg" alt="Cat" class="avatar">
-        <input type="radio" name="avatar" value="cat"> Cat <br><br>
+        <input type="radio" name="avatar" value="./images/1.png" class="avatar"><img src="./images/1.png">
+        <input type="radio" name="avatar" value="./images/2.png" class="avatar"><img src="./images/2.png">
+        <input type="radio" name="avatar" value="./images/3.png" class="avatar"><img src="./images/3.png">
+        <input type="radio" name="avatar" value="./images/4.png" class="avatar"><img src="./images/4.png">
+        <input type="radio" name="avatar" value="./images/5.png" class="avatar"><img src="./images/5.png">
+        <input type="radio" name="avatar" value="./images/6.png" class="avatar"><img src="./images/6.png">
+        <input type="radio" name="avatar" value="./images/7.png" class="avatar"><img src="./images/7.png">
+        <input type="radio" name="avatar" value="./images/8.png" class="avatar"><img src="./images/8.png">
+        <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img src="./images/9.png">
+        <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img src="./images/10.png">
         <br>
         <input type="submit">
     </form>
