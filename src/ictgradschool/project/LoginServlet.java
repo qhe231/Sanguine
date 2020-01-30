@@ -22,12 +22,12 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("TEST");
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         boolean isPassword = false;
 
+        //
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
             UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, username);

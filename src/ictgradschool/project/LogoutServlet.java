@@ -17,22 +17,6 @@ public class LogoutServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         session.invalidate();
-        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-        requestDispatcher.forward(req, resp);
+        resp.sendRedirect("./index");
     }
-
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        HttpSession session = req.getSession(false);
-//        if (session != null) {
-//            session.removeAttribute("userName");
-//        }
-//        RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-//        requestDispatcher.forward(req, resp);
-//    }
-//
-//    @Override
-//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        doGet(req,resp);
-//    }
 }
