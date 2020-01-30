@@ -1,6 +1,5 @@
 package ictgradschool.project;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import ictgradschool.project.util.PasswordUtil;
 
 import java.sql.*;
@@ -66,7 +65,7 @@ public class UserAuthenticationDAO {
     }
 
     public static boolean updateUserName(UserAuthentication ua, Connection conn, String newUserName) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement("UPDATE user_authentication SET userName = ? WHERE id = ?")) {
+        try (PreparedStatement stmt = conn.prepareStatement("UPDATE user_authentication SET userName = ? WHERE userId = ?")) {
             stmt.setString(1, newUserName);
             stmt.setInt(2, ua.getUserId());
 
@@ -93,7 +92,7 @@ public class UserAuthenticationDAO {
 
 //            create new salt
             byte[] newSaltByte = PasswordUtil.getNextSalt();
-            String newSalt = Arrays.toString(newSaltByte);
+            String newSalt = PasswordUtil.base64Encode(newSaltByte);
             ua.setSalt(newSalt);
 
 //            generate new hashNum
@@ -102,7 +101,7 @@ public class UserAuthenticationDAO {
 
 //            get mew hashedPassword
             byte[] newHash = PasswordUtil.hash(newPassword.toCharArray(), newSaltByte, newHashNum);
-            String newHashedPassword = Arrays.toString(newHash);
+            String newHashedPassword = PasswordUtil.base64Encode(newHash);
             ua.setHashedPassword(newHashedPassword);
 
             stmt.setString(1, newHashedPassword);

@@ -57,11 +57,9 @@ public class SignUpServlet extends HttpServlet {
                 boolean insertUiSuccessfully = UserInfoDAO.insertANewUserInfo(ui, conn);
                 if (insertUiSuccessfully) {
                     req.getSession().setAttribute("user", ui);
-                    req.setAttribute("user", ui);
-                    req.setAttribute("owner", ui);
 
-                    req.getRequestDispatcher("./userHomePage.jsp").forward(req, resp);
-                    //resp.sendRedirect("/userHomePage.jsp");
+                    //req.getRequestDispatcher("./userHomePage?ownerId=" + ui.getUserId()).forward(req, resp);
+                    resp.sendRedirect("./userHomePage?owner=" + ui.getUserName());
                 } else {
                     signUpFailed(req, resp);
                 }

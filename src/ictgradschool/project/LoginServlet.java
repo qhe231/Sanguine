@@ -49,10 +49,11 @@ public class LoginServlet extends HttpServlet {
                 UserInfo ui = UserInfoDAO.getUserInfoById(conn, ua.getUserId());
                 req.getSession().setAttribute("user", ui);
                 req.setAttribute("user", ui);
-                req.setAttribute("owner", ui);
+                //req.setAttribute("ownerId", ui.getUserId());
 
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/userHomePage.jsp");
-                requestDispatcher.forward(req, resp);
+                resp.sendRedirect("./userHomePage?owner=" + ui.getUserName());/*
+                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/userHomePage?ownerId=" + ui.getUserId());
+                requestDispatcher.forward(req, resp);*/
 
             } else {
                 RequestDispatcher requestDispatcher = req.getRequestDispatcher("/login.jsp");
