@@ -22,6 +22,7 @@ public class ArticleServlet extends HttpServlet {
         try (Connection conn = DBConnectionUtils.getConnectionFromWebInf(this, "./res/connection.properties")) {
             Article article = ArticleDAO.getSpecificArticle(conn, Integer.parseInt(req.getParameter("articleId")));
             req.setAttribute("article", article);
+            req.setAttribute("user", req.getSession().getAttribute("user"));
 
             RequestDispatcher rd = req.getRequestDispatcher("./WEB-INF/article.jsp");
             rd.forward(req, resp);
