@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,14 +66,21 @@
         <tr>
             <td><a href="./article?articleId=${article.articleId}">${article.title}</a></td>
             <td>
-                <span>${article.author.getUserName()}</span>
+                <span><a href="./userHomePage?owner=${article.author.getUserName()}">${article.author.getUserName()}</a></span>
                 <span><img src="./images/${article.author.getAvatarURL()}"></span>
             </td>
             <td>${article.children.size()}</td>
-        <td>${article.postedTimeStamp}</td>
+            <td>${article.postedTimeStamp}</td>
         </tr>
         <tr>
-            <td colspan="4">${article.content}</td>
+            <c:choose>
+                <c:when test="${article.content.length() <= 100}">
+                    <td colspan="4">${article.content}</td>
+                </c:when>
+                <c:otherwise>
+                    <td colspan="4">${article.content.substring(0,99)}...</td>
+                </c:otherwise>
+            </c:choose>
         </tr>
     </c:forEach>
     </tbody>
