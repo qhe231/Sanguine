@@ -15,6 +15,9 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <script type="text/javascript">
+
+
+
         function checkPassword() {
             if (document.getElementById("password").value == document.getElementById("confirmPassword").value) {
                 document.getElementById("message").style.color = 'green';
@@ -27,19 +30,26 @@
             }
         }
 
+
         function checkUserName() {
 
-            // let userNames = [];
-            // userNames[0] = "1234";
-            // userNames[1] = "asdf";
+            let userNames = '<%= request.getAttribute("userNames")%>';
+            console.log(userNames);
+            let userNameString = "";
+            for (let i = 1; i < userNames.length - 1; i++){
+                    userNameString = userNameString + userNames.charAt(i);
+            }
 
+            console.log(userNameString);
+            const userNameList = userNameString.split(", ");
 
-            // let userNames = (ArrayList<String>) request.getAttribute("userNames");
+            console.log(userNameList);
             const possibleUserName = document.getElementById("userName").value;
 
-            for (let i = 0; i < userNames.length; i++) {
+            for (let i = 0; i < userNameList.length; i++) {
+                console.log('Loop correctly', userNameList[i]);
 
-                if (userNames[i] !== possibleUserName) {
+                if (userNameList[i] !== possibleUserName) {
                     document.getElementById("userNameMessage").style.color = 'green';
                     document.getElementById("userNameMessage").innerHTML = "Username available";
                     document.getElementById("submit").disabled = false;
@@ -47,13 +57,22 @@
                     document.getElementById("userNameMessage").style.color = "red";
                     document.getElementById("userNameMessage").innerHTML = "Username not available";
                     document.getElementById("submit").disabled = true;
+                    break;
                 }
 
             }
         }
+
+
+
+
+
     </script>
 </head>
 <body>
+
+<jsp:include page="/UserNameList"/>
+
 
 <jsp:include page="./WEB-INF/NavigationBar.jsp">
     <jsp:param name="user" value="${user}"/>
@@ -63,28 +82,29 @@
     <form action="./SignUp" method="post">
         <fieldset>
             <label>Blog Name: </label>
-            <input name="blogName" value=""><br>
+            <input name="blogName" value="" required><br>
             <label>First Name: </label>
-            <input name="firstName" value=""><br>
+            <input name="firstName" value="" required><br>
             <label>Last Name: </label>
-            <input name="lastName" value=""><br>
+            <input name="lastName" value="" required><br>
 
             <label>User Name: </label>
-            <input name="userName" onkeyup="checkUserName()" id="userName"><br>
+            <input name="userName" onblur="checkUserName()" id="userName" required><br>
             <span id="userNameMessage"></span>
+
             <br>
 
             <label>Password: </label>
-            <input type="password" name="password" onkeyup='checkPassword()' id="password"> <br>
+            <input type="password" name="password" onkeyup='checkPassword()' id="password" required> <br>
             <label>Confirm Your Password: </label>
-            <input type="password" name="password" onkeyup='checkPassword()' id="confirmPassword"> <br>
+            <input type="password" name="password" onkeyup='checkPassword()' id="confirmPassword" required> <br>
             <span id="message"></span>
 
             <br>
             <label>DOB: </label>
             <%--<input type="DOB" name="DOB" value=""> <br>--%>
 
-            <select name="dob-day" id="dob-day">
+            <select name="dob-day" id="dob-day" required>
                 <option value="">Day</option>
                 <option value="">---</option>
                 <option value="01">01</option>
@@ -119,7 +139,7 @@
                 <option value="30">30</option>
                 <option value="31">31</option>
             </select>
-            <select name="dob-month" id="dob-month">
+            <select name="dob-month" id="dob-month" required>
                 <option value="">Month</option>
                 <option value="">-----</option>
                 <option value="01">January</option>
@@ -135,7 +155,7 @@
                 <option value="11">November</option>
                 <option value="12">December</option>
             </select>
-            <select name="dob-year" id="dob-year">
+            <select name="dob-year" id="dob-year" required>
                 <option value="">Year</option>
                 <option value="">----</option>
                 <option value="2012">2012</option>
