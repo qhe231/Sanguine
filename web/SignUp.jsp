@@ -14,64 +14,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <script type="text/javascript">
-
-
-
-        function checkPassword() {
-            if (document.getElementById("password").value == document.getElementById("confirmPassword").value) {
-                document.getElementById("message").style.color = 'green';
-                document.getElementById("message").innerHTML = "matching";
-                document.getElementById("submit").disabled = false;
-            } else {
-                document.getElementById("message").style.color = "red";
-                document.getElementById("message").innerHTML = "not matching";
-                document.getElementById("submit").disabled = true;
-            }
-        }
-
-
-        function checkUserName() {
-
-            let userNames = '<%= request.getAttribute("userNames")%>';
-            console.log(userNames);
-            let userNameString = "";
-            for (let i = 1; i < userNames.length - 1; i++){
-                    userNameString = userNameString + userNames.charAt(i);
-            }
-
-            console.log(userNameString);
-            const userNameList = userNameString.split(", ");
-
-            console.log(userNameList);
-            const possibleUserName = document.getElementById("userName").value;
-
-            for (let i = 0; i < userNameList.length; i++) {
-                console.log('Loop correctly', userNameList[i]);
-
-                if (userNameList[i] !== possibleUserName) {
-                    document.getElementById("userNameMessage").style.color = 'green';
-                    document.getElementById("userNameMessage").innerHTML = "Username available";
-                    document.getElementById("submit").disabled = false;
-                } else {
-                    document.getElementById("userNameMessage").style.color = "red";
-                    document.getElementById("userNameMessage").innerHTML = "Username not available";
-                    document.getElementById("submit").disabled = true;
-                    break;
-                }
-
-            }
-        }
-
-
-
-
-
-    </script>
+    <script type="text/javascript" src="SignUpJS.js"></script>
 </head>
 <body>
 
-<jsp:include page="/UserNameList"/>
+<%--<jsp:include page="/UserNameList"/>--%>
 
 
 <jsp:include page="./WEB-INF/NavigationBar.jsp">
@@ -102,11 +49,8 @@
 
             <br>
             <label>DOB: </label>
-            <%--<input type="DOB" name="DOB" value=""> <br>--%>
-
             <select name="dob-day" id="dob-day" required>
                 <option value="">Day</option>
-                <option value="">---</option>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -141,7 +85,6 @@
             </select>
             <select name="dob-month" id="dob-month" required>
                 <option value="">Month</option>
-                <option value="">-----</option>
                 <option value="01">January</option>
                 <option value="02">February</option>
                 <option value="03">March</option>
@@ -157,7 +100,6 @@
             </select>
             <select name="dob-year" id="dob-year" required>
                 <option value="">Year</option>
-                <option value="">----</option>
                 <option value="2012">2012</option>
                 <option value="2011">2011</option>
                 <option value="2010">2010</option>
