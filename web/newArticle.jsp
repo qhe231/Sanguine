@@ -10,9 +10,21 @@
 <html>
 <head>
     <title>New Article</title>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '#articleEditor'
+        });
+    </script>
 </head>
 <body>
-<jsp:include page="WEB-INF/articleEditor.jsp" />
+
+<form action="./postArticle" method="post">
+    <input name="title"><br>
+    <textarea id="articleEditor" name="content"></textarea><br>
+    <input type="submit" name="submit" id="submitButton">
+    <button name="cancel" id="cancelButton">Cancel</button>
+</form>
 
 </body>
 </html>
