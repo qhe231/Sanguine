@@ -112,10 +112,9 @@ public class ArticleDAO {
      * @throws SQLException
      */
     public static boolean editArticle(Connection conn, Article article) throws SQLException {
-        try (PreparedStatement s = conn.prepareStatement("update articles_and_comments set title = ?, content = ? where id = ?;", Statement.RETURN_GENERATED_KEYS)) {
-            s.setString(1, article.getTitle());
-            s.setString(2, article.getContent());
-            s.setInt(3, article.getArticleId());
+        try (PreparedStatement s = conn.prepareStatement("update articles_and_comments set content = ? where id = ?;", Statement.RETURN_GENERATED_KEYS)) {
+            s.setString(1, article.getContent());
+            s.setInt(2, article.getArticleId());
 
             return (s.executeUpdate() != 0);
         }
