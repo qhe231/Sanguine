@@ -142,7 +142,7 @@ ${user.avatarURL}
 
 <%--Button to choose avatar from list--%>
 <div style="display: none" id="chooseAvatar">
-    <form action="./">
+    <form action="./ChooseAvatar">
         <br> Select default avatar: <br><br>
         <input type="radio" name="avatar" value="./images/1.png" class="avatar"><img src="./images/1.png">
         <input type="radio" name="avatar" value="./images/2.png" class="avatar"><img src="./images/2.png">

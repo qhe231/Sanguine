@@ -218,9 +218,9 @@
             <label>Profile: </label>
             <textarea name="profile" value="" rows="4" cols="40"></textarea> <br>
 
-            <label>Upload Avatar: </label>
-            <input type="radio" name="avatar" value="uploadPic">Upload Your Own Avatar
-            <input type="file" name="avatar" value="uploadAvatar" accept="image/*"> <br>
+            <%--<label>Upload Avatar: </label>--%>
+            <%--<input type="radio" name="avatar" value="uploadPic">Upload Your Own Avatar--%>
+            <%--<input type="file" name="avatar" value="uploadAvatar" accept="image/*"> <br>--%>
 
             <label>Choose Avatar From List: </label>
             <input type="radio" name="avatar" value="./images/1.png" class="avatar"><img src="./images/1.png">

@@ -67,7 +67,7 @@
             <td><a href="./article?articleId=${article.articleId}">${article.title}</a></td>
             <td>
                 <span><a href="./userHomePage?owner=${article.author.getUserName()}">${article.author.getUserName()}</a></span>
-                <span><img src="./images/${article.author.getAvatarURL()}"></span>
+                <span><img src="${article.author.getAvatarURL()}"></span>
             </td>
             <td>${article.children.size()}</td>
             <td>${article.postedTimeStamp}</td>

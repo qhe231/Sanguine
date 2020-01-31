@@ -32,12 +32,13 @@ public class SignUpServlet extends HttpServlet {
         Date DOB = Date.valueOf(DOBString);
         String profile = req.getParameter("profile");
         String avatarURL = req.getParameter("avatar");
+  System.out.println(avatarURL);
 
-        if (avatarURL == "uploadPic") {
-            String uploadPic = req.getParameter("uploadAvatar");
-            //insert method call here to upload image
-            avatarURL = "./images/"+uploadPic;
-        }
+//        if (avatarURL == "uploadPic") {
+//            String uploadPic = req.getParameter("uploadAvatar");
+//            //insert method call here to upload image
+//            avatarURL = "./images/"+uploadPic;
+//        }
 
         byte[] saltByte = PasswordUtil.getNextSalt();
         String salt = PasswordUtil.base64Encode(saltByte);
