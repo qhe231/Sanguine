@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <ul>
-    <c:forEach var="comment" items="${comment.children}">
+    <c:forEach var="comment" items="${parent.children}">
         <li>
             <div class="comment" id="${comment.articleId}">
                 <div class="articleTitle">${comment.title}</div>
@@ -11,10 +11,10 @@
                 <div class="articleContent" id="content-${comment.articleId}">${comment.content}</div>
                 <c:if test="${user != null}">
                     <c:if test="${user.userId == comment.author.userId}">
-                        <button name="editArticle" class="editButton" id="edit-${comment.articleId}">Edit</button>
+                        <button class="editButton" id="edit-${comment.articleId}">Edit</button>
                     </c:if>
                     <c:if test="${(user.userId == comment.author.userId || user.userId == rootArticle.author.userId)}">
-                    <button name="deleteArticle" class="deleteButton" id="delete-${comment.articleId}>Delete</button>
+                        <button class="deleteButton" id="delete-${comment.articleId}">Delete</button>
                     </c:if>
                 </c:if>
             </div>
@@ -22,4 +22,7 @@
             <jsp:include page="comment.jsp" />
         </li>
     </c:forEach>
+    <li>
+        <button class="addComment" id="comment-${comment.articleId}">Add Comment</button>
+    </li>
 </ul>
