@@ -3,6 +3,9 @@ package ictgradschool.project;
 import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 import ictgradschool.project.util.PasswordUtil;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.logging.log4j.util.PropertyFilePropertySource;
 
 import javax.servlet.RequestDispatcher;
@@ -11,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,9 +22,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.List;
 
 @WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
 public class SignUpServlet extends HttpServlet {
+
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String blogName = req.getParameter("blogName");
@@ -32,13 +39,10 @@ public class SignUpServlet extends HttpServlet {
         Date DOB = Date.valueOf(DOBString);
         String profile = req.getParameter("profile");
         String avatarURL = req.getParameter("avatar");
-  System.out.println(avatarURL);
 
-//        if (avatarURL == "uploadPic") {
-//            String uploadPic = req.getParameter("uploadAvatar");
-//            //insert method call here to upload image
-//            avatarURL = "./images/"+uploadPic;
-//        }
+        if (avatarURL.equals("own")) {
+
+        }
 
         byte[] saltByte = PasswordUtil.getNextSalt();
         String salt = PasswordUtil.base64Encode(saltByte);

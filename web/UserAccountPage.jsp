@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Account Settings</title>
-
+    <script type="text/javascript" src="uploadAvatar.js"></script>
     <style>
 
         /*Style avatar thumbnail*/
@@ -123,13 +123,14 @@ ${user.profile}<br><br>
 
 <%--Button to upload avatar--%>
 <h2>Avatar</h2>
-${user.avatarURL}
+<img src="${user.avatarURL}"><br>
 <button onclick="showForm('uploadAvatar', 'uploadAvatarBtn')" id="uploadAvatarBtn">Upload avatar</button>
 
 <%--Form to upload avatar--%>
 <div style="display: none" id="uploadAvatar">
     <form action="./"> <%--TODO--%>
-        Upload new avatar: <input type="file" name="newAvatar" accept="image/*">
+        Upload new avatar: <input type="file" id="ownAvatarFile" name="newAvatar" accept="image/*">
+        <span id="ownAvatarPic"></span>
         <br><br>
         <input type="submit">
         <br><br>
@@ -155,6 +156,7 @@ ${user.avatarURL}
         <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img src="./images/9.png">
         <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img src="./images/10.png">
         <br>
+        <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a href="https://www.iconfinder.com/iconsets/business-avatar-1" target="_blank"><em>slack</em></a></p>
         <input type="submit">
     </form>
 </div>

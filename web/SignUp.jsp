@@ -15,6 +15,7 @@
     <meta charset="UTF-8">
     <title>Sign Up</title>
     <script type="text/javascript" src="SignUpJS.js"></script>
+    <script type="text/javascript" src="uploadAvatar.js"></script>
 </head>
 <body>
 
@@ -218,11 +219,8 @@
             <label>Profile: </label>
             <textarea name="profile" value="" rows="4" cols="40"></textarea> <br>
 
-            <%--<label>Upload Avatar: </label>--%>
-            <%--<input type="radio" name="avatar" value="uploadPic">Upload Your Own Avatar--%>
-            <%--<input type="file" name="avatar" value="uploadAvatar" accept="image/*"> <br>--%>
 
-            <label>Choose Avatar From List: </label>
+            <label>Choose An Avatar: </label>
             <input type="radio" name="avatar" value="./images/1.png" class="avatar"><img src="./images/1.png">
             <input type="radio" name="avatar" value="./images/2.png" class="avatar"><img src="./images/2.png">
             <input type="radio" name="avatar" value="./images/3.png" class="avatar"><img src="./images/3.png">
@@ -233,8 +231,13 @@
             <input type="radio" name="avatar" value="./images/8.png" class="avatar"><img src="./images/8.png">
             <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img src="./images/9.png">
             <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img src="./images/10.png">
-            <br>
-            <p>These avatars are from <strong>Hopnguyen Mr</strong> at <a href = "https://www.iconfinder.com/iconsets/business-avatar-1"><em>slack</em></a></p>
+            <input type="radio" name="avatar" value="own" class="avatar" id="ownAvatar"><span
+                id="ownAvatarPic">Your Own Avatar</span>
+            <input type="file" id="ownAvatarFile" accept="image/*">
+
+            <br><br>
+            <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a
+                    href="https://www.iconfinder.com/iconsets/business-avatar-1" target="_blank"><em>slack</em></a></p>
             <input type="submit" id="submit">
         </fieldset>
     </form>
