@@ -22,7 +22,7 @@ window.addEventListener("load", function() {
            inline: true
        });
        content.classList.add("currentlyEditing");
-       content.focus();
+       tinymce.activeEditor.focus();
 
        setButtonsForEditing(articleId);
    }
@@ -143,6 +143,7 @@ window.addEventListener("load", function() {
        tinymce.init({
            selector: '#newComment'
        });
+       tinymce.activeEditor.focus();
    }
 
    function cancelNewComment() {

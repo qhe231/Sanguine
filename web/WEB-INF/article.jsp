@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>JEPS Blog: ${article.title}</title>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/djtof1icz6but0e9v9pg9rgpweztf9nghye4u2u08y9gub17/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script type="text/javascript" src="./articleCommentEditDelete.js"></script>
 </head>
 <body>
