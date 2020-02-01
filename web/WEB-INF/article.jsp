@@ -11,12 +11,12 @@
 <html>
 <head>
     <title>JEPS Blog: ${article.title}</title>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script type="text/javascript" src="./articleEditDelete.js"></script>
+    <script src="https://cdn.tiny.cloud/1/djtof1icz6but0e9v9pg9rgpweztf9nghye4u2u08y9gub17/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script type="text/javascript" src="./articleCommentEditDelete.js"></script>
 </head>
 <body>
 <div class="mainArticle" id="${article.articleId}">
-    <div class="articleTitle">${article.title}</div>
+    <div class="articleTitle" id="title-${article.articleId}">${article.title}</div>
     <div class="articleAuthor">${article.author.userName}</div>
     <div class="articlePostTime">${article.postedTimeStamp}</div>
     <div class="articleContent" id="content-${article.articleId}">${article.content}</div>
@@ -25,7 +25,7 @@
         <button name="deleteArticle" class = "deleteButton" id="delete-${article.articleId}">Delete</button>
     </c:if>
 </div>
-<c:set var="comment" value="${article}" scope="request" />
+<c:set var="parent" value="${article}" scope="request" />
 <c:set var="rootArticle" value="${article}" scope="request" />
 <c:set var="user" value="${user}" scope="request" />
 <jsp:include page="comment.jsp" />
