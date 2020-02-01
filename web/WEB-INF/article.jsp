@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="mainArticle" id="${article.articleId}">
-    <div class="articleTitle">${article.title}</div>
+    <div class="articleTitle" id="title-${article.articleId}">${article.title}</div>
     <div class="articleAuthor">${article.author.userName}</div>
     <div class="articlePostTime">${article.postedTimeStamp}</div>
     <div class="articleContent" id="content-${article.articleId}">${article.content}</div>

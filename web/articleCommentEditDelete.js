@@ -7,7 +7,7 @@ window.addEventListener("load", function() {
     for (let i = 0; i < deleteButtons.length; i++)
         deleteButtons[i].addEventListener("click", deleteArticle);
     const addCommentButtons = document.querySelectorAll(".addComment");
-    for (let i = 0; i < editButtons.length; i++)
+    for (let i = 0; i < addCommentButtons.length; i++)
         addCommentButtons[i].addEventListener("click", newComment);
 
     let initialText;
@@ -83,92 +83,72 @@ window.addEventListener("load", function() {
    }
 
    let hiddenCommentBtn;
-   let newCommentDiv;
 
    function newComment() {
+       //if there's another comment form open, close it before continuing
+       console.log("hi");
+       if (document.querySelector("#newCommentForm") != null)
+           cancelNewComment();
+
        //hide this button
        hiddenCommentBtn = this;
        this.style.display = "none";
 
        //create the content structure
-       newCommentDiv = document.createElement("div");
-       newCommentDiv.classList.add('comment');
-       newCommentDiv.id = '-1';
-       this.parentNode.appendChild(newCommentDiv);
+       const newCommentForm = document.createElement("form");
+       newCommentForm.action = "./postArticle";
+       newCommentForm.method = "post";
+       newCommentForm.id = "newCommentForm";
+       this.parentNode.appendChild(newCommentForm);
 
-       const title = document.createElement("div");
-       title.classList.add("articleTitle");
-       newCommentDiv.appendChild(title);
-       const author = document.createElement("div");
-       author.classList.add("articleAuthor");
-       newCommentDiv.appendChild(author);
-       author.innerText = "You";
-       const postTime = document.createElement("div");
-       postTime.classList.add("articlePostTime");
-       newCommentDiv.appendChild(postTime);
-       postTime.innerText = "(not posted)";
-       const content = document.createElement("div");
-       content.classList.add("articleContent");
+       const parentId = document.createElement("input");
+       parentId.type = "hidden";
+       parentId.name = "parentId";
+       parentId.value = this.id.replace("comment-", "");
+       parentId.value = parentId.value.substring(0, parentId.value.indexOf("-"));
+       console.log("parent: " + parentId.value);
+       newCommentForm.appendChild(parentId);
+       const rootArticle = document.createElement("input");
+       rootArticle.type = "hidden";
+       rootArticle.name = "rootArticle";
+       rootArticle.value = this.id.substring(this.id.indexOf("-") + 1);
+       rootArticle.value = rootArticle.value.substring(rootArticle.value.indexOf("-") + 1);
+       newCommentForm.appendChild(rootArticle);
+       console.log("root: " + rootArticle.value);
+
+       const title = document.createElement("input");
+       title.name = "title";
+       parentTitle = document.querySelector(`#title-${parentId.value}`).innerText;
+       title.value = `re: ${parentTitle}`;
+       newCommentForm.appendChild(title);
+       title.required = true;
+       const content = document.createElement("textarea");
        content.id = "newComment";
-       newCommentDiv.appendChild(content);
+       content.name = "content";
+       newCommentForm.appendChild(content);
 
-       const titleTextbox = document.createElement("input");
-       titleTextbox.id = "titleBox";
-       title.appendChild(titleTextbox);
-
-       const submitButton = document.createElement("button");
-       submitButton.classList.add("editButton");
-       submitButton.id = this.id.replace("comment", "submit");
-       submitButton.innerText = "Submit";
-       newCommentDiv.appendChild(submitButton);
-       submitButton.addEventListener("click", submitNewComment);
+       const submitButton = document.createElement("input");
+       submitButton.type = "submit";
+       submitButton.name = "submit";
+       submitButton.id = "submitButton";
+       newCommentForm.appendChild(submitButton);
        const cancelButton = document.createElement("button");
        cancelButton.innerText = "Cancel";
-       cancelButton.classList.add("deleteButton");
-       newCommentDiv.appendChild(cancelButton);
+       cancelButton.name = "cancel";
+       cancelButton.id = "cancelButton";
+       newCommentForm.appendChild(cancelButton);
        cancelButton.addEventListener("click", cancelNewComment);
 
        //text editor
        tinymce.init({
-           selector: '#newComment',
-           inline: true
+           selector: '#newComment'
        });
-   }
-
-   async function submitNewComment() {
-       const parentId = this.id.replace("submit-", "");
-       const title = newCommentDiv.querySelector("#titleBox").innerText;
-       const content = newCommentDiv.querySelector(".articleContent").innerHTML;
-       if (title.length == 0 || content.length == 0)
-           return;
-       tinymce.activeEditor.remove();
-
-       let headers = new Headers();
-       headers.append('Content-Type', 'text/html; charset=UTF-8');
-       const promise = await fetch (`./PostArticleServlet?parentArticle=${parentId};title=${title}`, {
-           method: 'POST',
-           headers: headers,
-           body: content
-       })
-       const articleData = await promise.json();
-
-       newCommentDiv.removeChild(newCommentDiv.querySelector("#titleBox"));
-       newCommentDiv.querySelector(".articleTitle").innerText = title;
-       newCommentDiv.querySelector(".articleAuthor").innerText = articleData.author;
-       newCommentDiv.querySelector(".articlePostTime").innerText = articleData.time;
-       newCommentDiv.id = articleData.articleId;
-       newCommentDiv.querySelector(".articleContent").innerText = `content-${articleData.articleId}`;
-       newCommentDiv.querySelector(".editButton").innerText = `edit-${articleData.articleId}`;
-       newCommentDiv.querySelector(".deleteButton").innerText = `delete-${articleData.articleId}`;
-
-
-       newCommentDiv
    }
 
    function cancelNewComment() {
        tinymce.activeEditor.remove();
-       newCommentDiv.parentNode.removeChild(newCommentDiv);
-       newCommentDiv = null;
+       const newCommentForm = document.querySelector("#newCommentForm");
+       newCommentForm.parentNode.removeChild(newCommentForm);
 
        hiddenCommentBtn.style.display = "block";
        hiddenCommentBtn = null;
