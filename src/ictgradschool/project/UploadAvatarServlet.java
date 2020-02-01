@@ -15,7 +15,6 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(name = "uploadAvatar", urlPatterns = {"/uploadAvatar"})
@@ -23,7 +22,6 @@ public class UploadAvatarServlet extends HttpServlet {
     private File uploadsFolder;
     private File tempFolder;
     private final String imagesRelativePath = "/images";
-    private final List<String> acceptableMimeTypes = Arrays.asList("image/png", "image/jpeg");
 
     @Override
     public void init() throws ServletException {

@@ -27,22 +27,19 @@ import java.util.List;
 @WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
 public class SignUpServlet extends HttpServlet {
 
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String blogName = req.getParameter("blogName");
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
         String DOBString = req.getParameter("dob-year") + "-" + req.getParameter("dob-month") + "-" + req.getParameter("dob-day");
+
         Date DOB = Date.valueOf(DOBString);
         String profile = req.getParameter("profile");
         String avatarURL = req.getParameter("avatar");
-
-        if (avatarURL.equals("own")) {
-
-        }
 
         byte[] saltByte = PasswordUtil.getNextSalt();
         String salt = PasswordUtil.base64Encode(saltByte);

@@ -231,7 +231,7 @@
             <input type="radio" name="avatar" value="./images/8.png" class="avatar"><img src="./images/8.png">
             <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img src="./images/9.png">
             <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img src="./images/10.png">
-            <input type="radio" name="avatar" value="own" class="avatar" id="ownAvatar"><span
+            <input type="radio" name="avatar" class="avatar" id="ownAvatar"><span
                 id="ownAvatarPic">Your Own Avatar</span>
             <input type="file" id="ownAvatarFile" accept="image/*">
 
