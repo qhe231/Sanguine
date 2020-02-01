@@ -38,7 +38,8 @@
 
 <jsp:include page="./WEB-INF/NavigationBar.jsp">
     <jsp:param name="user" value="${user}"/>
-</jsp:include> <br>
+</jsp:include>
+<br>
 
 <h1>Account settings</h1>
 
@@ -50,7 +51,7 @@ ${user_auth.userName} <br><br>
 <%--Form to change username--%>
 <div style="display: none" id="changeUsername">
     <form action="./ChangeUsername">
-        New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20" >
+        New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20">
         <br><br>
         <input type="submit">
     </form>
@@ -90,7 +91,7 @@ ${user.profile}<br><br>
 <%--Form to change description--%>
 <div style="display: none" id="changeDesc">
     <form action="./ChangeDesc">
-        New description: <textarea rows="5"  name="desc"> </textarea>
+        New description: <textarea rows="5" name="desc"> </textarea>
         <br><br>
         <input type="submit">
     </form>
@@ -123,12 +124,12 @@ ${user.profile}<br><br>
 
 <%--Button to upload avatar--%>
 <h2>Avatar</h2>
-<img src="${user.avatarURL}"><br>
+<img src="${user.avatarURL}" width="64px"><br>
 <button onclick="showForm('uploadAvatar', 'uploadAvatarBtn')" id="uploadAvatarBtn">Upload avatar</button>
 
 <%--Form to upload avatar--%>
 <div style="display: none" id="uploadAvatar">
-    <form action="./"> <%--TODO--%>
+    <form action="./uploadAvatar" method="post" enctype="multipart/form-data">
         Upload new avatar: <input type="file" id="ownAvatarFile" name="newAvatar" accept="image/*">
         <span id="ownAvatarPic"></span>
         <br><br>
@@ -156,7 +157,8 @@ ${user.profile}<br><br>
         <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img src="./images/9.png">
         <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img src="./images/10.png">
         <br>
-        <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a href="https://www.iconfinder.com/iconsets/business-avatar-1" target="_blank"><em>slack</em></a></p>
+        <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a
+                href="https://www.iconfinder.com/iconsets/business-avatar-1" target="_blank"><em>slack</em></a></p>
         <input type="submit">
     </form>
 </div>
