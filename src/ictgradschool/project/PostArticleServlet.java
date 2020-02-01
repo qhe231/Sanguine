@@ -19,23 +19,22 @@ public class PostArticleServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int parentArticle;
-        try {
-            parentArticle = Integer.parseInt(req.getParameter("parentArticle"));
-        }
-        catch (NumberFormatException e) {
-            parentArticle = -1;
-        }
+
+
+        String parent = req.getParameter("parentId");
+        int parentId = (parent == null) ? -1 : Integer.parseInt(parent);
 
         Article article = new Article(((UserInfo)req.getSession(false).getAttribute("user")),
                 req.getParameter("title"), req.getParameter("content"), new Timestamp((new Date()).getTime()),
-                new ArrayList<>(), parentArticle);
-
+                new ArrayList<>(), parentId);
 
         try (Connection conn = DBConnectionUtils.getConnectionFromWebInf(this, "./res/connection.properties")) {
             ArticleDAO.insertArticle(conn, article);
 
-            resp.sendRedirect("./article?articleId="+article.getArticleId());
+            String rootArticle = req.getParameter("rootArticle");
+            if (rootArticle == null)
+                rootArticle = "" + article.getArticleId();
+            resp.sendRedirect("./article?articleId=" + rootArticle + "#" + article.getArticleId());
         }
         catch (SQLException e) {
             e.printStackTrace();
