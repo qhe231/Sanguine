@@ -3,6 +3,7 @@ package ictgradschool.project;
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ArticleDAO {
@@ -20,7 +21,7 @@ public class ArticleDAO {
         String sqlString = "select * from articles_and_comments where parentId " + ((parentId == -1) ? "is":"=") + " ?";
         if (userId != -1)
             sqlString += " and userBelongedId = ?";
-        sqlString += " order by datePosted;";
+        sqlString += " order by datePosted desc;";
 
         try (PreparedStatement s = conn.prepareStatement(sqlString)) {
             if (parentId == -1) {
@@ -42,6 +43,7 @@ public class ArticleDAO {
                 }
             }
         }
+
 
         return articles;
     }
