@@ -21,24 +21,16 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        HttpSession session = req.getSession();
+        UserAuthentication ua = (UserAuthentication) session.getAttribute("user_auth");
+
         String currentPassword = req.getParameter("currentPassword");
         String newPassword = req.getParameter("newPassword");
 
-        HttpSession session = req.getSession();
-        UserInfo ui = (UserInfo) session.getAttribute("user");
-        boolean isPasswordCorrect = false;
-        UserAuthentication ua = null;
+        byte[] salt = PasswordUtil.base64Decode(ua.getSalt());
+        byte[] expectedHash = PasswordUtil.base64Decode(ua.getHashedPassword());
 
-        try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
-            ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, ui.getUserName());
-
-            byte[] salt = PasswordUtil.base64Decode(ua.getSalt());
-            byte[] expectedHash = PasswordUtil.base64Decode(ua.getHashedPassword());
-
-            isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPassword.toCharArray(), salt, ua.getHashNum(), expectedHash);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPassword.toCharArray(), salt, ua.getHashNum(), expectedHash);
 
 //          If user entered correct password, update password and set success message
         if (isPasswordCorrect) {
