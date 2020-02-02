@@ -32,6 +32,8 @@ public class ChangeUsernameServlet extends HttpServlet  {
 
             UserAuthenticationDAO.updateUserName(ua, conn, newName);
 
+            ui.setUserName(newName);
+
             String message = "Username successfully updated to: " + newName;
             req.setAttribute("changeUsernameMessage", message);
 

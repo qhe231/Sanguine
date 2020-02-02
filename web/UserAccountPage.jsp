@@ -11,37 +11,8 @@
 <head>
     <title>Account Settings</title>
 
-    <style>
+    <script type="text/javascript" src="UserAccountJS.js"></script>
 
-        /*Style avatar thumbnail*/
-        .avatar {
-            width: 100px;
-            height: 100px;
-        }
-
-    </style>
-
-    <script type="text/javascript">
-
-        // Make form visible, hide button
-        function showForm(formDivId, btnId) {
-            const formDiv = document.getElementById(formDivId);
-            formDiv.style.display = "initial";
-
-            const btn = document.getElementById(btnId);
-            btn.style.display = "none";
-        }
-
-        // Make form invisible, display button
-        function hideForm(formDivId, btnId) {
-            const formDiv = document.getElementById(formDivId);
-            formDiv.style.display = "none";
-
-            const btn = document.getElementById(btnId);
-            btn.style.display = "initial";
-        }
-
-    </script>
 </head>
 <body>
 
@@ -54,15 +25,16 @@
 
 <%--Button to change username--%>
 <h2>Username</h2>
-<%--${user.userName} <br><br>--%>
+${user.userName} <br><br>
 <button onclick="showForm('changeUsername', 'usernameBtn')" id="usernameBtn">Change</button>
 
 <%--Form to change username--%>
 <div style="display: none" id="changeUsername">
     <form action="./ChangeUsername">
-        New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20" required>
-        <br><br>
-        <input type="submit">
+        New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20" onkeyup="checkUserName()" id="userName" required>
+        <span id="userNameMessage"></span><br><br>
+        <input type="submit" id="submitUser">
+<%--        <button type="submit" id="submitUser">subtnmitmme</button>--%>
     </form>
     <button onclick="hideForm('changeUsername', 'usernameBtn')">Cancel</button>
 </div>
@@ -71,6 +43,8 @@
 <c:if test="${changeUsernameMessage != null}">
     <div>${changeUsernameMessage}</div>
 </c:if>
+
+
 
 <%--Button to change name--%>
 <h2>Name</h2>
@@ -102,7 +76,7 @@ ${user.profile}<br><br>
 <%--Form to change description--%>
 <div style="display: none" id="changeDesc">
     <form action="./ChangeDesc">
-        New description: <textarea rows="5" name="desc" maxlength="1000"> </textarea>
+        New description: <textarea rows="5" name="desc" maxlength="1000" required> </textarea>
         <br><br>
         <input type="submit">
     </form>
@@ -123,9 +97,11 @@ ${user.profile}<br><br>
     <form action="./ChangePassword" method="post">
         Current password: <input type="password" name="currentPassword" required>
         <br> <br>
-        New password: <input type="password" name="newPassword" required>
+        New password: <input type="password" name="newPassword" id="password" onkeyup='checkPassword()' required>
         <br> <br>
-        <input type="submit">
+        Confirm new password: <input type="password" name="confirmNewPassword" id="confirmPassword" onkeyup='checkPassword()' required>
+        <span id="message"></span><br> <br>
+        <input type="submit" id="submitPassword">
     </form>
     <button onclick="hideForm('changePassword', 'passwordBtn')">Cancel</button>
 </div>

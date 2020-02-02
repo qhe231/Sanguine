@@ -21,7 +21,6 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
         String currentPassword = req.getParameter("currentPassword");
         String newPassword = req.getParameter("newPassword");
 

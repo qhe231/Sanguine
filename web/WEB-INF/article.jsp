@@ -13,8 +13,13 @@
     <title>JEPS Blog: ${article.title}</title>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script type="text/javascript" src="./articleEditDelete.js"></script>
+
 </head>
 <body>
+<jsp:include page="./NavigationBar.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include> <br>
+
 <div class="mainArticle" id="${article.articleId}">
     <div class="articleTitle">${article.title}</div>
     <div class="articleAuthor">${article.author.userName}</div>

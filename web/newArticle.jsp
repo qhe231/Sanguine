@@ -9,7 +9,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New Article</title>
+    <title>New Article</title><jsp:include page="./WEB-INF/NavigationBar.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include> <br>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
@@ -19,8 +21,9 @@
 </head>
 <body>
 
+
 <form action="./postArticle" method="post">
-    <input name="title"><br>
+    <input name="title" required><br>
     <textarea id="articleEditor" name="content"></textarea><br>
     <input type="submit" name="submit" id="submitButton">
     <button name="cancel" id="cancelButton">Cancel</button>

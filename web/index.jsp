@@ -1,3 +1,7 @@
+<%@ page import="java.util.Collections" %>
+<%@ page import="ictgradschool.project.Article" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ictgradschool.project.ArticleDAO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
@@ -42,6 +46,12 @@
             text-decoration: underline;
         }
     </style>
+
+    <script type="text/javascript">
+
+        let randomNum = (Math.random() * ${articles.size()});
+
+    </script>
 </head>
 <body>
 
@@ -50,6 +60,8 @@
 </jsp:include>
 
 <h1>Welcome to JESP Blog</h1>
+
+<a href="http://localhost:8080/article?articleId=random">View random article</a>
 
 <table>
     <caption>Newest Articles</caption>

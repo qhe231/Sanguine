@@ -1,9 +1,7 @@
 package ictgradschool.project;
 
-import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 import ictgradschool.project.util.PasswordUtil;
-import org.apache.logging.log4j.util.PropertyFilePropertySource;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,10 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
 @WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
 public class SignUpServlet extends HttpServlet {
@@ -36,20 +31,19 @@ public class SignUpServlet extends HttpServlet {
         if (avatarURL == "uploadPic") {
             String uploadPic = req.getParameter("uploadAvatar");
             //insert method call here to upload image
-            avatarURL = "./images/"+uploadPic;
+            avatarURL = "./images/" + uploadPic;
         }
 
+//        Create a hashed and salted password
         byte[] saltByte = PasswordUtil.getNextSalt();
         String salt = PasswordUtil.base64Encode(saltByte);
-
         int hashNum = (int) (Math.random() * 100000) + 1000000;
-
         byte[] hash = PasswordUtil.hash(password.toCharArray(), saltByte, hashNum);
-
         String hashedPassword = PasswordUtil.base64Encode(hash);
 
         UserAuthentication ua = new UserAuthentication(null, userName, hashedPassword, salt, hashNum);
 
+//        Insert user information to create new account
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             boolean insertUaSuccessfully = UserAuthenticationDAO.insertANewUserAuthentication(ua, conn);
             if (insertUaSuccessfully) {
@@ -73,6 +67,7 @@ public class SignUpServlet extends HttpServlet {
 
     }
 
+//    If sign up failed, set error message
     private void signUpFailed(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("error", "Sign up failed.");
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/SignUp.jsp");
