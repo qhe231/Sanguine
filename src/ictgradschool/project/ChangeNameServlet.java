@@ -34,8 +34,6 @@ public class ChangeNameServlet extends HttpServlet {
             String message = "Name successfully updated to " + firstName + " " + lastName;
             req.setAttribute("changeNameMessage", message);
 
-            ;
-
         } catch (SQLException e) {
             e.printStackTrace();
             String message = "Unable to update name";

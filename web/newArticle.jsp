@@ -10,11 +10,6 @@
 <html>
 <head>
     <title>New Article</title>
-    <jsp:include page="./WEB-INF/NavigationBar.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include> <br>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <title>New Article</title>
     <script src="https://cdn.tiny.cloud/1/djtof1icz6but0e9v9pg9rgpweztf9nghye4u2u08y9gub17/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
         tinymce.init({
@@ -23,7 +18,6 @@
     </script>
 </head>
 <body>
-
 
 <form action="./postArticle" method="post">
     <input name="title" required><br>
