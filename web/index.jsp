@@ -61,7 +61,7 @@
 
 <h1>Welcome to JESP Blog</h1>
 
-<a href="http://localhost:8080/article?articleId=random">View random article</a>
+<a href="./article?articleId=random">View random article</a>
 
 <table>
     <caption>Newest Articles</caption>
