@@ -11,14 +11,7 @@ public class UserInfoDAO {
             stmt.setInt(1, userId);
             try (ResultSet rs = stmt.executeQuery()) {
                 rs.next();
-                return new UserInfo(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getDate(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8));
+                return createANewUerInfo(rs);
             }
         }
     }
@@ -28,14 +21,7 @@ public class UserInfoDAO {
             stmt.setString(1, userName);
             try (ResultSet rs = stmt.executeQuery()) {
                 rs.next();
-                return new UserInfo(rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getString(4),
-                        rs.getDate(5),
-                        rs.getString(6),
-                        rs.getString(7),
-                        rs.getString(8));
+                return createANewUerInfo(rs);
             }
         }
     }
@@ -74,7 +60,6 @@ public class UserInfoDAO {
     }
 
     public static boolean updateName(UserInfo ui, Connection conn, String newFirstName, String newLastName) throws SQLException {
-
 
 
         try (PreparedStatement stmt = conn.prepareStatement("UPDATE user_info SET firstName = ?, lastName = ? WHERE userId = ?")) {
@@ -133,7 +118,17 @@ public class UserInfoDAO {
 
             return rowsAffected != 0;
         }
+    }
 
+    public static UserInfo createANewUerInfo(ResultSet rs) throws SQLException {
+        return new UserInfo(rs.getInt(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getDate(5),
+                rs.getString(6),
+                rs.getString(7),
+                rs.getString(8));
     }
 }
 
