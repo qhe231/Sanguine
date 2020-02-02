@@ -26,9 +26,9 @@
         <form action="./login" method="post">
             <p class="main">
                 <label>User Name: </label>
-                <input name="username" value=""><br>
+                <input name="username" value="" required><br>
                 <label>Password: </label>
-                <input type="password" name="password" value="">
+                <input type="password" name="password" value="" required>
             </p>
             <p class="space">
                 <input type="submit" value="Login" class="Login">
@@ -37,8 +37,8 @@
     </div>
 </div>
 
-<c:if test="${Error != null}">
-    <div> Error: ${Error} <br>
+<c:if test="${ErrorMessage != null}">
+    <div> Error: ${ErrorMessage} <br>
         Do you need to sign up? <a href="SignUp.jsp">Click here</a>
     </div>
 </c:if>
