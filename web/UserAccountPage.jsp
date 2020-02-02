@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Account Settings</title>
+    <script type="text/javascript" src="UserAccountJS.js"></script>
     <script type="text/javascript" src="uploadAvatar.js"></script>
     <style>
 
@@ -21,45 +22,38 @@
 
     </style>
 
-    <script type="text/javascript">
-
-        // Make form visible, hide button
-        function showForm(formDivId, btnId) {
-            const formDiv = document.getElementById(formDivId);
-            formDiv.style.display = "initial";
-
-            const btn = document.getElementById(btnId);
-            btn.style.display = "none";
-        }
-
-    </script>
 </head>
 <body>
 
 <jsp:include page="./WEB-INF/NavigationBar.jsp">
     <jsp:param name="user" value="${user}"/>
-</jsp:include> <br>
+</jsp:include>
+<br>
 
 <h1>Account settings</h1>
 
 <%--Button to change username--%>
 <h2>Username</h2>
-${user_auth.userName} <br><br>
+${user.userName} <br><br>
 <button onclick="showForm('changeUsername', 'usernameBtn')" id="usernameBtn">Change</button>
 
 <%--Form to change username--%>
 <div style="display: none" id="changeUsername">
     <form action="./ChangeUsername">
-        New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20" >
-        <br><br>
-        <input type="submit">
+        New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20" onkeyup="checkUserName()" id="userName" required>
+        <span id="userNameMessage"></span><br><br>
+        <input type="submit" id="submitUser">
+<%--        <button type="submit" id="submitUser">subtnmitmme</button>--%>
     </form>
+    <button onclick="hideForm('changeUsername', 'usernameBtn')">Cancel</button>
 </div>
 
 <%--Display success or failure message--%>
 <c:if test="${changeUsernameMessage != null}">
     <div>${changeUsernameMessage}</div>
 </c:if>
+
+
 
 <%--Button to change name--%>
 <h2>Name</h2>
@@ -69,12 +63,13 @@ ${user.firstName} ${user.lastName} <br><br>
 <%--Form to change name--%>
 <div style="display: none" id="changeName">
     <form action="./ChangeName">
-        New first name: <input type="text" name="firstName">
+        New first name: <input type="text" name="firstName" required>
         <br> <br>
-        New last name: <input type="text" name="lastName">
+        New last name: <input type="text" name="lastName" required>
         <br><br>
         <input type="submit">
     </form>
+    <button onclick="hideForm('changeName', 'nameBtn')">Cancel</button>
 </div>
 
 <%--Display success or failure message--%>
@@ -90,10 +85,11 @@ ${user.profile}<br><br>
 <%--Form to change description--%>
 <div style="display: none" id="changeDesc">
     <form action="./ChangeDesc">
-        New description: <textarea rows="5"  name="desc"> </textarea>
+        New description: <textarea rows="5" name="desc" maxlength="1000" required> </textarea>
         <br><br>
         <input type="submit">
     </form>
+    <button onclick="hideForm('changeDesc', 'descBtn')">Cancel</button>
 </div>
 
 <%--Display success or failure message--%>
@@ -108,15 +104,18 @@ ${user.profile}<br><br>
 <%--Form to change password--%>
 <div style="display: none" id="changePassword">
     <form action="./ChangePassword" method="post">
-        Current password: <input type="password" name="currentPassword">
+        Current password: <input type="password" name="currentPassword" required>
         <br> <br>
-        New password: <input type="password" name="newPassword">
+        New password: <input type="password" name="newPassword" id="password" onkeyup='checkPassword()' required>
         <br> <br>
-        <input type="submit">
+        Confirm new password: <input type="password" name="confirmNewPassword" id="confirmPassword" onkeyup='checkPassword()' required>
+        <span id="message"></span><br> <br>
+        <input type="submit" id="submitPassword">
     </form>
+    <button onclick="hideForm('changePassword', 'passwordBtn')">Cancel</button>
 </div>
 
-<%--If the entered password does not match the current passwrod, display an error message--%>
+<%--Display success or error message--%>
 <c:if test="${changePasswordMessage!= null}">
     <div>${changePasswordMessage}</div>
 </c:if>
@@ -135,9 +134,11 @@ ${user.profile}<br><br>
         <input type="submit">
         <br><br>
     </form>
+    <button onclick="hideForm('uploadAvatar', 'uploadAvatarBtn')">Cancel</button>
 </div>
 
-<%--Button to select avatar from list--%>
+
+<%--Button to choose avatar from list--%>
 <br><br>
 <button onclick="showForm('chooseAvatar', 'chooseAvatarBtn')" id="chooseAvatarBtn">Select default avatar</button>
 
@@ -159,8 +160,10 @@ ${user.profile}<br><br>
         <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a href="https://www.iconfinder.com/iconsets/business-avatar-1" target="_blank"><em>slack</em></a></p>
         <input type="submit">
     </form>
+    <button onclick="hideForm('chooseAvatar', 'chooseAvatarBtn')">Cancel</button>
 </div>
 
+<%--Display success or error message--%>
 <c:if test="${changeAvatarMessage!= null}">
     <div>${changeAvatarMessage}</div>
 </c:if>
@@ -173,31 +176,30 @@ ${user.blogName}<br><br>
 <%--Form to change blogname--%>
 <div style="display: none" id="changeBlogName">
     <form action="./ChangeBlogName">
-        New blog name: <input type="text" name="newBlogName">
+        New blog name: <input type="text" name="newBlogName" required>
         <br><br>
         <input type="submit">
     </form>
+    <button onclick="hideForm('changeBlogName', 'blogNameBtn')">Cancel</button>
+
 </div>
 
+<%--Display success or error message--%>
 <c:if test="${changeBlognameMessage != null}">
     <div>${changeBlognameMessage}</div>
 </c:if>
 
+<%--Button to change date of birth--%>
 <h2>Date of Birth</h2>
 ${user.dateOfBirth}<br><br>
 <button onclick="showForm('changeDateOfBirth', 'dobBtn')" id="dobBtn">Change</button>
 
-
+<%--Form to change date of birth--%>
 <div style="display: none" id="changeDateOfBirth">
     <form action="./ChangeDateOfBirth">
-        <option value="">Day</option>
-        <option value="">---</option>
 
-        <%--<% for(int i = 01; i < 31; i++) { %>--%>
-        <%--<option value="i">i</option>--%>
-        <%--<% } %>--%>
-
-        <select name="dob-day" id="dob-day">
+        <select name="dob-day" id="dob-day" required>
+            <option value="">Day</option>
             <option value="01">01</option>
             <option value="02">02</option>
             <option value="03">03</option>
@@ -230,9 +232,8 @@ ${user.dateOfBirth}<br><br>
             <option value="30">30</option>
             <option value="31">31</option>
         </select>
-        <select name="dob-month" id="dob-month">
+        <select name="dob-month" id="dob-month" required>
             <option value="">Month</option>
-            <option value="">-----</option>
             <option value="01">January</option>
             <option value="02">February</option>
             <option value="03">March</option>
@@ -246,9 +247,8 @@ ${user.dateOfBirth}<br><br>
             <option value="11">November</option>
             <option value="12">December</option>
         </select>
-        <select name="dob-year" id="dob-year">
+        <select name="dob-year" id="dob-year" required>
             <option value="">Year</option>
-            <option value="">----</option>
             <option value="2012">2012</option>
             <option value="2011">2011</option>
             <option value="2010">2010</option>
@@ -364,25 +364,33 @@ ${user.dateOfBirth}<br><br>
         </select>
         <input type="submit">
     </form>
+    <button onclick="hideForm('changeDateOfBirth', 'dobBtn')">Cancel</button>
+
 </div>
 
+<%--Display success or error message--%>
 <c:if test="${changeDOBMessage != null}">
     <div>${changeDOBMessage}</div>
 </c:if>
 
+<%--Button to delete account--%>
 <h2>Account</h2>
 <button onclick="showForm('deleteAccount', 'deleteBtn')" id="deleteBtn">Delete</button>
 
+<%--Form to delete account--%>
 <div style="display: none" id="deleteAccount">
     <form action="./DeleteAccount">
         This action will delete your account.
         <br><br>
-        Enter password: <input type="password" name="password">
+        Enter password: <input type="password" name="password" required>
         <br> <br>
         <input type="submit">
     </form>
+    <button onclick="hideForm('deleteAccount', 'deleteBtn')">Cancel</button>
+
 </div>
 
+<%--If the account could not be deleted, display error message--%>
 <c:if test="${deleteAccountMessage != null}">
     <div>${deleteAccountMessage}</div>
 </c:if>
