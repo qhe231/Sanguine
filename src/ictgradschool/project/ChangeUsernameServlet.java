@@ -20,15 +20,19 @@ public class ChangeUsernameServlet extends HttpServlet  {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession();
-        UserAuthentication ua = (UserAuthentication) session.getAttribute("user_auth");
-
         String newName = req.getParameter("newName");
 
 //        Update username, set message depending on success or failure
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
+            HttpSession session = req.getSession();
+            UserInfo ui = (UserInfo) session.getAttribute("user");
+
+            UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, ui.getUserName());
+
             UserAuthenticationDAO.updateUserName(ua, conn, newName);
+
+            ui.setUserName(newName);
 
             String message = "Username successfully updated to: " + newName;
             req.setAttribute("changeUsernameMessage", message);

@@ -19,9 +19,6 @@
 </head>
 <body>
 
-<%--<jsp:include page="/UserNameList"/>--%>
-
-
 <jsp:include page="./WEB-INF/NavigationBar.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
@@ -81,6 +78,10 @@
         </fieldset>
     </form>
 </div>
+
+<c:if test="${error != null}">
+    <div>${error}</div>
+</c:if>
 
 </body>
 </html>
