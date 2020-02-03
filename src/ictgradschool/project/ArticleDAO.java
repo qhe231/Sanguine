@@ -1,6 +1,5 @@
 package ictgradschool.project;
 
-import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,16 +7,16 @@ import java.util.List;
 public class ArticleDAO {
 
     /**
-     * @param conn      The DB connection to use
-     * @param parentId  If we only want to return children of a specified Article, this is its ID; -1 if we want root articles.
-     * @param userId    If we only want to return Articles written by a specific user, this is their ID; -1 if we want posts from all users.
-     * @return          List of all articles
+     * @param conn     The DB connection to use
+     * @param parentId If we only want to return children of a specified Article, this is its ID; -1 if we want root articles.
+     * @param userId   If we only want to return Articles written by a specific user, this is their ID; -1 if we want posts from all users.
+     * @return List of all articles
      * @throws SQLException
      */
     public static List<Article> getArticles(Connection conn, int parentId, int userId) throws SQLException {
         List<Article> articles = new ArrayList<>();
 
-        String sqlString = "select * from articles_and_comments where parentId " + ((parentId == -1) ? "is":"=") + " ?";
+        String sqlString = "select * from articles_and_comments where parentId " + ((parentId == -1) ? "is" : "=") + " ?";
         if (userId != -1)
             sqlString += " and userBelongedId = ?";
         sqlString += " order by datePosted;";
@@ -25,8 +24,7 @@ public class ArticleDAO {
         try (PreparedStatement s = conn.prepareStatement(sqlString)) {
             if (parentId == -1) {
                 s.setNull(1, Types.INTEGER);
-            }
-            else
+            } else
                 s.setInt(1, parentId);
 
             if (userId != -1)
@@ -49,7 +47,7 @@ public class ArticleDAO {
     /**
      * @param conn      The DB connection to use
      * @param articleId The ID of the Article to retrieve
-     * @return          The Article requested
+     * @return The Article requested
      * @throws SQLException
      */
     public static Article getSpecificArticle(Connection conn, int articleId) throws SQLException {
@@ -72,10 +70,9 @@ public class ArticleDAO {
     }
 
     /**
-     *
-     * @param conn      The DB connection to use
-     * @param article   The Article to add to the database
-     * @return          Whether the insert was successful
+     * @param conn    The DB connection to use
+     * @param article The Article to add to the database
+     * @return Whether the insert was successful
      * @throws SQLException
      */
     public static boolean insertArticle(Connection conn, Article article) throws SQLException {
@@ -105,10 +102,9 @@ public class ArticleDAO {
     }
 
     /**
-     *
-     * @param conn      The DB connection to use
-     * @param article   The Article to update in the database (if Article does not already exist, use insertArticle instead)
-     * @return          Whether the update was successful
+     * @param conn    The DB connection to use
+     * @param article The Article to update in the database (if Article does not already exist, use insertArticle instead)
+     * @return Whether the update was successful
      * @throws SQLException
      */
     public static boolean editArticle(Connection conn, Article article) throws SQLException {
@@ -121,10 +117,9 @@ public class ArticleDAO {
     }
 
     /**
-     *
-     * @param conn      The DB connection to use
-     * @param article   The Article object to remove from the database
-     * @return          Whether deletion was successful
+     * @param conn    The DB connection to use
+     * @param article The Article object to remove from the database
+     * @return Whether deletion was successful
      * @throws SQLException
      */
     public static boolean deleteArticle(Connection conn, Article article) throws SQLException {
@@ -132,10 +127,9 @@ public class ArticleDAO {
     }
 
     /**
-     *
      * @param conn      The DB connection to use
      * @param articleID The ID of the Article to remove from the database
-     * @return          Whether deletion was successful
+     * @return Whether deletion was successful
      * @throws SQLException
      */
     public static boolean deleteArticle(Connection conn, int articleID) throws SQLException {
@@ -146,5 +140,30 @@ public class ArticleDAO {
                 return false;
         }
         return true;
+    }
+
+    public static List<Article> getArticlesBySearch(Connection conn, String search) throws SQLException {
+
+        List<Article> articles = new ArrayList<>();
+
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM articles_and_comments WHERE title LIKE ? OR content LIKE ?")) {
+            stmt.setString(1, "%" + search + "%");
+            stmt.setString(2, "%" + search + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    int articleId = rs.getInt(1);
+                    Timestamp postedTime = rs.getTimestamp(2);
+                    String title = rs.getString(3);
+                    String content = rs.getString(4);
+                    int parentId = rs.getInt(5);
+                    UserInfo author = UserInfoDAO.getUserInfoById(conn, rs.getInt(6));
+                    List<Article> chilren = getArticles(conn, articleId, -1);
+                    Article article = new Article(articleId, author, title, content, postedTime, chilren, parentId);
+                    articles.add(article);
+                }
+            }
+        }
+
+        return articles;
     }
 }
