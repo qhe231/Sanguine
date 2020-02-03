@@ -60,8 +60,11 @@
 </jsp:include>
 
 <h1>Welcome to JESP Blog</h1>
+<form action="./search" method="get">
+    <input name="search" type="text"><input type="submit" value="Search">
+</form>
 
-<a href="http://localhost:8080/article?articleId=random">View random article</a>
+<a href="./article?articleId=random">View random article</a>
 
 <table>
     <caption>Newest Articles</caption>
