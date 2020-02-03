@@ -17,12 +17,15 @@
             <title>${owner.userName}'s Blog</title>
         </c:otherwise>
     </c:choose>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <jsp:include page="./WEB-INF/NavigationBar.jsp">
+        <jsp:param name="user" value="${user}"/>
+    </jsp:include>
 </head>
 <body>
 
-<jsp:include page="./WEB-INF/NavigationBar.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include>
 
 <c:choose>
     <c:when test="${owner.blogName != null}">

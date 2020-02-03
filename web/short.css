@@ -1,0 +1,48 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+/*--- navigation bar ---*/
+.navbar {
+    background: dodgerblue;
+}
+
+.nav-link,.navbar-brand {
+    color: #fff;
+    cursor: pointer;
+}
+
+.nav-link {
+    margin-right: 1em !important;
+}
+
+.nav-link:hover {
+    color: #000;
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+/*Background image*/
+.page-header {
+    background-image: url('./images/bright-light-rays.jpg') ;
+    background-size: cover;
+    background-position: center;
+    position: sticky;
+    background-attachment: fixed;
+
+    height: auto;
+    /*overflow: auto;*/
+    /*height: fit-content;*/
+}
+
+
+
+.container {
+    /*background: white;*/
+    word-wrap: break-word;
+    height: 100vh;
+text-align: center;
+}

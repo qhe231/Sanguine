@@ -9,95 +9,81 @@
 <head>
     <meta charset="UTF-8">
     <title>JESP Blog</title>
-    <style type="text/css">
-        body {
-            width: 600px;
-            margin: 6em auto;
-            color: #444;
-            text-align: justify;
-            font-family: sans-serif;
-            font-size: 14pt;
-            line-height: 150%;
-        }
-
-        h1, h2 {
-            text-decoration: lightgrey underline;
-            color: #222;
-        }
-
-        h2 {
-            margin-top: 2em;
-        }
-
-        code {
-            background-color: rgba(255, 167, 182, 0.41);
-            color: darkred;
-            font-family: monospace;
-            border: 1px solid darkred;
-            padding: 1px 5px;
-        }
-
-        a:visited, a:active, a {
-            color: dodgerblue;
-            text-decogitration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
 
     <script type="text/javascript">
 
         let randomNum = (Math.random() * ${articles.size()});
 
     </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <jsp:include page="./WEB-INF/NavigationBar.jsp">
+        <jsp:param name="user" value="${user}"/>
+    </jsp:include>
+    <header class="page-header header container-fluid">
+        <div class="container">
+            <div class="description">
+                <h1>Welcome to JESP Blog</h1>
+
+                <a href="./article?articleId=random">View random article</a>
+
+                <br>
+                <br><br><br><br><br><br><br><br><br><br><br>
+                <div class="row">
+                    <div class="col-4"><h5>Article</h5></div>
+                    <div class="col-2"><h5>Author</h5></div>
+                    <div class="col-2"><h5>Comments</h5></div>
+                    <div class="col-2"><h5>Date/Time</h5></div>
+                </div>
+
+                <br>
+
+                <c:forEach var="article" items="${articles}">
+
+                    <div class="row">
+                        <div class="col-4">
+                            <a href="./article?articleId=${article.articleId}">${article.title}</a> <br>
+                            <c:choose>
+                                <c:when test="${article.content.length() <= 100}">
+                                    <td colspan="4">${article.content}</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td colspan="4">${article.content.substring(0,99)}...</td>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                        <div class="col-2">
+                            <span><img src="${article.author.getAvatarURL()}" width="64px"></span>
+                            <span><a
+                                    href="./userHomePage?owner=${article.author.getUserName()}">${article.author.getUserName()}</a></span>
+                        </div>
+                        <div class="col-2">${article.children.size()}</div>
+                        <div class="col-2">${article.postedTimeStamp}</div>
+                    </div>
+                </c:forEach>
+
+                <br>
+
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                        crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+                        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                        crossorigin="anonymous"></script>
+                <script src="main.js"></script>
+            </div>
+
+        </div>
+
+    </header>
+
 </head>
 <body>
-
-<jsp:include page="./WEB-INF/NavigationBar.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include>
-
-<h1>Welcome to JESP Blog</h1>
-
-<a href="./article?articleId=random">View random article</a>
-
-<table>
-    <caption>Newest Articles</caption>
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Comments</th>
-        <th>Posted Time</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="article" items="${articles}">
-        <tr>
-            <td><a href="./article?articleId=${article.articleId}">${article.title}</a></td>
-            <td>
-                <span><a href="./userHomePage?owner=${article.author.getUserName()}">${article.author.getUserName()}</a></span>
-                <span><img src="${article.author.getAvatarURL()}" width="64px"></span>
-            </td>
-            <td>${article.children.size()}</td>
-            <td>${article.postedTimeStamp}</td>
-        </tr>
-        <tr>
-            <c:choose>
-                <c:when test="${article.content.length() <= 100}">
-                    <td colspan="4">${article.content}</td>
-                </c:when>
-                <c:otherwise>
-                    <td colspan="4">${article.content.substring(0,99)}...</td>
-                </c:otherwise>
-            </c:choose>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
-
 
 </body>
 </html>

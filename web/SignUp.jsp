@@ -16,13 +16,17 @@
     <title>Sign Up</title>
     <script type="text/javascript" src="SignUpJS.js"></script>
     <script type="text/javascript" src="uploadAvatar.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+
+    <jsp:include page="./WEB-INF/NavigationBar.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include>
 </head>
 <body>
 
-<jsp:include page="./WEB-INF/NavigationBar.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include>
-<br>
+
 
 <div id="contain">
     <form action="./SignUp" method="post">

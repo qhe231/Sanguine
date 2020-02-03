@@ -9,81 +9,48 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        li a:hover {
-            color: blue;
-            text-decoration: none;
-
-        }
-
-        nav {
-            background-color: grey;
-            overflow: hidden;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            border-bottom: 2px solid black;
-        }
-
-        nav a {
-            color: white;
-            text-align: center;
-            padding: 30px;
-            text-decoration: none;
-            font-size: 25px;
-            float: left;
-            font-family: "Arial", "sans-serif";
-        }
-
-        .left {
-            float: left;
-        }
-
-        .right {
-            float: right;
-        }
-
-        nav a:visited, nav a:active {
-            color: white;
-        }
-
-    </style>
-
-    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 
-<nav>
-    <ul>
-        <li class="left"><a href="./index">Home</a></li>
+<nav class="navbar navbar-expand-md">
+    <a class="navbar-brand" href="./index">Home</a>
+    <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="main-navigation">
+        <ul class="navbar-nav">
+            <c:choose>
 
-        <c:choose>
+                <c:when test="${user.userName != null}">
+                    <li class="nav-item"><a href="./newArticle.jsp" class="nav-link">Create Article</a></li>
+                    <li class="nav-item"><a href="./userHomePage?owner=${user.userName}"
+                                            class="nav-link">${user.blogName}</a></li>
+                    <li class="nav-item"><a href="./UserAccountPage.jsp" class="nav-link">Account</a></li>
+                    <li class="nav-item"><a href="./logout" class="nav-link">Log out</a></li>
+                </c:when>
 
-        <c:when test="${user.userName != null}">
-        <li class="right"><a href="./logout">Log out</a></li>
-        <li class="right"><a href="./UserAccountPage.jsp">Account</a></li>
-        <li class="right"><a href="./userHomePage?owner=${user.userName}">${user.blogName}</a></li>
-            <li class="right"><a href="./newArticle.jsp">Create Article</a></li>
-        </c:when>
+                <c:otherwise>
+                    <li class="nav-item"><a href="./login.jsp" class="nav-link">Log in</a></li>
+                    <li class="nav-item"><a href="./SignUp.jsp" class="nav-link">Sign up</a></li>
+                </c:otherwise>
 
-        <c:otherwise>
-        <li class="right"><a href="./SignUp.jsp">Sign up</a></li>
-        <li class="right"><a href="./login.jsp">Log in</a></li>
-            </c:otherwise>
-
-        </c:choose>
-    </ul>
+            </c:choose>
+        </ul>
+    </div>
 </nav>
-
-<br><br><br><br>
 
 </body>

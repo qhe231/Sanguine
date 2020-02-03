@@ -12,35 +12,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+
+    <link rel="stylesheet" type="text/css" href="short.css">
+
+    <jsp:include page="./WEB-INF/NavigationBar.jsp">
+        <jsp:param name="user" value="${user}"/>
+    </jsp:include>
+
+    <header class="page-header header container-fluid">
+        <div class="container" id="container">
+
+            Welcome back!
+
+            <div id="box">
+                <form action="./login" method="post">
+                    <p class="main">
+                        <label>User Name: </label>
+                        <input name="username" value="" required><br>
+                        <label>Password: </label>
+                        <input type="password" name="password" value="" required>
+                    </p>
+                    <p class="space">
+                        <input type="submit" value="Login" class="Login">
+                    </p>
+                </form>
+            </div>
+
+        <c:if test="${ErrorMessage != null}">
+            <div> Error: ${ErrorMessage} <br>
+                Do you need to sign up? <a href="SignUp.jsp">Click here</a>
+            </div>
+        </c:if>
+        </div>
+    </header>
+
 </head>
 
 <body>
 
-<jsp:include page="./WEB-INF/NavigationBar.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include>
-<br>
 
-<div id="container">
-    <div id="box">
-        <form action="./login" method="post">
-            <p class="main">
-                <label>User Name: </label>
-                <input name="username" value="" required><br>
-                <label>Password: </label>
-                <input type="password" name="password" value="" required>
-            </p>
-            <p class="space">
-                <input type="submit" value="Login" class="Login">
-            </p>
-        </form>
-    </div>
-</div>
 
-<c:if test="${ErrorMessage != null}">
-    <div> Error: ${ErrorMessage} <br>
-        Do you need to sign up? <a href="SignUp.jsp">Click here</a>
-    </div>
-</c:if>
+
 </body>
 </html>

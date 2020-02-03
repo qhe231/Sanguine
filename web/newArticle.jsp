@@ -10,6 +10,9 @@
 <html>
 <head>
     <title>New Article</title>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
     <jsp:include page="./WEB-INF/NavigationBar.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include> <br>

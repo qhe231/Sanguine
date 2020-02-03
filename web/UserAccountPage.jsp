@@ -12,23 +12,30 @@
     <title>Account Settings</title>
     <script type="text/javascript" src="UserAccountJS.js"></script>
     <script type="text/javascript" src="uploadAvatar.js"></script>
-    <style>
 
-        /*Style avatar thumbnail*/
-        .avatar {
-            width: 100px;
-            height: 100px;
-        }
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    </style>
 
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <jsp:include page="./WEB-INF/NavigationBar.jsp">
+        <jsp:param name="user" value="${user}"/>
+    </jsp:include>
 </head>
 <body>
 
-<jsp:include page="./WEB-INF/NavigationBar.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include>
-<br>
 
 <h1>Account settings</h1>
 
@@ -40,10 +47,11 @@ ${user.userName} <br><br>
 <%--Form to change username--%>
 <div style="display: none" id="changeUsername">
     <form action="./ChangeUsername">
-        New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20" onkeyup="checkUserName()" id="userName" required>
+        New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20"
+                             onkeyup="checkUserName()" id="userName" required>
         <span id="userNameMessage"></span><br><br>
         <input type="submit" id="submitUser">
-<%--        <button type="submit" id="submitUser">subtnmitmme</button>--%>
+        <%--        <button type="submit" id="submitUser">subtnmitmme</button>--%>
     </form>
     <button onclick="hideForm('changeUsername', 'usernameBtn')">Cancel</button>
 </div>
@@ -52,7 +60,6 @@ ${user.userName} <br><br>
 <c:if test="${changeUsernameMessage != null}">
     <div>${changeUsernameMessage}</div>
 </c:if>
-
 
 
 <%--Button to change name--%>
@@ -108,7 +115,8 @@ ${user.profile}<br><br>
         <br> <br>
         New password: <input type="password" name="newPassword" id="password" onkeyup='checkPassword()' required>
         <br> <br>
-        Confirm new password: <input type="password" name="confirmNewPassword" id="confirmPassword" onkeyup='checkPassword()' required>
+        Confirm new password: <input type="password" name="confirmNewPassword" id="confirmPassword"
+                                     onkeyup='checkPassword()' required>
         <span id="message"></span><br> <br>
         <input type="submit" id="submitPassword">
     </form>
@@ -157,7 +165,8 @@ ${user.profile}<br><br>
         <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img src="./images/9.png">
         <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img src="./images/10.png">
         <br>
-        <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a href="https://www.iconfinder.com/iconsets/business-avatar-1" target="_blank"><em>slack</em></a></p>
+        <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a
+                href="https://www.iconfinder.com/iconsets/business-avatar-1" target="_blank"><em>slack</em></a></p>
         <input type="submit">
     </form>
     <button onclick="hideForm('chooseAvatar', 'chooseAvatarBtn')">Cancel</button>
