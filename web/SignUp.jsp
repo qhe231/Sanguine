@@ -19,6 +19,8 @@
 </head>
 <body>
 
+
+<%--Sign up page--%>
 <jsp:include page="./WEB-INF/NavigationBar.jsp">
     <jsp:param name="user" value="${user}"/>
 </jsp:include>

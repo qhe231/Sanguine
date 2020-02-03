@@ -51,11 +51,29 @@
     </tbody>
 </table>
 
+<div id="comments">
+    <form action="./comments" method="post">
+        <input type="hidden" name="userId" value=${owner.userId}>
+        <input type="submit" value="Show All Comments">
+        <table>
+            <tbody>
+            <c:forEach var="comment" items="${comments}">
+                <tr>
+                    <td>${comment.title}</td>
+                    <td>${comment.postedTimeStamp}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </form>
+</div>
+
 <c:if test="${user.userId == owner.userId}">
     <form action="./newArticle.jsp" method="post">
         <input type="submit" name="postANewArticle" value="Post a New Article">
     </form>
 </c:if>
+
 
 </body>
 </html>
