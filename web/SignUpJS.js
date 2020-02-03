@@ -12,7 +12,7 @@ function checkPassword() {
 
 async function checkUserName() {
 
-    console.log('checkusername called')
+    console.log('checkusername called');
 
     const possibleUserName = document.querySelector("#userName").value;
     console.log(possibleUserName);

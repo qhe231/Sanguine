@@ -4,6 +4,7 @@ import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 import ictgradschool.project.util.PasswordUtil;
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.logging.log4j.util.PropertyFilePropertySource;
@@ -23,23 +24,38 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 @WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
 public class SignUpServlet extends HttpServlet {
 
+    private String streamText;
+
+    private String getValue(String val) {
+        String t = streamText.substring(streamText.indexOf("name=\"" + val + "\""));
+        t = t.substring(t.indexOf("\n") + 1);
+        t = t.substring(t.indexOf("\n") + 1);
+        return t.substring(0, t.indexOf("\n")).trim();
+    }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String blogName = req.getParameter("blogName");
-        String firstName = req.getParameter("firstName");
-        String lastName = req.getParameter("lastName");
-        String userName = req.getParameter("userName");
-        String password = req.getParameter("password");
-        String DOBString = req.getParameter("dob-year") + "-" + req.getParameter("dob-month") + "-" + req.getParameter("dob-day");
+        streamText = "";
+        Scanner s = new Scanner(req.getInputStream());
+        while (s.hasNextLine())
+            streamText += s.nextLine() + "\n";
 
-        Date DOB = Date.valueOf(DOBString);
-        String profile = req.getParameter("profile");
-        String avatarURL = req.getParameter("avatar");
+
+        String blogName = getValue("blogName");
+        String firstName = getValue("firstName");
+        String lastName = getValue("lastName");
+        String userName = getValue("userName");
+        String password = getValue("password");
+        Date DOB = Date.valueOf(getValue("dob"));
+        String profile = getValue("profile");
+        String avatarURL = getValue("avatar");
+
 
         byte[] saltByte = PasswordUtil.getNextSalt();
         String salt = PasswordUtil.base64Encode(saltByte);
@@ -60,8 +76,15 @@ public class SignUpServlet extends HttpServlet {
                 if (insertUiSuccessfully) {
                     req.getSession().setAttribute("user", ui);
 
-                    //req.getRequestDispatcher("./userHomePage?ownerId=" + ui.getUserId()).forward(req, resp);
-                    resp.sendRedirect("./userHomePage?owner=" + ui.getUserName());
+//                    DiskFileItemFactory factory = new DiskFileItemFactory();
+//                    factory.setSizeThreshold(4 * 1024);
+//                    factory.setRepository(new File(getServletContext().getRealPath("/WEB-INF/temp")));
+//                    ServletFileUpload upload = new ServletFileUpload(factory);
+//                    List<FileItem> fileItems = upload.parseRequest(req);
+//                    System.out.println(fileItems.size());
+
+                    req.getRequestDispatcher("./uploadAvatar").forward(req, resp);
+
                 } else {
                     signUpFailed(req, resp);
                 }

@@ -51,7 +51,6 @@ public class UploadAvatarServlet extends HttpServlet {
             List<FileItem> fileItems = upload.parseRequest(req);
             File fullsizeImageFile = null;
 
-
             for (FileItem fi : fileItems) {
                 if (!fi.isFormField() && fi.getContentType().substring(0, 6).equals("image/")) {
                     String fileName = fi.getName();
@@ -72,14 +71,17 @@ public class UploadAvatarServlet extends HttpServlet {
                         req.setAttribute("changeAvatarMessage", message);
 
                     }
-
                 }
             }
+            UserInfo ui = (UserInfo)(req.getSession().getAttribute("user"));
+            resp.sendRedirect("./userHomePage?owner=" + ui.getUserName());
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new ServletException(e);
         }
 
-        resp.sendRedirect("./UserAccountPage.jsp");
+
+//        resp.sendRedirect("./UserAccountPage.jsp");
     }
 }
