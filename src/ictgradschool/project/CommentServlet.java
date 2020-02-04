@@ -19,37 +19,48 @@ public class CommentServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-
         int userId = Integer.parseInt(req.getParameter("userId"));
+        Object userObj = req.getSession().getAttribute("user");
+        UserInfo user = (userObj == null) ? null : (UserInfo) userObj;
+
+        System.out.println(userId);
+        System.out.println(userId);
+        System.out.println(userId);
+        System.out.println(userId);
+        System.out.println(userId);
+        System.out.println(userId);
+        System.out.println(userId);
+
         List<Article> comments = new ArrayList<>();
 
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
             //get the user's all articles
             List<Article> articles = ArticleDAO.getArticles(conn, -1, userId);
+            UserInfo owner = UserInfoDAO.getUserInfoByUserName(conn, req.getParameter("owner"));
 
-            for (Article a : articles) {
+//            for (Article a : articles) {
+//
+//                //add each article's comment in the comments list
+//                for (Article c : a.getChildren()){
+//                    comments.add(c);
+//                }
+//            }
+//
+//            req.setAttribute("articles", articles);
+//            req.setAttribute("user", user);
+//            req.setAttribute("owner", owner);
+//            req.setAttribute("comments",comments);
 
-                //add each article's comment in the comments list
-                for (Article c : a.getChildren()){
-                    comments.add(c);
-                }
-            }
+            RequestDispatcher dispatcher  =getServletContext().getRequestDispatcher("/userHomePage.jsp");
+            dispatcher.forward(req,resp);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        req.setAttribute("comments",comments);
 
-        RequestDispatcher dispatcher  =getServletContext().getRequestDispatcher("/userHomePage.jsp");
-        dispatcher.forward(req,resp);
+
+
     }
 }

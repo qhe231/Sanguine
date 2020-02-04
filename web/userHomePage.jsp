@@ -52,20 +52,23 @@
 </table>
 
 <div id="comments">
-    <form action="./comments" method="post">
-        <input type="hidden" name="userId" value=${owner.userId}>
-        <input type="submit" value="Show All Comments">
-        <table>
-            <tbody>
-            <c:forEach var="comment" items="${comments}">
-                <tr>
-                    <td>${comment.title}</td>
-                    <td>${comment.postedTimeStamp}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </form>
+    <c:if test="${user.userId == owner.userId}">
+        <%--<form action="./comments" method="post">--%>
+            <%--<input type="hidden" name="userId" value=${owner.userId}>--%>
+            <%--<input type="submit" value="Show All Comments">--%>
+            <table>
+                <caption>Comments</caption>
+                <tbody>
+                <c:forEach var="comment" items="${comments}">
+                    <tr>
+                        <td><a href="./comment.jsp">${comment.title}</a></td>
+                        <td>${comment.postedTimeStamp}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </form>
+    </c:if>
 </div>
 
 <c:if test="${user.userId == owner.userId}">
