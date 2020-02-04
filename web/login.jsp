@@ -12,6 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <script src="login.js"></script>
 </head>
 
 <body>
@@ -36,6 +37,8 @@
         </form>
     </div>
 </div>
+
+<div class="g-signin2" data-onsuccess="googleSignIn"></div>
 
 <c:if test="${ErrorMessage != null}">
     <div> Error: ${ErrorMessage} <br>
