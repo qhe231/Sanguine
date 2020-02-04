@@ -53,31 +53,39 @@
     </tbody>
 </table>
 
-<div id="comments">
-    <c:if test="${user.userId == owner.userId}">
-        <%--<form action="./comments" method="post">--%>
-            <%--<input type="hidden" name="userId" value=${owner.userId}>--%>
-            <%--<input type="submit" value="Show All Comments">--%>
-            <table>
-                <caption>Comments</caption>
-                <tbody>
-                <c:forEach var="comment" items="${comments}">
-                    <tr>
-                        <td><a href="./comment.jsp">${comment.title}</a></td>
-                        <td>${comment.postedTimeStamp}</td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-        </form>
-    </c:if>
-</div>
-
 <c:if test="${user.userId == owner.userId}">
     <form action="./newArticle.jsp" method="post">
         <input type="submit" name="postANewArticle" value="Post a New Article">
     </form>
 </c:if>
+
+
+<div id="comments">
+    <c:if test="${user.userId == owner.userId}">
+        <table>
+            <caption>Comments</caption>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author Name</th>
+                <th>Posted Time</th>
+                <th>Last Edited Time</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="comment" items="${comments}">
+                <tr>
+                    <td><a href="./article?articleId=${comment.articleId}">${comment.title}</a></td>
+                    <td>${comment.author.userName}</td>
+                    <td>${comment.postedTimeStamp}</td>
+                    <td>${comment.editedTimeStamp}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+        </form>
+    </c:if>
+</div>
 
 
 </body>
