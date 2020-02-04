@@ -1,5 +1,8 @@
 package ictgradschool.project;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
+import ictgradschool.project.util.DBConnectionUtils;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 @WebServlet(name = "logout", urlPatterns = {"/logout"})
 public class LogoutServlet extends HttpServlet {
@@ -20,6 +25,7 @@ public class LogoutServlet extends HttpServlet {
 
         //hide user details
         session.invalidate();
+
         resp.sendRedirect("./index");
     }
 
