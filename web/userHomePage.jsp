@@ -69,7 +69,6 @@
                 <th>Title</th>
                 <th>Author Name</th>
                 <th>Posted Time</th>
-                <th>Last Edited Time</th>
             </tr>
             </thead>
             <tbody>
@@ -78,7 +77,6 @@
                     <td><a href="./article?articleId=${comment.articleId}">${comment.title}</a></td>
                     <td>${comment.author.userName}</td>
                     <td>${comment.postedTimeStamp}</td>
-                    <td>${comment.editedTimeStamp}</td>
                 </tr>
             </c:forEach>
             </tbody>
