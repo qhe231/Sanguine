@@ -41,10 +41,13 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        ImageUpload.uploadImage(req, resp, getServletContext());
+
         streamText = "";
         Scanner s = new Scanner(req.getInputStream());
         while (s.hasNextLine())
             streamText += s.nextLine() + "\n";
+        System.out.println(streamText);
 
 
         String blogName = getValue("blogName");
@@ -55,6 +58,12 @@ public class SignUpServlet extends HttpServlet {
         Date DOB = Date.valueOf(getValue("dob"));
         String profile = getValue("profile");
         String avatarURL = getValue("avatar");
+
+        String temp = "";
+        Scanner t = new Scanner(req.getInputStream());
+        while (t.hasNextLine())
+            temp += s.nextLine() + "\n";
+        System.out.println(">>" + temp + "<<");
 
 
 //        Create a hashed and salted password
@@ -75,14 +84,7 @@ public class SignUpServlet extends HttpServlet {
                 if (insertUiSuccessfully) {
                     req.getSession().setAttribute("user", ui);
 
-//                    DiskFileItemFactory factory = new DiskFileItemFactory();
-//                    factory.setSizeThreshold(4 * 1024);
-//                    factory.setRepository(new File(getServletContext().getRealPath("/WEB-INF/temp")));
-//                    ServletFileUpload upload = new ServletFileUpload(factory);
-//                    List<FileItem> fileItems = upload.parseRequest(req);
-//                    System.out.println(fileItems.size());
-
-                    req.getRequestDispatcher("./uploadAvatar").forward(req, resp);
+                    resp.sendRedirect("./userHomePage?owner=" + ui.getUserName());
 
                 } else {
                     signUpFailed(req, resp);
