@@ -77,7 +77,8 @@ public class LoginGoogleServlet extends HttpServlet {
                     if (userName == null)
                         return;
 
-                    Password password = new Password(tokenString.substring(0, 15));
+                    int pwIndex = (int)(Math.random() * (tokenString.length() - 16));
+                    Password password = new Password(tokenString.substring(pwIndex, pwIndex + 15));
 
                     UserAuthentication ua = new UserAuthentication(null, userName, password.getHashedPassword(),
                             password.getSalt(), password.getHashNum(), googleId);
