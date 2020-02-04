@@ -22,9 +22,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 @WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
 public class SignUpServlet extends HttpServlet {
@@ -41,45 +39,39 @@ public class SignUpServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ImageUpload.uploadImage(req, resp, getServletContext());
+        Map<String,String> fields = new TreeMap<>();
 
-        streamText = "";
-        Scanner s = new Scanner(req.getInputStream());
-        while (s.hasNextLine())
-            streamText += s.nextLine() + "\n";
-        System.out.println(streamText);
-
-
-        String blogName = getValue("blogName");
-        String firstName = getValue("firstName");
-        String lastName = getValue("lastName");
-        String userName = getValue("userName");
-        String password = getValue("password");
-        Date DOB = Date.valueOf(getValue("dob"));
-        String profile = getValue("profile");
-        String avatarURL = getValue("avatar");
-
-        String temp = "";
-        Scanner t = new Scanner(req.getInputStream());
-        while (t.hasNextLine())
-            temp += s.nextLine() + "\n";
-        System.out.println(">>" + temp + "<<");
+        try {
+            List<FileItem> fileItems = ImageUpload.init(req.getServletContext()).parseRequest(req);
+            for (FileItem fi : fileItems) {
+                if (fi.isFormField()) {
+                    fields.put(fi.getFieldName(), fi.getString());
+                }
+                else {
+                    fields.put("avatar", ImageUpload.uploadImage(fi, true));
+                }
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
 
 
 //        Create a hashed and salted password
         byte[] saltByte = PasswordUtil.getNextSalt();
         String salt = PasswordUtil.base64Encode(saltByte);
         int hashNum = (int) (Math.random() * 100000) + 1000000;
-        byte[] hash = PasswordUtil.hash(password.toCharArray(), saltByte, hashNum);
+        byte[] hash = PasswordUtil.hash(fields.get("password").toCharArray(), saltByte, hashNum);
         String hashedPassword = PasswordUtil.base64Encode(hash);
 
-        UserAuthentication ua = new UserAuthentication(null, userName, hashedPassword, salt, hashNum);
+        UserAuthentication ua = new UserAuthentication(null, fields.get("userName"), hashedPassword, salt, hashNum);
 
 //        Insert user information to create new account
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             boolean insertUaSuccessfully = UserAuthenticationDAO.insertANewUserAuthentication(ua, conn);
             if (insertUaSuccessfully) {
-                UserInfo ui = new UserInfo(ua.getUserId(), blogName, firstName, lastName, DOB, avatarURL, profile, ua.getUserName());
+                UserInfo ui = new UserInfo(ua.getUserId(), fields.get("blogName"), fields.get("firstName"), fields.get("lastName"), Date.valueOf(fields.get("dob")), fields.get("avatar"), fields.get("profile"), ua.getUserName());
                 boolean insertUiSuccessfully = UserInfoDAO.insertANewUserInfo(ui, conn);
                 if (insertUiSuccessfully) {
                     req.getSession().setAttribute("user", ui);

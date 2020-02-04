@@ -16,11 +16,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ImageUpload {
-    public static String uploadImage(HttpServletRequest req, HttpServletResponse resp, ServletContext sc) throws ServletException{
-        File uploadsFolder;
-        File tempFolder;
-        final String imagesRelativePath = "/images";
+    static File uploadsFolder;
+    static File tempFolder;
+    static final String imagesRelativePath = "/images";
 
+    public static ServletFileUpload init(ServletContext sc) {
         // Get the upload folder, ensure it exists.
         uploadsFolder = new File(sc.getRealPath(imagesRelativePath));
         if (!uploadsFolder.exists()) {
@@ -38,23 +38,20 @@ public class ImageUpload {
         factory.setRepository(tempFolder);
         ServletFileUpload upload = new ServletFileUpload(factory);
 
-        try {
-            List<FileItem> fileItems = upload.parseRequest(req);
-            File fullsizeImageFile = null;
+        return upload;
+    }
 
-            for (FileItem fi : fileItems) {
-                if (!fi.isFormField() && fi.getContentType().substring(0, 6).equals("image/")) {
-                    String fileName = fi.getName();
-                    fullsizeImageFile = new File(uploadsFolder, fileName);
-                    fi.write(fullsizeImageFile);
-                    return "./images/" + fullsizeImageFile.getName();
-                }
-            }
+    public static String uploadImage(FileItem fi, boolean isAvatar) throws Exception{
 
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            throw new ServletException(e);
+        File fullsizeImageFile = null;
+
+        if (fi.getContentType().substring(0, 6).equals("image/")) {
+            String fileName = fi.getName();
+            fullsizeImageFile = new File(uploadsFolder, fileName);
+            fi.write(fullsizeImageFile);
+            return "./images/" + fullsizeImageFile.getName();
         }
+
         return null;
     }
 }
