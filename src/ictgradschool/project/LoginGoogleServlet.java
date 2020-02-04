@@ -24,8 +24,12 @@ import java.util.Scanner;
 public class LoginGoogleServlet extends HttpServlet {
 
     private String createUserName(GoogleIdToken.Payload payload) {
-        String userNameLetters = ((String)payload.get("given_name")).toLowerCase().charAt(0) +
-                ((String)payload.get("family_name")).toLowerCase().substring(0, 3);
+        String userNameLetters = "" + ((String)payload.get("given_name")).toLowerCase().charAt(0);
+        String family_name = ((String)payload.get("family_name")).toLowerCase();
+        if (family_name.length() < 4)
+            userNameLetters += family_name;
+        else
+            userNameLetters += family_name.substring(0, 3);
         String userName = userNameLetters + "001";
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             List<UserAuthentication> userAuthentications = UserAuthenticationDAO.getAllUserAuthentications(conn);
