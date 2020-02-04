@@ -13,45 +13,52 @@
     <meta charset="UTF-8">
     <title>Login</title>
 
-    <link rel="stylesheet" type="text/css" href="short.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
 
     <jsp:include page="./WEB-INF/NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
     </jsp:include>
 
-    <header class="page-header header container-fluid">
-        <div class="container" id="container">
-
-            Welcome back!
-
-            <div id="box">
-                <form action="./login" method="post">
-                    <p class="main">
-                        <label>User Name: </label>
-                        <input name="username" value="" required><br>
-                        <label>Password: </label>
-                        <input type="password" name="password" value="" required>
-                    </p>
-                    <p class="space">
-                        <input type="submit" value="Login" class="Login">
-                    </p>
-                </form>
-            </div>
-
-        <c:if test="${ErrorMessage != null}">
-            <div> Error: ${ErrorMessage} <br>
-                Do you need to sign up? <a href="SignUp.jsp">Click here</a>
-            </div>
-        </c:if>
-        </div>
-    </header>
-
 </head>
 
 <body>
 
+<header class="page-header header container-fluid heightAuto">
+    <div class=" center heightVh">
+        <div class="content ">
+            <h1 class="center">Welcome back!</h1>
 
+            <div id="box">
+                <form action="./login" method="post">
+                    <p class="main">
 
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-2"><label>Username: </label></div>
+                        <div class="col-3"><input name="username" required></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-2"><label>Password: </label></div>
+                        <div class="col-3"><input type="password" name="password" required></div>
+                    </div>
+
+                    <br>
+
+                    <input type="submit" value="Login" class="Login center">
+
+                </form>
+            </div>
+
+            <c:if test="${ErrorMessage != null}">
+                <div class="center"> Error: ${ErrorMessage} <br>
+                    Do you need to sign up? <a href="SignUp.jsp">Click here</a>
+                </div>
+            </c:if>
+        </div>
+    </div>
+</header>
 
 </body>
 </html>

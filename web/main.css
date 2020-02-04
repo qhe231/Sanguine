@@ -3,12 +3,12 @@ body {
     margin: 0;
 }
 
-/*--- navigation bar ---*/
+/*--- Navigation Bar ---*/
 .navbar {
-    background: dodgerblue;
+    background: steelblue;
 }
 
-.nav-link,.navbar-brand {
+.nav-link, .navbar-brand {
     color: #fff;
     cursor: pointer;
 }
@@ -25,23 +25,73 @@ body {
     justify-content: flex-end;
 }
 
+
+/*--- Basic layout ---*/
+
 .page-header {
-    background-image: url('./images/bright-light-rays.jpg') ;
-    /*background: aquamarine;*/
+    background-image: url('./images/bright-light-rays.jpg');
     background-size: cover;
     background-position: center;
     position: sticky;
     background-attachment: fixed;
-
-    /*height: 100vh;*/
-    /*overflow: auto;*/
     height: fit-content;
+    /*overflow: auto;*/
 }
 
 .container {
     background: white;
     word-wrap: break-word;
-    margin-left: 200px;
+    padding: 30px;
     width: 1000px;
+    height: 100%;
+}
 
+.content {
+    background: white;
+    position: absolute;
+    padding: 50px;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 8px solid steelblue;
+    width: 30%;
+}
+
+/* Override previous height attributes */
+.heightAuto {
+    height: auto
+}
+
+.heightVh {
+    height: 100vh;
+    /*height: max-content;*/
+}
+
+.heightFit {
+height: fit-content;
+}
+
+.heightAvailable {
+    height: 100vmax;
+}
+
+.right {
+    float: right;
+
+}
+
+/* Align specific elements*/
+.rightText {
+    text-align: right;
+
+}
+
+.center {
+
+    text-align: center;
+}
+
+.left {
+
+    text-align: left;
 }
