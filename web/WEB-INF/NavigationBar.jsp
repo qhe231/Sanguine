@@ -59,6 +59,10 @@
     </style>
 
     <title>Title</title>
+    <meta name="google-signin-client_id" content="28193811864-vj7d671e3btucp1bopgidr8ulso973cd.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="logout.js"></script>
+
 </head>
 <body>
 
@@ -69,7 +73,7 @@
         <c:choose>
 
         <c:when test="${user.userName != null}">
-        <li class="right"><a href="./logout">Log out</a></li>
+        <li class="right"><a href="./logout" id="logout">Log out</a></li>
         <li class="right"><a href="./UserAccountPage.jsp">Account</a></li>
         <li class="right"><a href="./userHomePage?owner=${user.userName}">${user.blogName}</a></li>
             <li class="right"><a href="./newArticle.jsp">Create Article</a></li>
