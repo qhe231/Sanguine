@@ -16,8 +16,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "uploadImage", urlPatterns = {"/imageUpload"})
-public class ImageUploadServlet extends HttpServlet {
+@WebServlet(name = "uploadImage", urlPatterns = {"/avatarUpload"})
+public class AvatarUploadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();

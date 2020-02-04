@@ -127,7 +127,7 @@ ${user.profile}<br><br>
 
 <%--Form to upload avatar--%>
 <div style="display: none" id="uploadAvatar">
-    <form action="./imageUpload" method="POST" enctype="multipart/form-data">
+    <form action="./avatarUpload" method="POST" enctype="multipart/form-data">
         Upload new avatar: <input type="file" id="ownAvatarFile" name="newAvatar" accept="image/*">
         <span id="ownAvatarPic"></span>
         <br><br>
