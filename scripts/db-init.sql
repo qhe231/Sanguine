@@ -37,3 +37,6 @@ CREATE TABLE IF NOT EXISTS articles_and_comments
   FOREIGN KEY (userBelongedId) REFERENCES user_authentication (userId) ON DELETE CASCADE
 );
 
+ALTER TABLE user_authentication ADD thirdPartyId INT;
+
+ALTER TABLE articles_and_comments ADD timeEdited TIMESTAMP;

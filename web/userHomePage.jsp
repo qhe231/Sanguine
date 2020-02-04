@@ -39,6 +39,7 @@
     <tr>
         <th>Title</th>
         <th>Posted Time</th>
+        <th>Last Edited Time</th>
     </tr>
     </thead>
     <tbody>
@@ -46,6 +47,7 @@
         <tr>
             <td><a href="./article?articleId=${article.articleId}">${article.title}</a></td>
             <td>${article.postedTimeStamp}</td>
+            <td>${article.editedTimeStamp}</td>
         </tr>
     </c:forEach>
     </tbody>

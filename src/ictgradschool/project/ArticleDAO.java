@@ -36,7 +36,7 @@ public class ArticleDAO {
                 while (r.next()) {
                     int articleId = r.getInt(1);
                     UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
-                    Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId);
+                    Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId, r.getTimestamp(7));
                     articles.add(a);
                 }
             }
@@ -63,7 +63,7 @@ public class ArticleDAO {
                     int parentId = r.getInt(5);
                     if (r.wasNull())
                         parentId = -1;
-                    return new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId);
+                    return new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId, r.getTimestamp(7));
                 }
             }
         }
@@ -78,10 +78,11 @@ public class ArticleDAO {
      * @throws SQLException
      */
     public static boolean insertArticle(Connection conn, Article article) throws SQLException {
-        try (PreparedStatement s = conn.prepareStatement("insert into articles_and_comments (datePosted, title, content, parentId, userBelongedId) values (?, ?, ?, ?, ?);",
+        try (PreparedStatement s = conn.prepareStatement("insert into articles_and_comments (datePosted, title, content, parentId, userBelongedId, timeEdited) values (?, ?, ?, ?, ?, ?);",
                 Statement.RETURN_GENERATED_KEYS)) {
             s.setTimestamp(1, article.getPostedTimeStamp());
             s.setString(2, article.getTitle());
+            s.setTimestamp(6, article.getPostedTimeStamp());
             s.setString(3, article.getContent());
             int parentId = article.getParentId();
             if (parentId == -1)
@@ -110,9 +111,13 @@ public class ArticleDAO {
      * @throws SQLException
      */
     public static boolean editArticle(Connection conn, Article article) throws SQLException {
-        try (PreparedStatement s = conn.prepareStatement("update articles_and_comments set content = ? where id = ?;", Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement s = conn.prepareStatement("update articles_and_comments set content = ? , timeEdited = ?, datePosted = ? where id = ?;", Statement.RETURN_GENERATED_KEYS)) {
             s.setString(1, article.getContent());
-            s.setInt(2, article.getArticleId());
+
+//            set edited timestamp
+            s.setTimestamp(2, article.getEditedTimeStamp());
+            s.setTimestamp(3, article.getPostedTimeStamp());
+            s.setInt(4, article.getArticleId());
 
             return (s.executeUpdate() != 0);
         }
@@ -159,8 +164,9 @@ public class ArticleDAO {
                     String content = rs.getString(4);
                     int parentId = rs.getInt(5);
                     UserInfo author = UserInfoDAO.getUserInfoById(conn, rs.getInt(6));
-                    List<Article> chilren = getArticles(conn, articleId, -1);
-                    Article article = new Article(articleId, author, title, content, postedTime, chilren, parentId);
+                    List<Article> children = getArticles(conn, articleId, -1);
+                    Timestamp editedTime = rs.getTimestamp(7);
+                    Article article = new Article(articleId, author, title, content, postedTime, children, parentId, editedTime);
                     articles.add(article);
                 }
             }
