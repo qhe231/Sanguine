@@ -28,11 +28,13 @@ public class UserNameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-
+// Retrieve list of UserAuthentications and loop over each one. If the username is taken return false, else return true
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
-            List<UserAuthentication> userAuthentications = UserAuthenticationDAO.getAllUserAuthentications(conn);
             String possibleUserName = req.getParameter("possibleUserName");
+
+            List<UserAuthentication> userAuthentications = UserAuthenticationDAO.getAllUserAuthentications(conn);
+
 
             resp.getWriter().print("{\"isAvailable\":" + UserNameServlet.checkUserName(userAuthentications, possibleUserName) + "}");
 

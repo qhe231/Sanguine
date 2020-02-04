@@ -72,6 +72,7 @@
         <li class="right"><a href="./logout">Log out</a></li>
         <li class="right"><a href="./UserAccountPage.jsp">Account</a></li>
         <li class="right"><a href="./userHomePage?owner=${user.userName}">${user.blogName}</a></li>
+            <li class="right"><a href="./newArticle.jsp">Create Article</a></li>
         </c:when>
 
         <c:otherwise>

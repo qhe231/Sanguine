@@ -1,3 +1,7 @@
+<%@ page import="java.util.Collections" %>
+<%@ page import="ictgradschool.project.Article" %>
+<%@ page import="java.util.List" %>
+<%@ page import="ictgradschool.project.ArticleDAO" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
@@ -42,6 +46,12 @@
             text-decoration: underline;
         }
     </style>
+
+    <script type="text/javascript">
+
+        let randomNum = (Math.random() * ${articles.size()});
+
+    </script>
 </head>
 <body>
 
@@ -50,6 +60,11 @@
 </jsp:include>
 
 <h1>Welcome to JESP Blog</h1>
+<form action="./search" method="get">
+    <input name="search" type="text"><input type="submit" value="Search">
+</form>
+
+<a href="./article?articleId=random">View random article</a>
 
 <table>
     <caption>Newest Articles</caption>
@@ -59,6 +74,7 @@
         <th>Author</th>
         <th>Comments</th>
         <th>Posted Time</th>
+        <th>Last Edited Time</th>
     </tr>
     </thead>
     <tbody>
@@ -71,14 +87,16 @@
             </td>
             <td>${article.children.size()}</td>
             <td>${article.postedTimeStamp}</td>
+            <td>${article.editedTimeStamp}</td>
+
         </tr>
         <tr>
             <c:choose>
                 <c:when test="${article.content.length() <= 100}">
-                    <td colspan="4">${article.content}</td>
+                    <td colspan="5">${article.content}</td>
                 </c:when>
                 <c:otherwise>
-                    <td colspan="4">${article.content.substring(0,99)}...</td>
+                    <td colspan="5">${article.content.substring(0,99)}...</td>
                 </c:otherwise>
             </c:choose>
         </tr>

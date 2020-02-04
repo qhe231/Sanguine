@@ -36,6 +36,7 @@ public class SignUpServlet extends HttpServlet {
 
         UserAuthentication ua = new UserAuthentication(null, userName, password.getHashedPassword(), password.getSalt(), password.getHashNum());
 
+//        Insert user information to create new account
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             boolean insertUaSuccessfully = UserAuthenticationDAO.insertANewUserAuthentication(ua, conn);
             if (insertUaSuccessfully) {
@@ -59,6 +60,7 @@ public class SignUpServlet extends HttpServlet {
 
     }
 
+//    If sign up failed, set error message
     private void signUpFailed(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("error", "Sign up failed.");
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/SignUp.jsp");

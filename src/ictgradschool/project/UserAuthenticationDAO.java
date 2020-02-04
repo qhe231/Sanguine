@@ -129,7 +129,7 @@ public class UserAuthenticationDAO {
 
     }
 
-//    create a new UserAuthentication by the resultSet
+    //    create a new UserAuthentication by the resultSet
     private static UserAuthentication createANewUserAuthentication(ResultSet rs) throws SQLException {
         return new UserAuthentication(rs.getInt(1),
                 rs.getString(2),
@@ -137,5 +137,20 @@ public class UserAuthenticationDAO {
                 rs.getString(4),
                 rs.getInt(5),
                 rs.getString(6));
+    }
+
+    public static List<UserAuthentication> getUserAuthenticationsBySearch(Connection conn, String search) throws SQLException {
+        List<UserAuthentication> uas = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user_authentication WHERE userName LIKE ?")) {
+            stmt.setString(1, "%" + search + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    UserAuthentication ua = createANewUserAuthentication(rs);
+                    uas.add(ua);
+                }
+            }
+        }
+
+        return uas;
     }
 }
