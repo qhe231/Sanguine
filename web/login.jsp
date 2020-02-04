@@ -12,7 +12,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="login.js"></script>
 </head>
 
@@ -39,7 +38,6 @@
     </div>
 </div>
 
-<meta name="google-signin-client_id" content="28193811864-vj7d671e3btucp1bopgidr8ulso973cd.apps.googleusercontent.com">
 <div class="g-signin2" data-onsuccess="googleSignIn"></div>
 
 <c:if test="${ErrorMessage != null}">
