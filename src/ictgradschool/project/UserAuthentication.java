@@ -10,10 +10,7 @@ public class UserAuthentication implements Serializable {
    private String hashedPassword;
    private String salt;
    private Integer hashNum;
-
-    public UserAuthentication(){
-
-    }
+   private String thirdPartyId;
 
     public UserAuthentication(Integer userId, String userName, String hashedPassword, String salt, Integer hashNum) {
         this.userId = userId;
@@ -21,6 +18,16 @@ public class UserAuthentication implements Serializable {
         this.hashedPassword = hashedPassword;
         this.salt = salt;
         this.hashNum = hashNum;
+        this.thirdPartyId = null;
+    }
+
+    public UserAuthentication(Integer userId, String userName, String hashedPassword, String salt, Integer hashNum, String thirdPartyId) {
+        this.userId = userId;
+        this.userName = userName;
+        this.hashedPassword = hashedPassword;
+        this.salt = salt;
+        this.hashNum = hashNum;
+        this.thirdPartyId = thirdPartyId;
     }
 
     public Integer getUserId() {
@@ -62,4 +69,13 @@ public class UserAuthentication implements Serializable {
     public void setHashNum(Integer hashNum) {
         this.hashNum = hashNum;
     }
+
+    public String getThirdPartyId() {
+        return thirdPartyId;
+    }
+
+    public void setThirdPartyId(String thirdPartyId) {
+        this.thirdPartyId = thirdPartyId;
+    }
+
 }
