@@ -24,20 +24,20 @@ public class ChangePasswordServlet extends HttpServlet {
         HttpSession session = req.getSession();
         UserAuthentication ua = (UserAuthentication) session.getAttribute("user_auth");
 
-        String currentPassword = req.getParameter("currentPassword");
-        String newPassword = req.getParameter("newPassword");
+        String currentPasswordPlainText = req.getParameter("currentPassword");
+        String newPasswordPlainText = req.getParameter("newPassword");
 
-        byte[] salt = PasswordUtil.base64Decode(ua.getSalt());
-        byte[] expectedHash = PasswordUtil.base64Decode(ua.getHashedPassword());
+        Password existingPassword = new Password(ua.getSalt(), ua.getHashNum(), ua.getHashedPassword());
 
-        boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPassword.toCharArray(), salt, ua.getHashNum(), expectedHash);
+        boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPasswordPlainText.toCharArray(), existingPassword.getSaltByte(), existingPassword.getHashNum(),
+                existingPassword.getHashByte());
 
 //          If user entered correct password, update password and set success message
         if (isPasswordCorrect) {
 
             try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
-                UserAuthenticationDAO.updatePassword(ua, conn, newPassword);
+                UserAuthenticationDAO.updatePassword(ua, conn, newPasswordPlainText);
 
                 String message = "Password was successfully changed";
                 req.setAttribute("changePasswordMessage", message);
