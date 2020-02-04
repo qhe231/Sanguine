@@ -10,11 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "UserNameServlet", urlPatterns = { "/UserNameList" })
-public class UsernameServlet extends HttpServlet {
+public class UserNameServlet extends HttpServlet {
+
+    public static boolean checkUserName(List<UserAuthentication> userAuthentications, String possibleUserName) throws SQLException {
+
+        for (UserAuthentication ua : userAuthentications){
+            if (possibleUserName.equals(ua.getUserName())) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,16 +35,8 @@ public class UsernameServlet extends HttpServlet {
 
             List<UserAuthentication> userAuthentications = UserAuthenticationDAO.getAllUserAuthentications(conn);
 
-            for (UserAuthentication ua : userAuthentications){
 
-                if (possibleUserName.equals(ua.getUserName())) {
-                    resp.getWriter().print("{\"isAvailable\":" + false + "}");
-                    return;
-                }
-
-            }
-            resp.getWriter().print("{\"isAvailable\":" + true + "}");
-
+            resp.getWriter().print("{\"isAvailable\":" + UserNameServlet.checkUserName(userAuthentications, possibleUserName) + "}");
 
         } catch (SQLException e) {
             e.printStackTrace();

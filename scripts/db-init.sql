@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS user_authentication
   userName       VARCHAR(20)     NOT NULL UNIQUE,
   hashedPassword CHAR(88)        NOT NULL,
   salt           VARCHAR(44)     NOT NULL,
-  hashNum        INT             NOT NULL
+  hashNum        INT             NOT NULL,
+  thirdPartyId   INT
 );
 
 CREATE TABLE IF NOT EXISTS user_info
@@ -33,10 +34,7 @@ CREATE TABLE IF NOT EXISTS articles_and_comments
   content        TEXT,
   parentId       INT,
   userBelongedId INT NOT NULL,
+  timeEdited     TIMESTAMP,
   FOREIGN KEY (parentId) REFERENCES articles_and_comments (id) ON DELETE CASCADE,
   FOREIGN KEY (userBelongedId) REFERENCES user_authentication (userId) ON DELETE CASCADE
 );
-
-ALTER TABLE user_authentication ADD thirdPartyId INT;
-
-ALTER TABLE articles_and_comments ADD timeEdited TIMESTAMP;
