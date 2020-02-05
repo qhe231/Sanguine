@@ -9,6 +9,11 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <title>Title</title>
+    <meta name="google-signin-client_id" content="28193811864-vj7d671e3btucp1bopgidr8ulso973cd.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="logout.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -40,7 +45,7 @@
                     <li class="nav-item"><a href="./userHomePage?owner=${user.userName}"
                                             class="nav-link">${user.blogName}</a></li>
                     <li class="nav-item"><a href="./UserAccountPage.jsp" class="nav-link">Account</a></li>
-                    <li class="nav-item"><a href="./logout" class="nav-link">Log out</a></li>
+                    <li class="nav-item"><a href="./logout" class="nav-link" id="logout">Log out</a></li>
                 </c:when>
 
                 <c:otherwise>

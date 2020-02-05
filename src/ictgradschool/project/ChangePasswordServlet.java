@@ -21,31 +21,27 @@ public class ChangePasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String currentPassword = req.getParameter("currentPassword");
-        String newPassword = req.getParameter("newPassword");
-
         HttpSession session = req.getSession();
         UserInfo ui = (UserInfo) session.getAttribute("user");
-        boolean isPasswordCorrect = false;
         UserAuthentication ua = null;
 
-        try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
-            ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, ui.getUserName());
 
-            byte[] salt = PasswordUtil.base64Decode(ua.getSalt());
-            byte[] expectedHash = PasswordUtil.base64Decode(ua.getHashedPassword());
 
-            isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPassword.toCharArray(), salt, ua.getHashNum(), expectedHash);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String currentPasswordPlainText = req.getParameter("currentPassword");
+        String newPasswordPlainText = req.getParameter("newPassword");
+
+        Password existingPassword = new Password(ua.getSalt(), ua.getHashNum(), ua.getHashedPassword());
+
+        boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPasswordPlainText.toCharArray(), existingPassword.getSaltByte(), existingPassword.getHashNum(),
+                existingPassword.getHashByte());
 
 //          If user entered correct password, update password and set success message
         if (isPasswordCorrect) {
 
             try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
-                UserAuthenticationDAO.updatePassword(ua, conn, newPassword);
+                ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, ui.getUserName());
+                UserAuthenticationDAO.updatePassword(ua, conn, newPasswordPlainText);
 
                 String message = "Password was successfully changed";
                 req.setAttribute("changePasswordMessage", message);

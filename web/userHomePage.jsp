@@ -19,6 +19,7 @@
     </c:choose>
 
     <link rel="stylesheet" type="text/css" href="main.css">
+    <script type="text/javascript" src="commentsJS.js"></script>
 
     <jsp:include page="./WEB-INF/NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
@@ -45,6 +46,8 @@
         <form action="./newArticle.jsp" method="post">
             <input type="submit" name="postANewArticle" value="Post a New Article" class="button">
         </form>
+
+        <button type="button" id="commentsButton">Show All Comments</button>
         </c:if>
 
         <c:choose>
@@ -55,7 +58,8 @@
         <div class="row">
             <div class="col-4"><h4>Article</h4></div>
             <div class="col-2"><h4>Comments</h4></div>
-            <div class="col-2"><h4>Date/Time</h4></div>
+            <div class="col-2"><h4>Posted Time</h4></div>
+            <div class="col-2">Edited time</div>
         </div>
         <hr>
 
@@ -86,7 +90,37 @@
 
         </c:choose>
 
-
+        <div id="comments">
+            <c:if test="${user.userId == owner.userId}">
+                <c:choose>
+                    <c:when test=" ${comments.size() == 0}">
+                        <p>You do not have any comments.</p>
+                    </c:when>
+                    <c:otherwise>
+                        <table>
+                            <caption>Comments</caption>
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author Name</th>
+                                <th>Posted Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="comment" items="${comments}">
+                                <tr>
+                                    <td><a href="./article?articleId=${comment.articleId}">${comment.title}</a></td>
+                                    <td>${comment.author.userName}</td>
+                                    <td>${comment.postedTimeStamp}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </c:otherwise>
+                </c:choose>
+            </c:if>
+        </div>
+    </div>
 </header>
 
 </body>

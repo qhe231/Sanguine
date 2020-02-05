@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static javax.jdo.Query.SQL;
+
 //@author: Peter He
 
 public class UserAuthenticationDAO {
@@ -38,14 +40,32 @@ public class UserAuthenticationDAO {
         }
     }
 
+    public static UserAuthentication getUseAuthenticationByThirdPartyId(Connection conn, String thirdPartyId) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user_authentication WHERE thirdPartyId = ?")) {
+            stmt.setString(1, thirdPartyId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return createANewUserAuthentication(rs);
+                } else {
+                    return null;
+                }
+            }
+
+        }
+    }
+
     public static boolean insertANewUserAuthentication(UserAuthentication ua, Connection conn) throws SQLException {
 
 //        insert ua without an ID number.
-        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_authentication (userName, hashedPassword, salt, hashNum) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_authentication (userName, hashedPassword, salt, hashNum, thirdPartyId) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, ua.getUserName());
             stmt.setString(2, ua.getHashedPassword());
             stmt.setString(3, ua.getSalt());
             stmt.setInt(4, ua.getHashNum());
+            if (ua.getThirdPartyId() == null)
+                stmt.setNull(5, java.sql.Types.INTEGER);
+            else
+                stmt.setString(5, ua.getThirdPartyId());
 
             int rowsAffected = stmt.executeUpdate();
 
@@ -87,26 +107,18 @@ public class UserAuthenticationDAO {
         }
     }
 
-    public static boolean updatePassword(UserAuthentication ua, Connection conn, String newPassword) throws SQLException {
+    public static boolean updatePassword(UserAuthentication ua, Connection conn, String newPasswordPlainText) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement("UPDATE user_authentication SET hashedPassword = ?, salt=?, hashNum= ? WHERE userId = ?")) {
 
-//            create new salt
-            byte[] newSaltByte = PasswordUtil.getNextSalt();
-            String newSalt = PasswordUtil.base64Encode(newSaltByte);
-            ua.setSalt(newSalt);
+            Password password = new Password(newPasswordPlainText);
 
-//            generate new hashNum
-            int newHashNum = (int) (Math.random() * 100000) + 1000000;
-            ua.setHashNum(newHashNum);
+            ua.setSalt(password.getSalt());
+            ua.setHashNum(password.getHashNum());
+            ua.setHashedPassword(password.getHashedPassword());
 
-//            get mew hashedPassword
-            byte[] newHash = PasswordUtil.hash(newPassword.toCharArray(), newSaltByte, newHashNum);
-            String newHashedPassword = PasswordUtil.base64Encode(newHash);
-            ua.setHashedPassword(newHashedPassword);
-
-            stmt.setString(1, newHashedPassword);
-            stmt.setString(2, newSalt);
-            stmt.setInt(3, newHashNum);
+            stmt.setString(1, password.getHashedPassword());
+            stmt.setString(2, password.getSalt());
+            stmt.setInt(3, password.getHashNum());
             stmt.setInt(4, ua.getUserId());
 
             int rowsAffected = stmt.executeUpdate();
@@ -117,12 +129,28 @@ public class UserAuthenticationDAO {
 
     }
 
-//    create a new UserAuthentication by the resultSet
+    //    create a new UserAuthentication by the resultSet
     private static UserAuthentication createANewUserAuthentication(ResultSet rs) throws SQLException {
         return new UserAuthentication(rs.getInt(1),
                 rs.getString(2),
                 rs.getString(3),
                 rs.getString(4),
-                rs.getInt(5));
+                rs.getInt(5),
+                rs.getString(6));
+    }
+
+    public static List<UserAuthentication> getUserAuthenticationsBySearch(Connection conn, String search) throws SQLException {
+        List<UserAuthentication> uas = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user_authentication WHERE userName LIKE ?")) {
+            stmt.setString(1, "%" + search + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    UserAuthentication ua = createANewUserAuthentication(rs);
+                    uas.add(ua);
+                }
+            }
+        }
+
+        return uas;
     }
 }

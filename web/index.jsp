@@ -38,6 +38,12 @@
 
       </div>
 
+<form action="./search" method="get">
+    <input name="search" type="text"><input type="submit" value="Search">
+</form>
+
+        Newest Articles
+
         <div class="row">
             <div class="col-4"><h4>Article</h4></div>
             <div class="col-1"></div>
@@ -71,6 +77,7 @@
                 </div>
                 <div class="col-2">${article.children.size()}</div>
                 <div class="col-2">${article.postedTimeStamp}</div>
+                <div class="col-2">${article.editedTimeStamp}</div>
 
             </div>
 

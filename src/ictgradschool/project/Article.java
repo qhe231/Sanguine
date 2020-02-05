@@ -11,12 +11,13 @@ public class Article implements Serializable {
     private String title;
     private String content;
     private Timestamp postedTimeStamp;
+    private Timestamp editedTimeStamp;  //Add edit time for the article
 
     private List<Article> children;
 
     private int parentId;
 
-    public Article(int articleId, UserInfo author, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
+    public Article(int articleId, UserInfo author, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId, Timestamp editedTimeStamp) {
         this.articleId = articleId;
         this.author = author;
         this.title = title;
@@ -24,6 +25,8 @@ public class Article implements Serializable {
         this.postedTimeStamp = postedTimeStamp;
         this.children = children;
         this.parentId = parentId;
+        this.editedTimeStamp = editedTimeStamp; //Add edit time for the article
+
     }
 
     public Article(UserInfo author, String title, String content, Timestamp postedTimeStamp, List<Article> children, int parentId) {
@@ -33,6 +36,11 @@ public class Article implements Serializable {
         this.postedTimeStamp = postedTimeStamp;
         this.children = children;
         this.parentId = parentId;
+        this.editedTimeStamp = postedTimeStamp; //editedTimeStamp will be same as the postedTimeStamp at first post time
+    }
+
+    private String sanitise(String s) {
+        return s.replace("<","&lt;").replace(">","&gt;");
     }
 
     public int getArticleId() {
@@ -52,7 +60,7 @@ public class Article implements Serializable {
     }
 
     public String getTitle() {
-        return title;
+        return sanitise(title);
     }
 
     public void setTitle(String title) {
@@ -89,5 +97,13 @@ public class Article implements Serializable {
 
     public void setParentId(int parentId) {
         this.parentId = parentId;
+    }
+
+    public Timestamp getEditedTimeStamp() {
+        return editedTimeStamp;
+    }
+
+    public void setEditedTimeStamp(Timestamp editedTimeStamp) {
+        this.editedTimeStamp = editedTimeStamp;
     }
 }

@@ -23,7 +23,12 @@
             referrerpolicy="origin"></script>
     <script>
         tinymce.init({
-            selector: '#articleEditor'
+            selector: '#articleEditor',
+            plugins: 'image autoresize',
+            image_description: false,
+            image_dimensions: false,
+            image_uploadtab: true,
+            images_upload_url: './articleImage'
         });
     </script>
 </head>
@@ -38,7 +43,7 @@
             <input name="title" required><br>
             <textarea id="articleEditor" name="content"></textarea><br>
             <input type="submit" name="submit" id="submitButton" class="button">
-            <button name="cancel" id="cancelButton">Cancel</button>
+            <button name="cancel" id="cancelButton" onclick="window.history.back();">Cancel</button>
         </form>
     </div>
 </header>
