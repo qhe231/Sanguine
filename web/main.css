@@ -3,13 +3,19 @@ body {
     margin: 0;
 }
 
+a:link, a:visited, a:hover, a:active {
+
+    color: #508650;
+
+}
+
 /*--- Navigation Bar ---*/
 .navbar {
-    background: steelblue;
+    background:#508650 ;
 }
 
 .nav-link, .navbar-brand {
-    color: #fff;
+    color: white;
     cursor: pointer;
 }
 
@@ -18,7 +24,13 @@ body {
 }
 
 .nav-link:hover {
-    color: #000;
+    color: white;;
+}
+
+.navbar a:link, .navbar a:hover, .navbar a:active, .navbar a:visited {
+
+
+
 }
 
 .navbar-collapse {
@@ -28,7 +40,11 @@ body {
 /*--- Basic layout ---*/
 
 .page-header {
-    background-image: url('./images/bright-light-rays.jpg');
+    /*flowers Photo by Annie Spratt on Unsplash;*/
+
+    /*mountain Photo by Daniele Buso on Unsplash*/
+
+    background-image: url('./images/flower.jpg');
     background-size: cover;
     background-position: center;
     position: sticky;
@@ -56,13 +72,13 @@ body {
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 8px solid steelblue;
+    border: 8px solid #508650;
     width: 30%;
 }
 
 /* Override previous height attributes */
 /*.minHeight {*/
-    /*min-height: 100vh;*/
+/*min-height: 100vh;*/
 /*}*/
 
 .heightAuto {
@@ -109,10 +125,10 @@ li {
 /*Style buttons*/
 button, .button{
     background: white;
-    border: solid 2px steelblue;
-
+    border: solid 2px #508650;
 }
 
 .artImage img {
     display: none;
 }
+

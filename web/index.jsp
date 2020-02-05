@@ -31,18 +31,26 @@
 <header class="page-header header container-fluid">
     <div class="container">
 
-      <div class="row">
-          <div class="col"><h1>Welcome to JESP Blog</h1></div>
+        <div class="row">
+            <div class="col"><h1>Welcome to JESP Blog</h1></div>
 
-          <div class="col"> <button onclick="window.location.href ='./article?articleId=random'" class="right">View Random Article</button> </div>
+            <div class="col">
+                <button onclick="window.location.href ='./article?articleId=random'" class="right">View Random Article
+                </button>
+            </div>
 
-      </div>
+        </div>
 
-<form action="./search" method="get">
-    <input name="search" type="text"><input type="submit" value="Search">
-</form>
+        <div class="row">
+            <div class="col"><h3>Newest Articles</h3></div>
+            <div class="col">
+                <form action="./search" method="get">
+                    <input name="search" type="text" class="right"><input type="submit" value="Search"
+                                                                          class="button right">
+                </form>
+            </div>
+        </div>
 
-        Newest Articles
 
         <div class="row">
             <div class="col-3"><h4>Article</h4></div>
