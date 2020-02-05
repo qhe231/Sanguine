@@ -17,6 +17,8 @@
             <title>${owner.userName}'s Blog</title>
         </c:otherwise>
     </c:choose>
+
+    <link rel="stylesheet" type="text/css" href="main.css">
     <script type="text/javascript" src="commentsJS.js"></script>
 </head>
 <body>
@@ -25,76 +27,101 @@
     <jsp:param name="user" value="${user}"/>
 </jsp:include>
 
-<c:choose>
-    <c:when test="${owner.blogName != null}">
-        <h1>${owner.blogName}</h1>
-    </c:when>
-    <c:otherwise>
-        <h1>${owner.userName}'s Blog</h1>
-    </c:otherwise>
-</c:choose>
+</head>
+<body>
 
-<table>
-    <caption>Articles</caption>
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Posted Time</th>
-        <th>Last Edited Time</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="article" items="${articles}">
-        <tr>
-            <td><a href="./article?articleId=${article.articleId}">${article.title}</a></td>
-            <td>${article.postedTimeStamp}</td>
-            <td>${article.editedTimeStamp}</td>
-        </tr>
-    </c:forEach>
-    </tbody>
-</table>
+<header class="page-header header container-fluid">
+    <div class="container minHeight">
 
-<c:if test="${user.userId == owner.userId}">
-    <form action="./newArticle.jsp" method="post">
-        <input type="submit" name="postANewArticle" value="Post a New Article">
-    </form>
-
-    <button type="button" id="commentsButton">Show All Comments</button>
-</c:if>
-
-
-<div id="comments">
-    <c:if test="${user.userId == owner.userId}">
+        <%--Display Blog Name--%>
         <c:choose>
-            <c:when test="${comments.size() <= 0}">
-                <p>You do not have any comments.</p>
-            </c:when>
-            <c:otherwise>
-                <table>
-                    <caption>Comments</caption>
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Author Name</th>
-                        <th>Posted Time</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="comment" items="${comments}">
-                        <tr>
-                            <td><a href="./article?articleId=${comment.articleId}">${comment.title}</a></td>
-                            <td>${comment.author.userName}</td>
-                            <td>${comment.postedTimeStamp}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </c:otherwise>
+        <c:when test="${owner.blogName != null}">
+        <h1>${owner.blogName}</h1>
+        </c:when>
+        <c:otherwise>
+        <h1>${owner.userName}'s Blog</h1>
+        </c:otherwise>
         </c:choose>
-    </c:if>
 
-    <script>console.log(${comments.size()})</script>
-</div>
+        <%--Button to post new article--%>
+        <c:if test="${user.userId == owner.userId}">
+        <form action="./newArticle.jsp" method="post">
+            <input type="submit" name="postANewArticle" value="Post a New Article" class="button">
+        </form>
+
+        <button type="button" id="commentsButton">Show All Comments</button>
+        </c:if>
+
+        <c:choose>
+
+        <c:when test="${articles[0].title != null}">
+            <%--Display all articles associated with the blog--%>
+        <h2>Articles</h2>
+        <div class="row">
+            <div class="col-4"><h4>Article</h4></div>
+            <div class="col-2"><h4>Comments</h4></div>
+            <div class="col-2"><h4>Posted Time</h4></div>
+            <div class="col-2"><h4>Edited time</h4></div>
+        </div>
+        <hr>
+
+        <c:forEach var="article" items="${articles}">
+        <div class="row">
+
+            <div class="col-4"><a href="./article?articleId=${article.articleId}">${article.title}</a>
+                <c:choose>
+                    <c:when test="${article.content.length() <= 100}">
+                        <td colspan="4">${article.content}</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td colspan="4">${article.content.substring(0,99)}...</td>
+                    </c:otherwise>
+                </c:choose></div>
+
+            <div class="col-2">${article.children.size()}</div>
+
+            <div class="col-2">${article.postedTimeStamp}</div>
+        </div>
+        <hr>
+        </c:forEach>
+        </c:when>
+
+        <c:otherwise>
+        You have not posted any articles.
+        </c:otherwise>
+
+        </c:choose>
+
+        <div id="comments">
+            <h2>Comments</h2>
+
+            <c:if test="${user.userId == owner.userId}">
+                <c:choose>
+                    <c:when test="${comments.size() <= 0}">
+                        <p>You do not have any comments.</p>
+                    </c:when>
+                    <c:otherwise>
+
+                        <div class="row">
+                            <div class="col">Title</div>
+                            <div class="col">Posted Time</div>
+                        </div>
+                        <hr>
+
+                            <c:forEach var="comment" items="${comments}">
+                                <div class="row">
+                                <div class="col"><a href="./article?articleId=${comment.articleId}">${comment.title}</a>
+                                </div>
+                                <div class="col"> ${comment.postedTimeStamp}</div>
+                                </div>
+                                <hr>
+                            </c:forEach>
+
+                    </c:otherwise>
+                </c:choose>
+            </c:if>
+            <script>console.log(${comments.size()})</script>
+        </div>
 
 </body>
 </html>
