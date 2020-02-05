@@ -39,6 +39,10 @@ public class Article implements Serializable {
         this.editedTimeStamp = postedTimeStamp; //editedTimeStamp will be same as the postedTimeStamp at first post time
     }
 
+    private String sanitise(String s) {
+        return s.replace("<","&lt;").replace(">","&gt;");
+    }
+
     public int getArticleId() {
         return articleId;
     }
@@ -56,7 +60,7 @@ public class Article implements Serializable {
     }
 
     public String getTitle() {
-        return title;
+        return sanitise(title);
     }
 
     public void setTitle(String title) {

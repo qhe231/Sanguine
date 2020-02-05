@@ -30,20 +30,24 @@ public class UserInfo implements Serializable {
         this.profile = profile;
     }
 
+    private String sanitise(String s) {
+        return s.replace("<","&lt;").replace(">","&gt;");
+    }
+
     public Integer getUserId() {
         return userId;
     }
 
     public String getBlogName() {
-        return blogName;
+        return sanitise(blogName);
     }
 
     public String getFirstName() {
-        return firstName;
+        return sanitise(firstName);
     }
 
     public String getLastName() {
-        return lastName;
+        return sanitise(lastName);
     }
 
     public Date getDateOfBirth() {
@@ -55,7 +59,7 @@ public class UserInfo implements Serializable {
     }
 
     public String getProfile() {
-        return profile;
+        return sanitise(profile);
     }
 
     public String getUserName() {
