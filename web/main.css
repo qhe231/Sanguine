@@ -29,7 +29,7 @@ a:link, a:visited, a:hover, a:active {
 
 .navbar a:link, .navbar a:hover, .navbar a:active, .navbar a:visited {
 
-
+color: white;
 
 }
 
@@ -41,9 +41,6 @@ a:link, a:visited, a:hover, a:active {
 
 .page-header {
     /*flowers Photo by Annie Spratt on Unsplash;*/
-
-    /*mountain Photo by Daniele Buso on Unsplash*/
-
     background-image: url('./images/flower.jpg');
     background-size: cover;
     background-position: center;

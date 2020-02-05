@@ -38,27 +38,64 @@
 
         <h1>Account settings</h1>
 
+        <h3>Theme</h3>
+        ${user.theme} <br><br>
+
+        <button onclick="showForm('changeTheme', 'themeBtn')" id="themeBtn">Change</button>
+
+        <%--Form to change theme--%>
+        <div style="display: none" id="changeTheme">
+            <form action="./ChangeTheme">
+
+                <input type="radio" name="theme" value="Botanical" class="theme"> Botanical
+                <input type="radio" name="theme" value="TestTheme" class="theme"> Unfinished test theme
+
+                <br><br>
+                <input type="submit" id="submitTheme" class="button">
+                <%--        <button type="submit" id="submitUser">subtnmitmme</button>--%>
+            </form>
+            <button onclick="hideForm('changeTheme', 'themeBtn')" class="button">Cancel</button>
+        </div>
+
+        <%--Display success or failure message--%>
+        <c:if test="${changeThemeMessage != null}">
+            <div>${changeThemeMessage}</div>
+        </c:if>
+        <hr>
+
+
+        <%--        --%>
+
+
+
+
+
+
+
+
+
+
         <%--Button to change username--%>
         <h3>Username</h3>
         ${user.userName} <br><br>
         <button onclick="showForm('changeUsername', 'usernameBtn')" id="usernameBtn">Change</button>
 
+
         <%--Form to change username--%>
         <div style="display: none" id="changeUsername">
             <form action="./ChangeUsername">
-                New username: <input type="text" name="newName" placeholder="20 characters or less" maxlength="20"
-                                     onkeyup="checkUserName()" id="userName" required>
-                <span id="userNameMessage"></span><br><br>
-                <input type="submit" id="submitUser" class="button">
-                <%--        <button type="submit" id="submitUser">subtnmitmme</button>--%>
+                New username: <input type="text" name="newUsername" id="username" required>
+                <%--<span id="userNameMessage"></span>--%>
+                <br><br>
+                <input type="submit" id="submitTheme" class="button">
             </form>
-            <button onclick="hideForm('changeUsername', 'usernameBtn')" class="button">Cancel</button>
+            <button onclick="hideForm('changeUsername', 'themeBtn')" class="button">Cancel</button>
         </div>
 
 
         <%--Display success or failure message--%>
-        <c:if test="${changeUsernameMessage != null}">
-            <div>${changeUsernameMessage}</div>
+        <c:if test="${changeUserNameMessage != null}">
+            <div>${changeUserNameMessage}</div>
         </c:if>
         <hr>
 
@@ -131,23 +168,23 @@
         <c:if test="${changePasswordMessage!= null}">
             <div>${changePasswordMessage}</div>
         </c:if>
-<hr>
+        <hr>
         <%--Button to upload avatar--%>
         <h3>Avatar</h3>
         <img src="${user.avatarURL}"><br>
-        <button onclick="showForm('uploadAvatar', 'uploadAvatarBtn')" id="uploadAvatarBtn" >Upload avatar</button>
+        <button onclick="showForm('uploadAvatar', 'uploadAvatarBtn')" id="uploadAvatarBtn">Upload avatar</button>
 
-<%--Form to upload avatar--%>
-<div style="display: none" id="uploadAvatar">
-    <form action="./avatarUpload" method="POST" enctype="multipart/form-data">
-        Upload new avatar: <input type="file" id="ownAvatarFile" name="newAvatar" accept="image/*">
-        <span id="ownAvatarPic"></span>
-        <br><br>
-        <input type="submit">
-        <br><br>
-    </form>
-    <button onclick="hideForm('uploadAvatar', 'uploadAvatarBtn')">Cancel</button>
-</div>
+        <%--Form to upload avatar--%>
+        <div style="display: none" id="uploadAvatar">
+            <form action="./avatarUpload" method="POST" enctype="multipart/form-data">
+                Upload new avatar: <input type="file" id="ownAvatarFile" name="newAvatar" accept="image/*">
+                <span id="ownAvatarPic"></span>
+                <br><br>
+                <input type="submit">
+                <br><br>
+            </form>
+            <button onclick="hideForm('uploadAvatar', 'uploadAvatarBtn')">Cancel</button>
+        </div>
 
         <%--Button to choose avatar from list--%>
         <br><br>
@@ -208,13 +245,13 @@
         ${user.dateOfBirth}<br><br>
         <button onclick="showForm('changeDateOfBirth', 'dobBtn')" id="dobBtn" class="button">Change</button>
 
-<%--Form to change date of birth--%>
-<div style="display: none" id="changeDateOfBirth">
-    <form action="./ChangeDateOfBirth">
-        <input type="date" name="dob" required>
-        <input type="submit">
-    </form>
-    <button onclick="hideForm('changeDateOfBirth', 'dobBtn')">Cancel</button>
+        <%--Form to change date of birth--%>
+        <div style="display: none" id="changeDateOfBirth">
+            <form action="./ChangeDateOfBirth">
+                <input type="date" name="dob" required>
+                <input type="submit">
+            </form>
+            <button onclick="hideForm('changeDateOfBirth', 'dobBtn')">Cancel</button>
 
         </div>
 

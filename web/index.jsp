@@ -19,8 +19,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <c:choose>
 
-    <link rel="stylesheet" type="text/css" href="main.css">
+        <c:when test="${user.getTheme() == 'TestTheme'}">
+            <link rel="stylesheet" type="text/css" href="newtheme.css">
+<%--            <link rel="stylesheet" type="text/css" href="main.css">--%>
+        </c:when>
+        <c:otherwise>
+            <link rel="stylesheet" type="text/css" href="main.css">
+        </c:otherwise>
+    </c:choose>
+
+<%--    <link rel="stylesheet" type="text/css" href="newtheme.css">--%>
 
     <jsp:include page="./WEB-INF/NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
