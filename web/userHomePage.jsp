@@ -17,6 +17,7 @@
             <title>${owner.userName}'s Blog</title>
         </c:otherwise>
     </c:choose>
+    <script type="text/javascript" src="commentsJS.js"></script>
 </head>
 <body>
 
@@ -57,34 +58,41 @@
     <form action="./newArticle.jsp" method="post">
         <input type="submit" name="postANewArticle" value="Post a New Article">
     </form>
+
+    <button type="button" id="commentsButton">Show All Comments</button>
 </c:if>
 
 
 <div id="comments">
     <c:if test="${user.userId == owner.userId}">
-        <table>
-            <caption>Comments</caption>
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author Name</th>
-                <th>Posted Time</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="comment" items="${comments}">
-                <tr>
-                    <td><a href="./article?articleId=${comment.articleId}">${comment.title}</a></td>
-                    <td>${comment.author.userName}</td>
-                    <td>${comment.postedTimeStamp}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-        </form>
+        <c:choose>
+            <c:when test=" ${comments.size() == 0}">
+                <p>You do not have any comments.</p>
+            </c:when>
+            <c:otherwise>
+                <table>
+                    <caption>Comments</caption>
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author Name</th>
+                        <th>Posted Time</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="comment" items="${comments}">
+                        <tr>
+                            <td><a href="./article?articleId=${comment.articleId}">${comment.title}</a></td>
+                            <td>${comment.author.userName}</td>
+                            <td>${comment.postedTimeStamp}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </c:otherwise>
+        </c:choose>
     </c:if>
 </div>
-
 
 </body>
 </html>
