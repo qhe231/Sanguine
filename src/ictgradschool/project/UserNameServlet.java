@@ -17,6 +17,9 @@ public class UserNameServlet extends HttpServlet {
 
     public static boolean checkUserName(List<UserAuthentication> userAuthentications, String possibleUserName) throws SQLException {
 
+        if (possibleUserName.contains("<") || possibleUserName.contains(">"))
+            return false;
+
         for (UserAuthentication ua : userAuthentications){
             if (possibleUserName.equals(ua.getUserName())) {
                 return false;
