@@ -45,11 +45,11 @@
         Newest Articles
 
         <div class="row">
-            <div class="col-4"><h4>Article</h4></div>
-            <div class="col-1"></div>
+            <div class="col-3"><h4>Article</h4></div>
             <div class="col-2"><h4>Author</h4></div>
             <div class="col-2"><h4>Comments</h4></div>
-            <div class="col-2"><h4>Date/Time</h4></div>
+            <div class="col-2"><h4>Posted Time</h4></div>
+            <div class="col-2"><h4>Edited Time</h4></div>
         </div>
         <hr>
 
@@ -58,7 +58,7 @@
         <c:forEach var="article" items="${articles}">
 
             <div class="row">
-                <div class="col-4">
+                <div class="col-3">
                     <a href="./article?articleId=${article.articleId}">${article.title}</a> <br>
                     <c:choose>
                         <c:when test="${article.content.length() <= 100}">
@@ -69,7 +69,6 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-                <div class="col-1"></div>
                 <div class="col-2">
                     <span><img src="${article.author.getAvatarURL()}" width="64px"></span>
                     <span><a

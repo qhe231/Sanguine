@@ -20,10 +20,12 @@
 
     <link rel="stylesheet" type="text/css" href="main.css">
     <script type="text/javascript" src="commentsJS.js"></script>
+</head>
+<body>
 
-    <jsp:include page="./WEB-INF/NavigationBar.jsp">
-        <jsp:param name="user" value="${user}"/>
-    </jsp:include>
+<jsp:include page="./WEB-INF/NavigationBar.jsp">
+    <jsp:param name="user" value="${user}"/>
+</jsp:include>
 
 </head>
 <body>
@@ -59,7 +61,7 @@
             <div class="col-4"><h4>Article</h4></div>
             <div class="col-2"><h4>Comments</h4></div>
             <div class="col-2"><h4>Posted Time</h4></div>
-            <div class="col-2">Edited time</div>
+            <div class="col-2"><h4>Edited time</h4></div>
         </div>
         <hr>
 
@@ -91,37 +93,35 @@
         </c:choose>
 
         <div id="comments">
+            <h2>Comments</h2>
+
             <c:if test="${user.userId == owner.userId}">
                 <c:choose>
-                    <c:when test=" ${comments.size() == 0}">
+                    <c:when test="${comments.size() <= 0}">
                         <p>You do not have any comments.</p>
                     </c:when>
                     <c:otherwise>
-                        <table>
-                            <caption>Comments</caption>
-                            <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Author Name</th>
-                                <th>Posted Time</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+
+                        <div class="row">
+                            <div class="col">Title</div>
+                            <div class="col">Posted Time</div>
+                        </div>
+                        <hr>
+
                             <c:forEach var="comment" items="${comments}">
-                                <tr>
-                                    <td><a href="./article?articleId=${comment.articleId}">${comment.title}</a></td>
-                                    <td>${comment.author.userName}</td>
-                                    <td>${comment.postedTimeStamp}</td>
-                                </tr>
+                                <div class="row">
+                                <div class="col"><a href="./article?articleId=${comment.articleId}">${comment.title}</a>
+                                </div>
+                                <div class="col"> ${comment.postedTimeStamp}</div>
+                                </div>
+                                <hr>
                             </c:forEach>
-                            </tbody>
-                        </table>
+
                     </c:otherwise>
                 </c:choose>
             </c:if>
+            <script>console.log(${comments.size()})</script>
         </div>
-    </div>
-</header>
 
 </body>
 </html>
