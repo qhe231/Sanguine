@@ -19,7 +19,12 @@ window.addEventListener("load", function() {
        const content = document.querySelector(`#content-${articleId}`);
        tinymce.init({
            selector: `#${content.id}`,
-           inline: true
+           inline: true,
+           plugins: 'image autoresize',
+           image_description: false,
+           image_dimensions: false,
+           image_uploadtab: true,
+           images_upload_url: './articleImage'
        });
        content.classList.add("currentlyEditing");
        tinymce.activeEditor.focus();
@@ -140,7 +145,12 @@ window.addEventListener("load", function() {
 
        //text editor
        tinymce.init({
-           selector: '#newComment'
+           selector: '#newComment',
+           plugins: 'image autoresize',
+           image_description: false,
+           image_dimensions: false,
+           image_uploadtab: true,
+           images_upload_url: './articleImage'
        });
        tinymce.activeEditor.focus();
    }
