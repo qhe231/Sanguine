@@ -37,7 +37,7 @@
             Title
             <input name="title" required><br>
             <textarea id="articleEditor" name="content"></textarea><br>
-            <input type="submit" name="submit" id="submitButton">
+            <input type="submit" name="submit" id="submitButton" class="button">
             <button name="cancel" id="cancelButton">Cancel</button>
         </form>
     </div>

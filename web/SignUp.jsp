@@ -290,7 +290,7 @@
 
                     <div class="row">
                         <div class="col-2"></div>
-                        <div class="col"> <input type="submit" id="submit"> </div>
+                        <div class="col"> <input type="submit" id="submit" class="button"> </div>
                     </div>
 
                 </fieldset>

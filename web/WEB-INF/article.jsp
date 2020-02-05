@@ -21,10 +21,11 @@
     <jsp:include page="./NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
     </jsp:include>
+
 </head>
 <body>
-<header class="page-header header container-fluid heightAvailable">
-    <div class="container heightAvailable">
+<header class="page-header header container-fluid">
+    <div class="container">
 
         <div class="mainArticle" id="${article.articleId}">
 
@@ -33,36 +34,32 @@
             </div>
 
             <div class="row">
-            <div class="col">
-                <span><img src="${article.author.getAvatarURL()}" width="64px"></span>
-                <span><a class="articleAuthor"                        href="./userHomePage?owner=${article.author.getUserName()}">${article.author.getUserName()}</a></span>
-                <span class="articlePostTime right">${article.postedTimeStamp}</span>
+                <div class="col">
+                    <span><img src="${article.author.getAvatarURL()}" width="64px"></span>
+                    <span><a class="articleAuthor"
+                             href="./userHomePage?owner=${article.author.getUserName()}">${article.author.getUserName()}</a></span>
+                    <span class="articlePostTime right">${article.postedTimeStamp}</span>
+                </div>
             </div>
-            </div>
-
-            <%--<div class="row">--%>
-                <%--<div class="col-1"><span><img src="${article.author.getAvatarURL()}" width="64px"></span></div>--%>
-                <%--<div class="articleAuthor col-1"><a--%>
-                        <%--href="./userHomePage?owner=${article.author.getUserName()}">${article.author.userName}</a></div>--%>
-                <%--<div class="articlePostTime col-2">${article.postedTimeStamp}</div>--%>
-            <%--</div>--%>
 
             <div class="row">
-            <div class="articleContent col" id="content-${article.articleId}">${article.content}</div>
+                <div class="articleContent col" id="content-${article.articleId}">${article.content}</div>
             </div>
 
-            <c:if test="${user != null && user.userId == article.author.userId}">
-                <button name="editArticle" class="editButton" id="edit-${article.articleId}">Edit</button>
-                <button name="deleteArticle" class="deleteButton" id="delete-${article.articleId}">Delete</button>
-            </c:if>
-
         </div>
+
+        <div class="right">
+
+        <c:if test="${user != null && user.userId == article.author.userId}">
+            <button name="editArticle" class="editButton" id="edit-${article.articleId}">Edit</button>
+            <button name="deleteArticle" class="deleteButton" id="delete-${article.articleId}">Delete</button>
+        </c:if>
+        </div>
+        <%--<hr>--%>
 
         <c:set var="parent" value="${article}" scope="request"/>
         <c:set var="rootArticle" value="${article}" scope="request"/>
         <c:set var="user" value="${user}" scope="request"/>
-
-        <hr>
 
         <jsp:include page="comment.jsp"/>
 

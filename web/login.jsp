@@ -23,9 +23,8 @@
 
 <body>
 
-<header class="page-header header container-fluid heightAuto">
-    <div class=" center heightVh">
-        <div class="content ">
+<header class="page-header header container-fluid">
+        <div class="content center heightFit">
             <h1 class="center">Welcome back!</h1>
 
             <div id="box">
@@ -46,7 +45,7 @@
 
                     <br>
 
-                    <input type="submit" value="Login" class="Login center">
+                    <input type="submit" value="Login" class="Login center button">
 
                 </form>
             </div>
@@ -57,7 +56,6 @@
                 </div>
             </c:if>
         </div>
-    </div>
 </header>
 
 </body>

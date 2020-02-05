@@ -28,7 +28,7 @@
 <body>
 
 <header class="page-header header container-fluid">
-    <div class="container heightVh">
+    <div class="container minHeight">
 
         <%--Display Blog Name--%>
         <c:choose>
@@ -43,7 +43,7 @@
         <%--Button to post new article--%>
         <c:if test="${user.userId == owner.userId}">
         <form action="./newArticle.jsp" method="post">
-            <input type="submit" name="postANewArticle" value="Post a New Article">
+            <input type="submit" name="postANewArticle" value="Post a New Article" class="button">
         </form>
         </c:if>
 
