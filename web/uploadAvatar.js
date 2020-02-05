@@ -10,7 +10,7 @@ window.addEventListener("load", function () {
         image.width = 64;
         ownAvatarPic.innerHTML = null;
         ownAvatarPic.appendChild(image);
-        ownAvatar.value = "./image/" + event.target.files[0].name;
+        ownAvatar.value = "./images/" + event.target.files[0].name;
 
     };
 

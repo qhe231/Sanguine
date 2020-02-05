@@ -20,32 +20,28 @@ import java.util.*;
 @WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
 public class SignUpServlet extends HttpServlet {
 
-    private String streamText;
-
-    private String getValue(String val) {
-        String t = streamText.substring(streamText.indexOf("name=\"" + val + "\""));
-        t = t.substring(t.indexOf("\n") + 1);
-        t = t.substring(t.indexOf("\n") + 1);
-        return t.substring(0, t.indexOf("\n")).trim();
-    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Map<String,String> fields = new TreeMap<>();
+        Map<String, String> fields = new TreeMap<>();
 
         try {
             List<FileItem> fileItems = ImageUploadUtil.init(req.getServletContext()).parseRequest(req);
             for (FileItem fi : fileItems) {
                 if (fi.isFormField()) {
                     fields.put(fi.getFieldName(), fi.getString());
-                }
-                else {
-                    fields.put("avatar", ImageUploadUtil.uploadImage(fi, true));
+                } else {
+                    String potentialAvatarUrl = ImageUploadUtil.uploadImage(fi, true);
+                    if (!potentialAvatarUrl.equals(""))
+                        fields.put("avatar", potentialAvatarUrl);
+                    else {
+                        String av = fields.get("avatar");
+                        if (!av.substring(av.length() - 4).equals(".png"))
+                            fields.put("avatar", "./images/1.png");
+                    }
                 }
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return;
         }
@@ -84,7 +80,7 @@ public class SignUpServlet extends HttpServlet {
 
     }
 
-//    If sign up failed, set error message
+    //    If sign up failed, set error message
     private void signUpFailed(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("error", "Sign up failed.");
         RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher("/SignUp.jsp");
