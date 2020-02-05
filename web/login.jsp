@@ -17,28 +17,48 @@
     <script src="login.js"></script>
 </head>
 
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <jsp:include page="./WEB-INF/NavigationBar.jsp">
+        <jsp:param name="user" value="${user}"/>
+    </jsp:include>
+
+</head>
+
 <body>
 
-<jsp:include page="./WEB-INF/NavigationBar.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include>
-<br>
+<header class="page-header header container-fluid">
+        <div class="content center heightFit">
+            <h1 class="center">Welcome back!</h1>
 
-<div id="container">
-    <div id="box">
-        <form action="./login" method="post">
-            <p class="main">
-                <label>User Name: </label>
-                <input name="username" value="" required><br>
-                <label>Password: </label>
-                <input type="password" name="password" value="" required>
-            </p>
-            <p class="space">
-                <input type="submit" value="Login" class="Login">
-            </p>
-        </form>
-    </div>
-</div>
+            <div id="box">
+                <form action="./login" method="post">
+                    <p class="main">
+
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-2"><label>Username: </label></div>
+                        <div class="col-3"><input name="username" required></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-2"><label>Password: </label></div>
+                        <div class="col-3"><input type="password" name="password" required></div>
+                    </div>
+
+                    <br>
+
+                    <input type="submit" value="Login" class="Login center button">
+
+                </form>
+            </div>
+
+            <c:if test="${ErrorMessage != null}">
+                <div class="center"> Error: ${ErrorMessage} <br>
+                    Do you need to sign up? <a href="SignUp.jsp">Click here</a>
+                </div>
+            </c:if>
 
 <div class="g-signin2" data-onsuccess="googleSignIn"></div>
 
@@ -47,5 +67,7 @@
         Do you need to sign up? <a href="SignUp.jsp">Click here</a>
     </div>
 </c:if>
+</div>
+</header>
 </body>
 </html>
