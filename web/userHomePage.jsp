@@ -66,7 +66,7 @@
 <div id="comments">
     <c:if test="${user.userId == owner.userId}">
         <c:choose>
-            <c:when test=" ${comments.size() == 0}">
+            <c:when test="${comments.size() <= 0}">
                 <p>You do not have any comments.</p>
             </c:when>
             <c:otherwise>
@@ -92,6 +92,8 @@
             </c:otherwise>
         </c:choose>
     </c:if>
+
+    <script>console.log(${comments.size()})</script>
 </div>
 
 </body>
