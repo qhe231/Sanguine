@@ -1,6 +1,5 @@
 package ictgradschool.project;
 
-import ictgradschool.project.util.DBConnectionUtils;
 import ictgradschool.project.util.ImageUploadUtil;
 import org.apache.commons.fileupload.FileItem;
 
@@ -9,38 +8,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "uploadImage", urlPatterns = {"/avatarUpload"})
-public class AvatarUploadServlet extends HttpServlet {
+@WebServlet(name = "articleImage", urlPatterns = { "/articleImage" })
+public class ArticleImageServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        UserInfo ui = (UserInfo) session.getAttribute("user");
-        String avatarURL = "";
-
         try {
             List<FileItem> fileItems = ImageUploadUtil.init(req.getServletContext()).parseRequest(req);
             for (FileItem fi : fileItems) {
                 if (!fi.isFormField()) {
-                    avatarURL += ImageUploadUtil.uploadImage(fi, true);
+                    resp.getWriter().print("{\"location\":\"" + ImageUploadUtil.uploadImage(fi, false) + "\"}");
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
-            UserInfoDAO.updateAvatarURL(ui, conn, avatarURL);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        resp.sendRedirect("./UserAccountPage.jsp");
     }
 }
