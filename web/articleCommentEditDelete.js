@@ -86,7 +86,6 @@ window.addEventListener("load", function() {
 
    function newComment() {
        //if there's another comment form open, close it before continuing
-       console.log("hi");
        if (document.querySelector("#newCommentForm") != null)
            cancelNewComment();
 
