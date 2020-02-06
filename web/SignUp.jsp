@@ -17,24 +17,6 @@
     <script type="text/javascript" src="SignUpJS.js"></script>
     <script type="text/javascript" src="uploadAvatar.js"></script>
 
-    <c:choose>
-        <c:when test="${user.getTheme() == 'Snow'}">
-            <link rel="stylesheet" type="text/css" href="./css/Snow.css">
-        </c:when>
-        <c:when test="${user.getTheme() == 'Hot Air Balloons'}">
-            <link rel="stylesheet" type="text/css" href="./css/HotAirBalloons.css">
-        </c:when>
-        <c:when test="${user.getTheme() == 'Beach'}">
-            <link rel="stylesheet" type="text/css" href="./css/Beach.css">
-        </c:when>
-        <c:when test="${user.getTheme() == 'Stationery'}">
-            <link rel="stylesheet" type="text/css" href="./css/Stationery.css">
-        </c:when>
-        <c:otherwise>
-            <link rel="stylesheet" type="text/css" href="./css/Botanical.css">
-        </c:otherwise>
-    </c:choose>
-
 
 <%--Sign up page--%>
     <jsp:include page="./WEB-INF/NavigationBar.jsp">
