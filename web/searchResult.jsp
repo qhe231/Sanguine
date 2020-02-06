@@ -19,23 +19,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <c:choose>
-        <c:when test="${user.getTheme() == 'Snow'}">
-            <link rel="stylesheet" type="text/css" href="./css/Snow.css">
-        </c:when>
-        <c:when test="${user.getTheme() == 'Hot Air Balloons'}">
-            <link rel="stylesheet" type="text/css" href="./css/HotAirBalloons.css">
-        </c:when>
-        <c:when test="${user.getTheme() == 'Beach'}">
-            <link rel="stylesheet" type="text/css" href="./css/Beach.css">
-        </c:when>
-        <c:when test="${user.getTheme() == 'Stationery'}">
-            <link rel="stylesheet" type="text/css" href="./css/Stationery.css">
-        </c:when>
-        <c:otherwise>
-            <link rel="stylesheet" type="text/css" href="./css/Botanical.css">
-        </c:otherwise>
-    </c:choose>
 
     <jsp:include page="./WEB-INF/NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
