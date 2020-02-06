@@ -15,7 +15,23 @@
             referrerpolicy="origin"></script>
     <script type="text/javascript" src="./articleCommentEditDelete.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <c:choose>
+        <c:when test="${user.getTheme() == 'Snow'}">
+            <link rel="stylesheet" type="text/css" href="./CSS/Snow.css">
+        </c:when>
+        <c:when test="${user.getTheme() == 'Hot Air Balloons'}">
+            <link rel="stylesheet" type="text/css" href="./CSS/HotAirBalloons.css">
+        </c:when>
+        <c:when test="${user.getTheme() == 'Beach'}">
+            <link rel="stylesheet" type="text/css" href="./CSS/Beach.css">
+        </c:when>
+        <c:when test="${user.getTheme() == 'Stationery'}">
+            <link rel="stylesheet" type="text/css" href="./CSS/Stationery.css">
+        </c:when>
+        <c:otherwise>
+            <link rel="stylesheet" type="text/css" href="CSS/Botanical.css">
+        </c:otherwise>
+    </c:choose>
 
     <jsp:include page="./NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>

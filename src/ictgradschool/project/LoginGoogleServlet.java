@@ -94,7 +94,7 @@ public class LoginGoogleServlet extends HttpServlet {
                         String avatarURL = (String) payload.get("picture");
                         Date dob = new Date(0);
 
-                        UserInfo ui = new UserInfo(ua.getUserId(), userName + "'s Blog", fname, sname, dob, avatarURL, "", userName);
+                        UserInfo ui = new UserInfo(ua.getUserId(), userName + "'s Blog", fname, sname, dob, avatarURL, "", null, userName);
 
                         if (UserInfoDAO.insertANewUserInfo(ui, conn)) {
                             req.getSession().setAttribute("user", ui);

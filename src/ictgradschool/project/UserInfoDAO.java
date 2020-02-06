@@ -130,7 +130,23 @@ public class UserInfoDAO {
                 rs.getDate(5),
                 rs.getString(6),
                 rs.getString(7),
-                rs.getString(8));
+                rs.getString(8),
+                rs.getString(9));
+
+    }
+
+    public static boolean updateTheme(UserInfo ui, Connection conn, String theme) throws SQLException {
+        try (PreparedStatement stmt = conn.prepareStatement("UPDATE user_info SET theme = ? WHERE userId = ?")) {
+            stmt.setString(1, theme);
+            stmt.setInt(2, ui.getUserId());
+
+            int rowsAffected = stmt.executeUpdate();
+
+            ui.setTheme(theme);
+
+            return rowsAffected != 0;
+
+        }
     }
 }
 

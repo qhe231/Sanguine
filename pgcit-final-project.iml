@@ -28,5 +28,6 @@
     <orderEntry type="library" name="libs" level="project" />
     <orderEntry type="library" name="libs-sources" level="project" />
     <orderEntry type="library" name="Java EE 6-Java EE 6 (2)" level="project" />
+    <orderEntry type="library" name="Java EE 6-Java EE 62" level="project" />
   </component>
 </module>
