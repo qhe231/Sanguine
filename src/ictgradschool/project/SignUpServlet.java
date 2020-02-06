@@ -70,7 +70,7 @@ public class SignUpServlet extends HttpServlet {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             boolean insertUaSuccessfully = UserAuthenticationDAO.insertANewUserAuthentication(ua, conn);
             if (insertUaSuccessfully) {
-                UserInfo ui = new UserInfo(ua.getUserId(), fields.get("blogName"), fields.get("firstName"), fields.get("lastName"), Date.valueOf(fields.get("dob")), fields.get("avatar"), fields.get("profile"), ua.getUserName());
+                UserInfo ui = new UserInfo(ua.getUserId(), fields.get("blogName"), fields.get("firstName"), fields.get("lastName"), Date.valueOf(fields.get("dob")), fields.get("avatar"), fields.get("profile"), null, ua.getUserName());
                 boolean insertUiSuccessfully = UserInfoDAO.insertANewUserInfo(ui, conn);
                 if (insertUiSuccessfully) {
                     req.getSession().setAttribute("user", ui);

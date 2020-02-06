@@ -18,14 +18,31 @@
         </c:otherwise>
     </c:choose>
 
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <c:choose>
+        <c:when test="${user.getTheme() == 'Snow'}">
+            <link rel="stylesheet" type="text/css" href="./css/Snow.css">
+        </c:when>
+        <c:when test="${user.getTheme() == 'Hot Air Balloons'}">
+            <link rel="stylesheet" type="text/css" href="./css/HotAirBalloons.css">
+        </c:when>
+        <c:when test="${user.getTheme() == 'Beach'}">
+            <link rel="stylesheet" type="text/css" href="./css/Beach.css">
+        </c:when>
+        <c:when test="${user.getTheme() == 'Stationery'}">
+            <link rel="stylesheet" type="text/css" href="./css/Stationery.css">
+        </c:when>
+        <c:otherwise>
+            <link rel="stylesheet" type="text/css" href="./css/Botanical.css">
+        </c:otherwise>
+    </c:choose>
+
+    <jsp:include page="./WEB-INF/NavigationBar.jsp">
+        <jsp:param name="user" value="${user}"/>
+    </jsp:include>
+
     <script type="text/javascript" src="commentsJS.js"></script>
 </head>
-<body>
 
-<jsp:include page="./WEB-INF/NavigationBar.jsp">
-    <jsp:param name="user" value="${user}"/>
-</jsp:include>
 
 </head>
 <body>
@@ -108,14 +125,14 @@
                         </div>
                         <hr>
 
-                            <c:forEach var="comment" items="${comments}">
-                                <div class="row">
+                        <c:forEach var="comment" items="${comments}">
+                            <div class="row">
                                 <div class="col"><a href="./article?articleId=${comment.articleId}">${comment.title}</a>
                                 </div>
                                 <div class="col"> ${comment.postedTimeStamp}</div>
-                                </div>
-                                <hr>
-                            </c:forEach>
+                            </div>
+                            <hr>
+                        </c:forEach>
 
                     </c:otherwise>
                 </c:choose>

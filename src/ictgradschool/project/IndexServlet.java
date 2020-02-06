@@ -22,7 +22,6 @@ public class IndexServlet extends HttpServlet {
 
             List<Article> articles = ArticleDAO.getArticles(conn, -1, -1);
 
-
             req.setAttribute("articles", articles);
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
