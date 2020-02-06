@@ -67,6 +67,17 @@ public class Article implements Serializable {
         this.title = title;
     }
 
+    public String getContentPreview() {
+        String preview = content;
+        while (preview.contains("<")) {
+            String s = preview.substring(0, preview.indexOf("<")) + preview.substring(preview.indexOf(">") + 1);
+            preview = s;
+        }
+        if (preview.length() <= 100)
+            return preview;
+        return preview.substring(0, 100);
+    }
+
     public String getContent() {
         return content;
     }

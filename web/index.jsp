@@ -57,14 +57,7 @@
             <div class="row">
                 <div class="col-3">
                     <a href="./article?articleId=${article.articleId}">${article.title}</a> <br>
-                    <c:choose>
-                        <c:when test="${article.content.length() <= 100}">
-                            <td colspan="4" class="artImage">${article.content}</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td colspan="4" class="artImage">${article.content.substring(0,99)}...</td>
-                        </c:otherwise>
-                    </c:choose>
+                            <td colspan="4" class="artImage">${article.contentPreview}</td>
                 </div>
                 <div class="col-2">
                     <span><img src="${article.author.getAvatarURL()}" width="64px"></span>
