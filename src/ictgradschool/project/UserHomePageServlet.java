@@ -34,8 +34,6 @@ public class UserHomePageServlet extends HttpServlet {
                 }
             }
 
-            System.out.println(comments.size());
-
             req.setAttribute("articles", articles);
             req.setAttribute("user", user);
             req.setAttribute("owner", owner);

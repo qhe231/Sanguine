@@ -34,11 +34,14 @@ public class AvatarUploadServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
-            UserInfoDAO.updateAvatarURL(ui, conn, avatarURL);
+        if (!avatarURL.equals("")) {
+            try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+                UserInfoDAO.updateAvatarURL(ui, conn, avatarURL);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         resp.sendRedirect("./UserAccountPage.jsp");

@@ -30,7 +30,7 @@ public class UserInfoDAO {
 
 
     public static boolean insertANewUserInfo(UserInfo ui, Connection conn) throws SQLException {
-        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_info VALUES (?,?,?,?,?,?,?)")) {
+        try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO user_info VALUES (?,?,?,?,?,?,?,?)")) {
             stmt.setInt(1, ui.getUserId());
             stmt.setString(2, ui.getBlogName());
             stmt.setString(3, ui.getFirstName());
@@ -38,6 +38,7 @@ public class UserInfoDAO {
             stmt.setDate(5, (Date) ui.getDateOfBirth());
             stmt.setString(6, ui.getAvatarURL());
             stmt.setString(7, ui.getProfile());
+            stmt.setString(8, ui.getTheme());
 
             int rowsAffected = stmt.executeUpdate();
 

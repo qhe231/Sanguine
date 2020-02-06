@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS user_info
   dateOfBirth DATE            NOT NULL,
   avatarURL   TEXT,
   profile     TEXT,
+  theme       VARCHAR(100),
   FOREIGN KEY (userId) REFERENCES user_authentication (userId) ON DELETE CASCADE
 );
 
