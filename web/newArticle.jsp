@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: sbro190
@@ -11,7 +12,7 @@
 <head>
     <title>New Article</title>
 
-    <link rel="stylesheet" type="text/css" href="main.css">
+
 
     <jsp:include page="./WEB-INF/NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
@@ -31,6 +32,25 @@
             images_upload_url: './articleImage'
         });
     </script>
+
+    <c:choose>
+        <c:when test="${user.getTheme() == 'Snow'}">
+            <link rel="stylesheet" type="text/css" href="./CSS/Snow.css">
+        </c:when>
+        <c:when test="${user.getTheme() == 'Hot Air Balloons'}">
+            <link rel="stylesheet" type="text/css" href="./CSS/HotAirBalloons.css">
+        </c:when>
+        <c:when test="${user.getTheme() == 'Beach'}">
+            <link rel="stylesheet" type="text/css" href="./CSS/Beach.css">
+        </c:when>
+        <c:when test="${user.getTheme() == 'Stationery'}">
+            <link rel="stylesheet" type="text/css" href="./CSS/Stationery.css">
+        </c:when>
+        <c:otherwise>
+            <link rel="stylesheet" type="text/css" href="CSS/Botanical.css">
+        </c:otherwise>
+    </c:choose>
+
 </head>
 <body>
 
