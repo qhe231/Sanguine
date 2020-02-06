@@ -31,13 +31,13 @@ public class ChangeThemeServlet extends HttpServlet {
             UserInfoDAO.updateTheme(ui, conn, theme);
 
             String message = "Theme successfully updated to " + theme;
-            req.setAttribute("changeNameMessage", message);
+            req.setAttribute("changeThemeMessage", message);
 
 
         } catch (SQLException e) {
             e.printStackTrace();
             String message = "Unable to update theme";
-            req.setAttribute("changeNameMessage", message);
+            req.setAttribute("changeThemeMessage", message);
         }
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");

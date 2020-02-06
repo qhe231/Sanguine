@@ -3,21 +3,16 @@ body {
     margin: 0;
 }
 
-a:link, a:visited, a:hover, a:active {
-
-    color: #508650;
-
-}
 
 /*--- Navigation Bar ---*/
 .navbar {
-    background:#508650 ;
-}
+    background: #D7A00D;
+}B87EB4
 
-.nav-link, .navbar-brand {
-    color: white;
-    cursor: pointer;
-}
+ .nav-link, .navbar-brand {
+     color: white;
+     cursor: pointer;
+ }
 
 .nav-link {
     margin-right: 1em !important;
@@ -29,7 +24,7 @@ a:link, a:visited, a:hover, a:active {
 
 .navbar a:link, .navbar a:hover, .navbar a:active, .navbar a:visited {
 
-color: white;
+    color: white;
 
 }
 
@@ -40,15 +35,20 @@ color: white;
 /*--- Basic layout ---*/
 
 .page-header {
-    /*flowers Photo by Annie Spratt on Unsplash;*/
-    background-image: url('./images/flower.jpg');
+    /* Photo by Joanna Kosinska on Unsplash*/
+    background-image: url('../images/stationery.jpg');
     background-size: cover;
     background-position: center;
     position: sticky;
     background-attachment: fixed;
     height: fit-content;
     min-height: 100vh;
-    /*overflow: auto;*/
+}
+
+.crop {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 
 
@@ -69,14 +69,12 @@ color: white;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 8px solid #508650;
+    border: 8px solid #D7A00D;
     width: 30%;
 }
 
-/* Override previous height attributes */
-/*.minHeight {*/
-/*min-height: 100vh;*/
-/*}*/
+/*--- Override previous height attributes  ---*/
+
 
 .heightAuto {
     height: auto
@@ -95,14 +93,15 @@ color: white;
     height: 100vmax;
 }
 
-.right {
-    float: right;
-}
 
-/* Align specific elements*/
+/*--- Align specific elements ---*/
 .rightText {
     text-align: right;
 
+}
+
+.right {
+    float: right;
 }
 
 .center {
@@ -119,13 +118,27 @@ li {
     list-style-type: none;
 }
 
-/*Style buttons*/
-button, .button{
+/*--- Style buttons ---*/
+button, .button {
     background: white;
-    border: solid 2px #508650;
+    border: solid 2px #D7A00D;
 }
+
+/*--- Style text ---*/
+
+a:link, a:visited, a:hover, a:active {
+
+    color: #D7A00D;
+
+}
+
+
+.heading {
+    color: #D7A00D;
+
+}
+
 
 .artImage img {
     display: none;
 }
-

@@ -1,0 +1,144 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+
+/*--- Navigation Bar ---*/
+.navbar {
+    background: #508650;
+}
+
+.nav-link, .navbar-brand {
+    color: white;
+    cursor: pointer;
+}
+
+.nav-link {
+    margin-right: 1em !important;
+}
+
+.nav-link:hover {
+    color: white;;
+}
+
+.navbar a:link, .navbar a:hover, .navbar a:active, .navbar a:visited {
+
+    color: white;
+
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+/*--- Basic layout ---*/
+
+.page-header {
+    /*Photo by Annie Spratt on Unsplash;*/
+    background-image: url('../images/flower.jpg');
+    background-size: cover;
+    background-position: center;
+    position: sticky;
+    background-attachment: fixed;
+    height: fit-content;
+    min-height: 100vh;
+}
+
+
+.container {
+    background: white;
+    word-wrap: break-word;
+    padding: 30px;
+    width: 1000px;
+    min-height: 100vh;
+    height: 100%;
+
+}
+
+.content {
+    background: white;
+    position: absolute;
+    padding: 50px;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 8px solid #508650;
+    width: 30%;
+}
+
+/*--- Override previous height attributes  ---*/
+
+
+.heightAuto {
+    height: auto
+}
+
+.heightVh {
+    height: 100vh;
+    /*height: max-content;*/
+}
+
+.heightFit {
+    height: fit-content;
+}
+
+.heightVMax {
+    height: 100vmax;
+}
+
+
+/*--- Align specific elements ---*/
+.rightText {
+    text-align: right;
+
+}
+
+.right {
+    float: right;
+}
+
+.center {
+
+    text-align: center;
+}
+
+.left {
+
+    text-align: left;
+}
+
+li {
+    list-style-type: none;
+}
+
+/*--- Style buttons ---*/
+button, .button {
+    background: white;
+    border: solid 2px #508650;
+}
+
+/*--- Style text ---*/
+
+a:link, a:visited, a:hover, a:active {
+
+    color: #508650;
+
+}
+
+
+.heading {
+    color: #508650;
+
+}
+
+
+.artImage img {
+    display: none;
+}
+
+.crop {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}

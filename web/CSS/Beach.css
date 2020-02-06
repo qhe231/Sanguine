@@ -3,18 +3,11 @@ body {
     margin: 0;
 }
 
-a:link, a:visited, a:hover, a:active {
-
-    color: steelblue;
-
-}
 
 /*--- Navigation Bar ---*/
 .navbar {
-    background: steelblue;
-
-;
-}
+    background: #299EB1;
+}B87EB4
 
 .nav-link, .navbar-brand {
     color: white;
@@ -42,16 +35,14 @@ a:link, a:visited, a:hover, a:active {
 /*--- Basic layout ---*/
 
 .page-header {
-
-
-    background-color: lightblue;
+    /* Photo by Fezbot2000 on Unsplash;*/
+    background-image: url('../images/beach.jpg');
     background-size: cover;
     background-position: center;
     position: sticky;
     background-attachment: fixed;
     height: fit-content;
     min-height: 100vh;
-    /*overflow: auto;*/
 }
 
 
@@ -72,14 +63,12 @@ a:link, a:visited, a:hover, a:active {
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 8px solid steelblue;
+    border: 8px solid #299EB1;
     width: 30%;
 }
 
-/* Override previous height attributes */
-/*.minHeight {*/
-/*min-height: 100vh;*/
-/*}*/
+/*--- Override previous height attributes  ---*/
+
 
 .heightAuto {
     height: auto
@@ -98,14 +87,15 @@ a:link, a:visited, a:hover, a:active {
     height: 100vmax;
 }
 
-.right {
-    float: right;
-}
 
-/* Align specific elements*/
+/*--- Align specific elements ---*/
 .rightText {
     text-align: right;
 
+}
+
+.right {
+    float: right;
 }
 
 .center {
@@ -122,13 +112,33 @@ li {
     list-style-type: none;
 }
 
-/*Style buttons*/
-button, .button{
+/*--- Style buttons ---*/
+button, .button {
     background: white;
-    border: solid 2px steelblue;
+    border: solid 2px #299EB1;
 }
+
+/*--- Style text ---*/
+
+a:link, a:visited, a:hover, a:active {
+
+    color: #299EB1;
+
+}
+
+
+.heading {
+    color: #299EB1;
+
+}
+
 
 .artImage img {
     display: none;
 }
 
+.crop {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
