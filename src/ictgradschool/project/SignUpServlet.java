@@ -30,22 +30,15 @@ public class SignUpServlet extends HttpServlet {
             for (FileItem fi : fileItems) {
                 if (fi.isFormField()) {
 
-                    // the upload part becomes isFormField
-                    // and the image is uploaded without the execution of the other method
-                    // the image is not in the out folder
-                    System.out.println(fi.getFieldName() + "-" + fi.getString());
-
                     fields.put(fi.getFieldName(), fi.getString());
                 } else {
 
-                    // it is not doing this whole part????
                     String potentialAvatarUrl = ImageUploadUtil.uploadImage(fi, true);
-                    System.out.println("1111111111111111111111" + potentialAvatarUrl);
+
                     if (!potentialAvatarUrl.equals(""))
                         fields.put("avatar", potentialAvatarUrl);
                     else {
                         String av = fields.get("avatar");
-                        System.out.println("***************" + av);
                         if (!av.substring(av.length() - 4).equals(".png"))
                             fields.put("avatar", "./images/1.png");
                     }
