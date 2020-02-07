@@ -52,7 +52,6 @@
             <button name="deleteArticle" class="deleteButton" id="delete-${article.articleId}">Delete</button>
         </c:if>
         </div>
-        <%--<hr>--%>
 
         <c:set var="parent" value="${article}" scope="request"/>
         <c:set var="rootArticle" value="${article}" scope="request"/>

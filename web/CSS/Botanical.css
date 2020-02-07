@@ -64,7 +64,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     border: 8px solid #508650;
-    width: 30%;
+    width: 500px;
 }
 
 /*--- Override previous height attributes  ---*/
@@ -105,7 +105,7 @@ body {
 
 .left {
 
-    text-align: left;
+    float: left;
 }
 
 li {
@@ -141,4 +141,34 @@ a:link, a:visited, a:hover, a:active {
     width: 100px;
     height: 100px;
     border-radius: 50%;
+}
+
+/*--Media queries below*/
+
+.displaySm {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .hideSm {
+        display: none;
+    }
+
+    .displaySm {
+        display: initial;
+    }
+
+    .grey {
+        color: grey;
+    }
+
+    .centerSm {
+        text-align: center;
+    }
+
+    .content {
+        width: 100%;
+    }
+
 }

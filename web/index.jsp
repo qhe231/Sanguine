@@ -20,42 +20,39 @@
     <div class="container">
 
         <div class="row">
-            <div class="col heading"><h1>Welcome to JESP Blog</h1></div>
+            <div class="col-md col-12 heading"><h1>Welcome to JESP Blog</h1></div>
 
-            <div class="col">
-                <button onclick="window.location.href ='./article?articleId=random'" class="right">View Random Article
+            <div class="col-md col-12">
+                <button onclick="window.location.href ='./article?articleId=random'" class="right centerSm">View Random Article
                 </button>
             </div>
-
+<br>
         </div>
+        <br>
 
-        <div class="row">
-            <div class="col"><h3>Newest Articles</h3></div>
-            <div class="col">
                 <form action="./search" method="get">
-                    <input type="submit" value="Search"
-                                                            class="button right">
-                    <input name="search" type="text" class="right">
+                    <input type="submit" value="Search" placeholder="Enter search term" class="button right centerSm">
+                    <input name="search" type="text" class="right centerSm">
                 </form>
-            </div>
-        </div>
 
+      <h3>Newest Articles</h3>
 
-        <div class="row">
+        <div class="row hideSm">
             <div class="col-3"><h4>Article</h4></div>
             <div class="col-2"><h4>Author</h4></div>
             <div class="col-2"><h4>Comments</h4></div>
             <div class="col-2"><h4>Posted Time</h4></div>
             <div class="col-2"><h4>Edited Time</h4></div>
         </div>
+
         <hr>
 
-        <br>
+
 
         <c:forEach var="article" items="${articles}">
 
             <div class="row">
-                <div class="col-3">
+                <div class="col-md-3 col-12">
                     <a href="./article?articleId=${article.articleId}">${article.title}</a> <br>
                     <c:choose>
                         <c:when test="${article.content.length() <= 100}">
@@ -66,14 +63,21 @@
                         </c:otherwise>
                     </c:choose>
                 </div>
-                <div class="col-2">
+                <div class="col-md-2 col-12">
                     <span><img src="${article.author.getAvatarURL()}" width="64px"></span>
                     <span><a
                             href="./userHomePage?owner=${article.author.getUserName()}">${article.author.getUserName()}</a></span>
                 </div>
-                <div class="col-2">${article.children.size()}</div>
-                <div class="col-2">${article.postedTimeStamp}</div>
-                <div class="col-2">${article.editedTimeStamp}</div>
+
+                <div class="col-md-2 col-12"><span class="displaySm grey">Comments: </span>${article.children.size()}
+                </div>
+
+                <div class="col-md-2 col-12"><span class="displaySm grey">Posted time: </span>${article.postedTimeStamp}
+                </div>
+
+                <div class="col-md-2 col-12"><c:if test="${article.editedTimeStamp != null}"><span
+                        class="displaySm grey">Edited time: </span>${article.editedTimeStamp}</c:if>
+                </div>
 
             </div>
 
@@ -82,13 +86,6 @@
         </c:forEach>
 
         <br>
-
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-                integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-                crossorigin="anonymous"></script>
 
     </div>
 
