@@ -19,6 +19,7 @@ window.addEventListener("load", function () {
     }
 
     checkCurrentReactions();
+    let timer = setInterval(checkCurrentReactions, 5000);
 
     async function react() {
         const articleId = this.id.substring(this.id.indexOf("-") + 1);
