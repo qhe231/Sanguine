@@ -21,6 +21,7 @@ public class IndexServlet extends HttpServlet {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
             List<Article> articles = ArticleDAO.getArticles(conn, -1, -1);
+            //Article.sortByPopularity(articles);
 
             req.setAttribute("articles", articles);
 

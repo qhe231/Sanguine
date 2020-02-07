@@ -3,6 +3,8 @@ package ictgradschool.project;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Article implements Serializable {
@@ -129,5 +131,33 @@ public class Article implements Serializable {
 
     public void setReactions(List<ArticleReaction> reactions) {
         this.reactions = reactions;
+    }
+
+    public static void sortByPopularity(List<Article> articles) {
+        int baseCommentVal = 4;
+        int baseLikeVal = 2;
+        int baseDislikeVal = -1;
+
+        Comparator<Article> c = (a1, a2) ->
+                getArticlePopularityScore(a2, baseCommentVal, baseLikeVal, baseDislikeVal) - getArticlePopularityScore(a1, baseCommentVal, baseLikeVal, baseDislikeVal);
+
+        Collections.sort(articles, c);
+    }
+
+    private static int getArticlePopularityScore(Article a, int commentVal, int likeVal, int dislikeVal) {
+        int score = a.children.size();
+        for (ArticleReaction r: a.reactions)
+            switch (r.getReaction()) {
+                case 1:
+                    score += likeVal;
+                    break;
+                case 2:
+                    score += dislikeVal;
+                    break;
+            }
+        for (Article comment: a.children) {
+            score += getArticlePopularityScore(comment, Math.max(commentVal-1, 1), Math.max(likeVal-1, 0), Math.min(dislikeVal + 1, 0) );
+        }
+        return score;
     }
 }
