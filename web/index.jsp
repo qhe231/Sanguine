@@ -14,6 +14,7 @@
         <jsp:param name="user" value="${user}"/>
     </jsp:include>
 
+    <script type="text/javascript" src="./articleReaction.js"></script>
 </head>
 <body>
 <header class="page-header header container-fluid">
@@ -54,9 +55,11 @@
 
         <c:forEach var="article" items="${articles}">
 
-            <div class="row">
+            <div class="row articleRow" id="${article.articleId}">
                 <div class="col-3">
                     <a href="./article?articleId=${article.articleId}">${article.title}</a> <br>
+                    <img src="./images/plus.png" class="reactionIcon"><span class="reactionCounter" id="nLike-${article.articleId}"></span>
+                    <img src="./images/minus.png" class="reactionIcon"><span class="reactionCounter" id="nDislike-${article.articleId}"></span><br>
                             <td colspan="4" class="artImage">${article.contentPreview}</td>
                 </div>
                 <div class="col-2">

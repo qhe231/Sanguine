@@ -36,7 +36,9 @@ public class ArticleDAO {
                 while (r.next()) {
                     int articleId = r.getInt(1);
                     UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
-                    Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId, r.getTimestamp(7));
+                    List<ArticleReaction> reactions = ArticleReactionDAO.getReactionsToArticle(conn, articleId);
+                    Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2),
+                            getArticles(conn, articleId, -1), parentId, r.getTimestamp(7), reactions);
                     articles.add(a);
                 }
             }
@@ -60,10 +62,12 @@ public class ArticleDAO {
             try (ResultSet r = s.getResultSet()) {
                 if (r.next()) {
                     UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
+                    List<ArticleReaction> reactions = ArticleReactionDAO.getReactionsToArticle(conn, articleId);
                     int parentId = r.getInt(5);
                     if (r.wasNull())
                         parentId = -1;
-                    return new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2), getArticles(conn, articleId, -1), parentId, r.getTimestamp(7));
+                    return new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2),
+                            getArticles(conn, articleId, -1), parentId, r.getTimestamp(7), reactions);
                 }
             }
         }
@@ -166,7 +170,8 @@ public class ArticleDAO {
                     UserInfo author = UserInfoDAO.getUserInfoById(conn, rs.getInt(6));
                     List<Article> children = getArticles(conn, articleId, -1);
                     Timestamp editedTime = rs.getTimestamp(7);
-                    Article article = new Article(articleId, author, title, content, postedTime, children, parentId, editedTime);
+                    List<ArticleReaction> reactions = ArticleReactionDAO.getReactionsToArticle(conn, articleId);
+                    Article article = new Article(articleId, author, title, content, postedTime, children, parentId, editedTime, reactions);
                     articles.add(article);
                 }
             }
