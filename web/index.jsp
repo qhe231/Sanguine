@@ -15,8 +15,16 @@
     </jsp:include>
 
     <script type="text/javascript" src="./articleReaction.js"></script>
+    <script type="text/javascript" src="./sortIndex.js"></script>
 </head>
 <body>
+<div id="sortingDiv">
+    Rank articles in order of:
+    <select id="sortingSelector">
+        <option value="sort_date">Date Posted</option>
+        <option value="sort_popular">Popularity</option>
+    </select>
+</div>
 <header class="page-header header container-fluid">
     <div class="container">
 
