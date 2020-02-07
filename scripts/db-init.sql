@@ -1,5 +1,5 @@
 # @author: Peter He
-
+DROP TABLE IF EXISTS article_reactions;
 DROP TABLE IF EXISTS articles_and_comments;
 DROP TABLE IF EXISTS user_info;
 DROP TABLE IF EXISTS user_authentication;
@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS user_info
   dateOfBirth DATE            NOT NULL,
   avatarURL   TEXT,
   profile     TEXT,
+  theme       VARCHAR(100),
   FOREIGN KEY (userId) REFERENCES user_authentication (userId) ON DELETE CASCADE
 );
 
@@ -37,4 +38,14 @@ CREATE TABLE IF NOT EXISTS articles_and_comments
   timeEdited     TIMESTAMP,
   FOREIGN KEY (parentId) REFERENCES articles_and_comments (id) ON DELETE CASCADE,
   FOREIGN KEY (userBelongedId) REFERENCES user_authentication (userId) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS article_reactions
+(
+  article_id INT NOT NULL,
+  user_id    INT NOT NULL,
+  reaction   INT NOT NULL,
+  PRIMARY KEY (user_id, article_id),
+  FOREIGN KEY (article_id) REFERENCES articles_and_comments (id) ON DELETE CASCADE,
+  FOREIGN KEY (user_id) REFERENCES user_authentication (userId) ON DELETE CASCADE
 );

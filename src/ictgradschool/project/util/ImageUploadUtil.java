@@ -69,7 +69,7 @@ public class ImageUploadUtil {
             return "./images/" + fullsizeImageFile.getName();
         }
 
-        return null;
+        return "";
     }
 
     private static File createThumbnail(File imageFile) throws IOException {

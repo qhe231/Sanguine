@@ -14,8 +14,17 @@
         <jsp:param name="user" value="${user}"/>
     </jsp:include>
 
+    <script type="text/javascript" src="./articleReaction.js"></script>
+    <script type="text/javascript" src="./sortIndex.js"></script>
 </head>
 <body>
+<div id="sortingDiv">
+    Rank articles in order of:
+    <select id="sortingSelector">
+        <option value="sort_date">Date Posted</option>
+        <option value="sort_popular">Popularity</option>
+    </select>
+</div>
 <header class="page-header header container-fluid">
     <div class="container">
 
@@ -30,10 +39,15 @@
         </div>
         <br>
 
+        <div class="row">
+            <div class="col"><h3>Newest Articles</h3></div>
+            <div class="col">
                 <form action="./search" method="get">
                     <input type="submit" value="Search" placeholder="Enter search term" class="button right centerSm">
                     <input name="search" type="text" class="right centerSm">
                 </form>
+            </div>
+        </div>
 
       <h3>Newest Articles</h3>
 
@@ -51,17 +65,13 @@
 
         <c:forEach var="article" items="${articles}">
 
-            <div class="row">
-                <div class="col-md-3 col-12">
+
+            <div class="row articleRow" id="${article.articleId}">
+                <div class="col-3">
                     <a href="./article?articleId=${article.articleId}">${article.title}</a> <br>
-                    <c:choose>
-                        <c:when test="${article.content.length() <= 100}">
-                            <td colspan="4" class="artImage">${article.content}</td>
-                        </c:when>
-                        <c:otherwise>
-                            <td colspan="4" class="artImage">${article.content.substring(0,99)}...</td>
-                        </c:otherwise>
-                    </c:choose>
+                    <img src="./images/plus.png" class="reactionIcon"><span class="reactionCounter" id="nLike-${article.articleId}"></span>
+                    <img src="./images/minus.png" class="reactionIcon"><span class="reactionCounter" id="nDislike-${article.articleId}"></span><br>
+                            <td colspan="4" class="artImage">${article.contentPreview}</td>
                 </div>
                 <div class="col-md-2 col-12">
                     <span><img src="${article.author.getAvatarURL()}" width="64px"></span>

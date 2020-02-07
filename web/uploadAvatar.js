@@ -10,7 +10,9 @@ window.addEventListener("load", function () {
         image.width = 64;
         ownAvatarPic.innerHTML = null;
         ownAvatarPic.appendChild(image);
-        ownAvatar.value = "./image/" + event.target.files[0].name;
+        ownAvatar.checked = true;
+        ownAvatar.value = "./images/" + event.target.files[0].name;
+
 
     };
 
@@ -18,15 +20,6 @@ window.addEventListener("load", function () {
 
 async function uploadAvatar() {
     const avatarCondition = document.querySelector("#changeAvatarMessage");
-    avatarCondition.style.color = "red";
+    avatarCondition.style.color = "green";
     avatarCondition.innerHTML = "uploading now";
-
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'multipart/form-data');
-    // await fetch('./uploadAvatar', {
-    //     method: 'POST',
-    //     header: headers,
-    //     enctype: "multipart/form-data"
-    // });
-
 }

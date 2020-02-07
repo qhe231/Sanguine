@@ -24,12 +24,13 @@
     </jsp:include>
 
 
+
 </head>
 <body>
 
 <header class="page-header header container-fluid">
-    <%--had heightVh in container--%>
-    <div id="contain" class="container">
+
+    <div id="contain" class="container heightVh">
         <div id="left">
 
             <h1 class="center">Sign Up</h1>

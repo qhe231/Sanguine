@@ -14,6 +14,7 @@
     <script src="https://cdn.tiny.cloud/1/djtof1icz6but0e9v9pg9rgpweztf9nghye4u2u08y9gub17/tinymce/5/tinymce.min.js"
             referrerpolicy="origin"></script>
     <script type="text/javascript" src="./articleCommentEditDelete.js"></script>
+    <script type="text/javascript" src="./articleReaction.js"></script>
 
     <jsp:include page="./NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
@@ -46,11 +47,15 @@
         </div>
 
         <div class="right">
+            <input type="checkbox" class="reactionButton" id="like-${article.articleId}"><img src="./images/plus.png"></input>
+            <span class="reactionCounter" id="nLike-${article.articleId}"></span>
+            <input type="checkbox" class="reactionButton" id="dislike-${article.articleId}"><img src="./images/minus.png"></button>
+            <span class="reactionCounter" id="nDislike-${article.articleId}"></span>
 
-        <c:if test="${user != null && user.userId == article.author.userId}">
-            <button name="editArticle" class="editButton" id="edit-${article.articleId}">Edit</button>
-            <button name="deleteArticle" class="deleteButton" id="delete-${article.articleId}">Delete</button>
-        </c:if>
+            <c:if test="${user != null and user.userId == article.author.userId}">
+                <button name="editArticle" class="editButton" id="edit-${article.articleId}">Edit</button>
+                <button name="deleteArticle" class="deleteButton" id="delete-${article.articleId}">Delete</button>
+            </c:if>
         </div>
 
         <c:set var="parent" value="${article}" scope="request"/>
