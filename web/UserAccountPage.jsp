@@ -78,9 +78,9 @@
                 <%--Form to change name--%>
                 <div style="display: none" id="changeName">
                     <form action="./ChangeName">
-                        New first name: <input type="text" name="firstName" required>
+                        New first name: <input type="text" name="firstName">
                         <br> <br>
-                        New last name: <input type="text" name="lastName" required>
+                        New last name: <input type="text" name="lastName">
                         <br><br>
 
                         <div class="row"> <div class="col">
