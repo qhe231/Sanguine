@@ -134,9 +134,9 @@ public class Article implements Serializable {
     }
 
     public static void sortByPopularity(List<Article> articles) {
-        int baseCommentVal = 4;
-        int baseLikeVal = 2;
-        int baseDislikeVal = -1;
+        int baseCommentVal = 5;
+        int baseLikeVal = 9;
+        int baseDislikeVal = -5;
 
         Comparator<Article> c = (a1, a2) ->
                 getArticlePopularityScore(a2, baseCommentVal, baseLikeVal, baseDislikeVal) - getArticlePopularityScore(a1, baseCommentVal, baseLikeVal, baseDislikeVal);
@@ -156,7 +156,7 @@ public class Article implements Serializable {
                     break;
             }
         for (Article comment: a.children) {
-            score += getArticlePopularityScore(comment, Math.max(commentVal-1, 1), Math.max(likeVal-1, 0), Math.min(dislikeVal + 1, 0) );
+            score += getArticlePopularityScore(comment, Math.max(commentVal-1, 1), Math.max(likeVal-2, 0), Math.min(dislikeVal + 2, 0) );
         }
         return score;
     }

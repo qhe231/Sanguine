@@ -5,6 +5,7 @@ import ictgradschool.project.util.DBConnectionUtils;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,9 +22,19 @@ public class IndexServlet extends HttpServlet {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
             List<Article> articles = ArticleDAO.getArticles(conn, -1, -1);
-            //Article.sortByPopularity(articles);
+
+            String sorting = "sort_date";
+            Cookie[] cookies = req.getCookies();
+            for (Cookie c: cookies)
+                if (c.getName().equals("sortingMethod")) {
+                    sorting = c.getValue();
+                    break;
+                }
+            if (sorting.equals("sort_popular"))
+                Article.sortByPopularity(articles);
 
             req.setAttribute("articles", articles);
+
 
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(req, resp);
