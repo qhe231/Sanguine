@@ -5,6 +5,7 @@ import ictgradschool.project.UserAuthenticationDAO;
 import ictgradschool.project.util.DBConnectionUtils;
 import ictgradschool.project.util.PasswordUtil;
 import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 import static org.junit.Assert.*;
 
@@ -14,14 +15,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-/**
- * If there are already some data in the table before this test, method testGetAllUserAuthentications()
- * and method  testGetUserAuthenticationsBySearch() will be inaccurate. The results of the two methods
- * getAllUserAuthentications() and getUserAuthenticationsBySearch() vary when the data are different.
- * As We do not know what the data in the table are like, we cannot set an expected result for the test.
- */
 
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestUserAuthenticationDAO {
     private Connection conn;
 
@@ -39,44 +35,47 @@ public class TestUserAuthenticationDAO {
         conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties");
     }
 
+
     @Test
-    public void testGetAllUserAuthentications() throws SQLException {
+    public void testAGetAllUserAuthentications() throws SQLException {
         List<UserAuthentication> allUAs = UserAuthenticationDAO.getAllUserAuthentications(conn);
         String usernames = "";
         for (UserAuthentication ua : allUAs) {
             usernames += ua.getUserName();
         }
-        assertEquals("abace", usernames);
+
+        String lastUsernames = usernames.substring(usernames.length() - 5);
+        assertEquals("abace", lastUsernames);
     }
 
     @Test
-    public void testGetUserAuthenticationByValidUserName() throws SQLException {
+    public void testBGetUserAuthenticationByValidUserName() throws SQLException {
         UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, "a");
         String username = ua.getUserName();
         assertEquals("a", username);
     }
 
     @Test
-    public void testGetUserAuthenticationByInvalidUserName() throws SQLException {
+    public void testCGetUserAuthenticationByInvalidUserName() throws SQLException {
         UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, "z");
         assertNull(ua);
     }
 
     @Test
-    public void testGetUseAuthenticationByValidThirdPartyId() throws SQLException {
+    public void testDGetUseAuthenticationByValidThirdPartyId() throws SQLException {
         UserAuthentication ua = UserAuthenticationDAO.getUseAuthenticationByThirdPartyId(conn, "1");
         String username = ua.getUserName();
         assertEquals("a", username);
     }
 
     @Test
-    public void testGetUseAuthenticationByInvalidThirdPartyId() throws SQLException {
+    public void testEGetUseAuthenticationByInvalidThirdPartyId() throws SQLException {
         UserAuthentication ua = UserAuthenticationDAO.getUseAuthenticationByThirdPartyId(conn, "0");
         assertNull(ua);
     }
 
     @Test
-    public void testInsertANewUserAuthentication() throws SQLException {
+    public void testFInsertANewUserAuthentication() throws SQLException {
         UserAuthentication ua = new UserAuthentication(12, "d", "1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678", "qwertyuiop", 2);
         UserAuthenticationDAO.insertANewUserAuthentication(ua, conn);
         UserAuthentication ua2 = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, "d");
@@ -91,7 +90,7 @@ public class TestUserAuthenticationDAO {
     }
 
     @Test
-    public void testUpdateUserName() throws SQLException {
+    public void testGUpdateUserName() throws SQLException {
         UserAuthentication ua = UserAuthenticationDAO.getUseAuthenticationByThirdPartyId(conn, "2");
         UserAuthenticationDAO.updateUserName(ua, conn, "B");
         String username = ua.getUserName();
@@ -100,7 +99,7 @@ public class TestUserAuthenticationDAO {
     }
 
     @Test
-    public void testDeleteUser() throws SQLException {
+    public void testHDeleteUser() throws SQLException {
         UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, "e");
         UserAuthenticationDAO.deleteUser(ua, conn);
         UserAuthentication ua2 = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, "e");
@@ -108,7 +107,7 @@ public class TestUserAuthenticationDAO {
     }
 
     @Test
-    public void testUpdatePassword() throws SQLException {
+    public void testIUpdatePassword() throws SQLException {
         UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, "a");
         UserAuthenticationDAO.updatePassword(ua, conn, "abc");
         byte[] salt = PasswordUtil.base64Decode(ua.getSalt());
@@ -119,14 +118,14 @@ public class TestUserAuthenticationDAO {
     }
 
     @Test
-    public void testGetUserAuthenticationsBySearch() throws SQLException {
+    public void testJGetUserAuthenticationsBySearch() throws SQLException {
         List<UserAuthentication> uas = UserAuthenticationDAO.getUserAuthenticationsBySearch(conn, "a");
         String expectedUsernames = "";
         for (UserAuthentication ua : uas) {
             expectedUsernames += ua.getUserName();
         }
-
-        assertEquals("aac", expectedUsernames);
+        String lastUsernames = expectedUsernames.substring(expectedUsernames.length() - 3);
+        assertEquals("aac", lastUsernames);
     }
 
 
@@ -136,6 +135,7 @@ public class TestUserAuthenticationDAO {
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("DELETE FROM user_authentication WHERE userName ='a' OR userName ='b' OR userName ='ac' OR userName = 'd' OR userName ='B' OR userName ='c' OR userName ='e' ;");
         }
+        conn.close();
     }
 
 

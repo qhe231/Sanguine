@@ -4,6 +4,7 @@ import ictgradschool.project.UserInfo;
 import ictgradschool.project.UserInfoDAO;
 import ictgradschool.project.util.DBConnectionUtils;
 import org.junit.*;
+import org.junit.runners.MethodSorters;
 
 import javax.jws.soap.SOAPBinding;
 
@@ -15,6 +16,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TestUserInfoDAO {
     private Connection conn;
     private UserInfo testUI;
@@ -38,31 +40,31 @@ public class TestUserInfoDAO {
     }
 
     @Test
-    public void testGetUserInfoByValidId() throws SQLException {
+    public void testAGetUserInfoByValidId() throws SQLException {
         UserInfo ui = UserInfoDAO.getUserInfoById(conn, 1000);
         assertEquals("fnameA", ui.getFirstName());
     }
 
     @Test
-    public void testGetUserInfoByInvalidId() throws SQLException {
+    public void testBGetUserInfoByInvalidId() throws SQLException {
         UserInfo ui = UserInfoDAO.getUserInfoById(conn, 2000);
         assertNull(ui);
     }
 
     @Test
-    public void testGetUserInfoByValidUserName() throws SQLException {
+    public void testCGetUserInfoByValidUserName() throws SQLException {
         UserInfo ui = UserInfoDAO.getUserInfoByUserName(conn, "a");
         assertEquals("fnameA", ui.getFirstName());
     }
 
     @Test
-    public void testGetUserInfoByInvalidUserName() throws SQLException {
+    public void testDGetUserInfoByInvalidUserName() throws SQLException {
         UserInfo ui = UserInfoDAO.getUserInfoByUserName(conn, "z");
         assertNull(ui);
     }
 
     @Test
-    public void testInsertANewUserInfo() throws SQLException {
+    public void testEInsertANewUserInfo() throws SQLException {
         UserInfo ui = new UserInfo(1003, "BlogD", "fnameD", "lnameD", Date.valueOf("2006-05-24"), "urlD", "profileD", "themeD", "e");
         UserInfoDAO.insertANewUserInfo(ui, conn);
         UserInfo ui2 = UserInfoDAO.getUserInfoById(conn, 1003);
@@ -79,32 +81,32 @@ public class TestUserInfoDAO {
     }
 
     @Test
-    public void testUpdateBlogName() throws SQLException {
+    public void testFUpdateBlogName() throws SQLException {
         UserInfoDAO.updateBlogName(testUI, conn, "NewBlog");
         assertEquals("NewBlog", testUI.getBlogName());
     }
 
     @Test
-    public void testUpdateName() throws SQLException {
+    public void testGUpdateName() throws SQLException {
         UserInfoDAO.updateName(testUI, conn, "NewFname", "NewLname");
         assertEquals("NewFname", testUI.getFirstName());
         assertEquals("NewLname", testUI.getLastName());
     }
 
     @Test
-    public void testUpdateAvatarURL() throws SQLException {
+    public void testHUpdateAvatarURL() throws SQLException {
         UserInfoDAO.updateAvatarURL(testUI, conn, "NewURL");
         assertEquals("NewURL", testUI.getAvatarURL());
     }
 
     @Test
-    public void testUpdateProfile() throws SQLException {
+    public void testIUpdateProfile() throws SQLException {
         UserInfoDAO.updateProfile(testUI, conn, "NewProfile");
         assertEquals("NewProfile", testUI.getProfile());
     }
 
     @Test
-    public void testUpdateTheme() throws SQLException {
+    public void testJUpdateTheme() throws SQLException {
         UserInfoDAO.updateTheme(testUI, conn, "NewTheme");
         assertEquals("NewTheme", testUI.getTheme());
     }
@@ -115,5 +117,6 @@ public class TestUserInfoDAO {
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate("DELETE FROM user_authentication WHERE userId =1000 OR userId =1001 OR userId =1002 OR userId =1003;");
         }
+        conn.close();
     }
 }

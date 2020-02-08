@@ -25,13 +25,15 @@ public class IndexServlet extends HttpServlet {
 
             String sorting = "sort_date";
             Cookie[] cookies = req.getCookies();
-            for (Cookie c: cookies)
-                if (c.getName().equals("sortingMethod")) {
-                    sorting = c.getValue();
-                    break;
-                }
-            if (sorting.equals("sort_popular"))
-                Article.sortByPopularity(articles);
+            if (cookies.length != 0) {
+                for (Cookie c : cookies)
+                    if (c.getName().equals("sortingMethod")) {
+                        sorting = c.getValue();
+                        break;
+                    }
+                if (sorting.equals("sort_popular"))
+                    Article.sortByPopularity(articles);
+            }
 
             req.setAttribute("articles", articles);
 

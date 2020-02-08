@@ -157,7 +157,7 @@ public class ArticleDAO {
 
         List<Article> articles = new ArrayList<>();
 
-        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM articles_and_comments WHERE title LIKE ? OR content LIKE ?")) {
+        try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM articles_and_comments WHERE title LIKE ? OR content LIKE ? ORDER BY datePosted DESC;")) {
             stmt.setString(1, "%" + search + "%");
             stmt.setString(2, "%" + search + "%");
             try (ResultSet rs = stmt.executeQuery()) {

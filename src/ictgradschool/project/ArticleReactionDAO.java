@@ -39,8 +39,6 @@ public class ArticleReactionDAO {
 
             s.execute();
 
-            System.out.println(reaction);
-
             try (ResultSet r = s.getResultSet()) {
                 if (r.next()) {
                     if (reaction == 0)
