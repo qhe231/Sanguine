@@ -26,13 +26,14 @@ public class IndexServlet extends HttpServlet {
             String sorting = "sort_date";
             Cookie[] cookies = req.getCookies();
             if (cookies != null)
-                for (Cookie c: cookies)
+                for (Cookie c : cookies)
                     if (c.getName().equals("sortingMethod")) {
                         sorting = c.getValue();
                         break;
                     }
             if (sorting.equals("sort_popular"))
                 Article.sortByPopularity(articles);
+
 
             req.setAttribute("articles", articles);
 
