@@ -1,6 +1,8 @@
 package ictgradschool.project;
 
-public class ArticleReaction {
+import java.io.Serializable;
+
+public class ArticleReaction implements Serializable {
     int articleId;
     int userId;
     int reaction;
