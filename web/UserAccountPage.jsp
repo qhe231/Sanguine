@@ -78,16 +78,32 @@
                 <%--Form to change name--%>
                 <div style="display: none" id="changeName">
                     <form action="./ChangeName">
-                        New first name: <input type="text" name="firstName">
-                        <br> <br>
-                        New last name: <input type="text" name="lastName">
-                        <br><br>
 
-                        <div class="row"> <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                New first name:
+                            </div>
+                            <input type="text" name="firstName" required>
+                            <div class="col"></div>
+                        </div>
 
-                        <input type="submit" class="button">
-                        <button type="button" onclick="hideForm('changeName', 'nameBtn')" class="button">Cancel</button>
-                        </div>  </div>
+                        <div class="row">
+                            <div class="col">
+                                New last name:
+                            </div>
+                            <input type="text" name="lastName" required>
+                            <div class="col"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+
+                                <input type="submit" class="button">
+                                <button type="button" onclick="hideForm('changeName', 'nameBtn')" class="button">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
                     </form>
 
                 </div>
@@ -105,17 +121,22 @@
                 <%--Form to change description--%>
                 <div style="display: none" id="changeDesc">
                     <form action="./ChangeDesc">
-                        <textarea rows="5" cols="50" name="desc" maxlength="1000" placeholder="New description" required> </textarea>
+                        <textarea rows="5" cols="50" name="desc" maxlength="1000" placeholder="New description"
+                                  required> </textarea>
                         <br><br>
 
                         <div class="row">
                             <div class="col">
 
-                        <input type="submit" class="button">
+                                <input type="submit" class="button">
 
-                    <button type="button" onclick="hideForm('changeDesc', 'descBtn')" class="button">Cancel</button>
-                            </div></div>
-                    </form>  </div>
+                                <button type="button" onclick="hideForm('changeDesc', 'descBtn')" class="button">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
                 <%--Display success or failure message--%>
                 <c:if test="${changeDescMessage != null}">
@@ -139,10 +160,12 @@
 
                         <div class="row">
                             <div class="col">
-                        <input type="submit" class="button">
+                                <input type="submit" class="button">
 
-                    <button onclick="hideForm('changeBlogName', 'blogNameBtn')" class="button">Cancel</button>
-                            </div></div>
+                                <button onclick="hideForm('changeBlogName', 'blogNameBtn')" class="button">Cancel
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
 
@@ -159,10 +182,25 @@
                 <%--Form to change date of birth--%>
                 <div style="display: none" id="changeDateOfBirth">
                     <form action="./ChangeDateOfBirth">
-                        <input type="date" name="dob" required>
-                        <input type="submit"  class="button">
+
+                        <div class="row">
+                            <div class="col-2">
+                                New DOB:
+                            </div>
+                            <div class="col">
+                                <input type="date" name="dob" required>
+                            </div>
+                        </div>
+
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <input type="submit" class="button">
+                                <button onclick="hideForm('changeDateOfBirth', 'dobBtn')">Cancel</button>
+                            </div>
+                        </div>
                     </form>
-                    <button onclick="hideForm('changeDateOfBirth', 'dobBtn')">Cancel</button>
+
 
                 </div>
 
@@ -182,10 +220,10 @@
                     <form action="./ChangeTheme">
 
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md col-12">
                                 <img src="./images/Cropped_Images/plant_crop.jpg" class="crop">
-                                <input type="radio" name="theme" value="Botanical" class="theme"> Botanical
-                                <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                                <input type="radio" name="theme" value="Botanical" class="theme"> Botanical<br> <br>
+                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@anniespratt?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
                                    target="_blank" rel="noopener noreferrer"
                                    title="Download free do whatever you want high-resolution photos from Annie Spratt"><span
@@ -194,14 +232,14 @@
                                         style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
                                         viewBox="0 0 32 32"><title>unsplash-logo</title><path
                                         d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
-                                        style="display:inline-block;padding:2px 3px">Annie Spratt</span></a>
+                                        style="display:inline-block;padding:2px 3px">Annie Spratt</span></a> <br><br>
 
                             </div>
 
-                            <div class="col">
+                            <div class="col-md col-12">
                                 <img src="./images/Cropped_Images/beach_crop.jpg" class="crop">
-                                <input type="radio" name="theme" value="Beach" class="theme"> Beach
-                                <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                                <input type="radio" name="theme" value="Beach" class="theme"> Beach <br><br>
+                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@fezbot2000?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
                                    target="_blank" rel="noopener noreferrer"
                                    title="Download free do whatever you want high-resolution photos from Fezbot2000"><span
@@ -210,16 +248,16 @@
                                         style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
                                         viewBox="0 0 32 32"><title>unsplash-logo</title><path
                                         d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
-                                        style="display:inline-block;padding:2px 3px">Fezbot2000</span></a>
+                                        style="display:inline-block;padding:2px 3px">Fezbot2000</span></a> <br>
                             </div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md col-12">
                                 <img src="./images/Cropped_Images/balloons_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Hot Air Balloons" class="theme"> Hot Air
-                                Balloons
-                                <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                                Balloons <br><br>
+                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@kajhinkson?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
                                    target="_blank" rel="noopener noreferrer"
                                    title="Download free do whatever you want high-resolution photos from Kyle Hinkson"><span
@@ -228,14 +266,14 @@
                                         style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
                                         viewBox="0 0 32 32"><title>unsplash-logo</title><path
                                         d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
-                                        style="display:inline-block;padding:2px 3px">Kyle Hinkson</span></a>
-                            </div>
+                                        style="display:inline-block;padding:2px 3px">Kyle Hinkson</span></a><br>
+                                <br></div>
 
 
-                            <div class="col">
+                            <div class="col-md col-12">
                                 <img src="./images/Cropped_Images/stationery_crop.jpg" class="crop">
-                                <input type="radio" name="theme" value="Stationery" class="theme"> Stationery
-                                <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                                <input type="radio" name="theme" value="Stationery" class="theme"> Stationery <br><br>
+                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@joannakosinska?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
                                    target="_blank" rel="noopener noreferrer"
                                    title="Download free do whatever you want high-resolution photos from Joanna Kosinska"><span
@@ -244,15 +282,15 @@
                                         style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
                                         viewBox="0 0 32 32"><title>unsplash-logo</title><path
                                         d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
-                                        style="display:inline-block;padding:2px 3px">Joanna Kosinska</span></a>
+                                        style="display:inline-block;padding:2px 3px">Joanna Kosinska</span></a><br>
                             </div>
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md col-12">
                                 <img src="./images/Cropped_Images/snow_crop.jpg" class="crop">
-                                <input type="radio" name="theme" value="Snow" class="theme"> Snow
-                                <a style="background-color:black;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                                <input type="radio" name="theme" value="Snow" class="theme"> Snow <br><br>
+                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@paulfiedler?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
                                    target="_blank" rel="noopener noreferrer"
                                    title="Download free do whatever you want high-resolution photos from Paul Fiedler"><span
@@ -261,7 +299,7 @@
                                         style="height:12px;width:auto;position:relative;vertical-align:middle;top:-2px;fill:white"
                                         viewBox="0 0 32 32"><title>unsplash-logo</title><path
                                         d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path></svg></span><span
-                                        style="display:inline-block;padding:2px 3px">Paul Fiedler</span></a>
+                                        style="display:inline-block;padding:2px 3px">Paul Fiedler</span></a><br>
                             </div>
                         </div>
                         <br>
@@ -287,20 +325,26 @@
 
                 <%--Button to upload avatar--%>
                 <h3>Avatar</h3>
-                <img src="${user.avatarURL}"><br>
+                <img src="${user.avatarURL}"><br> <br>
                 <button onclick="showForm('uploadAvatar', 'uploadAvatarBtn')" id="uploadAvatarBtn">Upload avatar
                 </button>
 
                 <%--Form to upload avatar--%>
                 <div style="display: none" id="uploadAvatar">
                     <form action="./avatarUpload" method="POST" enctype="multipart/form-data">
-                        Upload new avatar: <input type="file" id="ownAvatarFile" name="newAvatar" accept="image/*"  class="button">
+                        Upload new avatar: <input type="file" id="ownAvatarFile" name="newAvatar" accept="image/*">
                         <span id="ownAvatarPic"></span>
                         <br><br>
-                        <input type="submit">
-                        <br><br>
+
+                        <div class="row">
+                            <div class="col">
+                                <input type="submit" class="button">
+                                <button class="button" type="button"
+                                        onclick="hideForm('uploadAvatar', 'uploadAvatarBtn')">Cancel
+                                </button>
+                            </div>
+                        </div>
                     </form>
-                    <button class="button" onclick="hideForm('uploadAvatar', 'uploadAvatarBtn')">Cancel</button>
                 </div>
 
                 <%--Button to choose avatar from list--%>
@@ -312,39 +356,74 @@
                 <div style="display: none" id="chooseAvatar">
                     <form action="./ChooseAvatar">
                         <br> Select default avatar: <br><br>
-                        <input type="radio" name="avatar" value="./images/1.png" class="avatar"><img
-                            src="./images/1.png">
-                        <input type="radio" name="avatar" value="./images/2.png" class="avatar"><img
-                            src="./images/2.png">
-                        <input type="radio" name="avatar" value="./images/3.png" class="avatar"><img
-                            src="./images/3.png">
-                        <input type="radio" name="avatar" value="./images/4.png" class="avatar"><img
-                            src="./images/4.png">
-                        <input type="radio" name="avatar" value="./images/5.png" class="avatar"><img
-                            src="./images/5.png">
+
+                        <div class="row">
+
+                            <div class="col-2">
+                                <input type="radio" name="avatar" value="./images/1.png" class="avatar"><img
+                                    src="./images/1.png"></div>
+
+                            <div class="col-2">
+                                <input type="radio" name="avatar" value="./images/2.png" class="avatar"><img
+                                    src="./images/2.png"></div>
+
+                            <div class="col-2">
+                                <input type="radio" name="avatar" value="./images/3.png" class="avatar"><img
+                                    src="./images/3.png"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+
+                                <input type="radio" name="avatar" value="./images/4.png" class="avatar"><img
+                                    src="./images/4.png"></div>
+
+
+                            <div class="col-2">
+                                <input type="radio" name="avatar" value="./images/5.png" class="avatar"><img
+                                    src="./images/5.png">
+                            </div>
+
+                            <div class="col-2">
                         <input type="radio" name="avatar" value="./images/6.png" class="avatar"><img
-                            src="./images/6.png">
+                                    src="./images/6.png"></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-2">
                         <input type="radio" name="avatar" value="./images/7.png" class="avatar"><img
-                            src="./images/7.png">
+                                    src="./images/7.png"> </div>
+
+                            <div class="col-2">
                         <input type="radio" name="avatar" value="./images/8.png" class="avatar"><img
-                            src="./images/8.png">
+                                    src="./images/8.png"> </div>
+
+                            <div class="col-2">
                         <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img
-                            src="./images/9.png">
+                                    src="./images/9.png"></div></div>
+
+                        <div class="row">
+                            <div class="col-2">
                         <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img
-                            src="./images/10.png">
+                                    src="./images/10.png"></div></div>
+                    </form>
+
                         <br>
                         <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a
                                 href="https://www.iconfinder.com/iconsets/business-avatar-1"
                                 target="_blank"><em>slack</em></a>
                         </p>
 
-
                         <div class="row">
                             <div class="col">
-                        <input type="submit" class="button">
+                                <input type="submit" class="button">
 
-                    <button type="button" onclick="hideForm('chooseAvatar', 'chooseAvatarBtn')" class="button">Cancel</button>
-                            </div></div>    </form>   </div>
+                                <button type="button" onclick="hideForm('chooseAvatar', 'chooseAvatarBtn')"
+                                        class="button">Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
                 <%--Display success or error message--%>
                 <c:if test="${changeAvatarMessage!= null}">
@@ -360,21 +439,51 @@
                 <%--Form to change password--%>
                 <div style="display: none" id="changePassword">
                     <form action="./ChangePassword" method="post">
-                        Current password: <input type="password" name="currentPassword" required>
-                        <br> <br>
-                        New password: <input type="password" name="newPassword" id="password" onkeyup='checkPassword()'
-                                             required>
-                        <br> <br>
-                        Confirm new password: <input type="password" name="confirmNewPassword" id="confirmPassword"
-                                                     onkeyup='checkPassword()' required>
-                        <span id="message"></span><br> <br>
+
+                        <div class="row">
+                            <div class="col-3">
+                                Current password:
+                            </div>
+                            <div class="col"><input type="password" name="currentPassword" required></div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-3">
+                                New password:
+                            </div>
+                            <div class="col">
+                                <input type="password" name="newPassword" id="password" onkeyup='checkPassword()'
+                                       required>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-3">
+                                Confirm new password:
+                            </div>
+                            <div class="col">
+                                <input type="password" name="confirmNewPassword" id="confirmPassword"
+                                       onkeyup='checkPassword()' required>
+                                <span id="message"></span></div>
+                        </div>
+
+                        <br>
 
                         <div class="row">
                             <div class="col">
-                        <input type="submit" id="submitPassword" class="button">
+                                <input type="submit" id="submitPassword" class="button">
 
-                    <button type="button" onclick="hideForm('changePassword', 'passwordBtn')" class="button">Cancel</button>
-                            </div></div>  </form>  </div>
+                                <button type="button" onclick="hideForm('changePassword', 'passwordBtn')"
+                                        class="button">Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
                 <%--Display success or error message--%>
                 <c:if test="${changePasswordMessage!= null}">
@@ -396,10 +505,14 @@
 
                         <div class="row">
                             <div class="col">
-                        <input type="submit" class="button">
+                                <input type="submit" class="button">
 
-                    <button type="button" onclick="hideForm('deleteAccount', 'deleteBtn')" class="button">Cancel</button>
-                            </div></div> </form>
+                                <button type="button" onclick="hideForm('deleteAccount', 'deleteBtn')" class="button">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
 
                 <%--If the account could not be deleted, display error message--%>
@@ -411,15 +524,7 @@
 
     </div>
 </header>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+
 
 </body>
 </html>

@@ -11,6 +11,7 @@
 <head>
     <title>Title</title>
     <meta name="google-signin-client_id" content="28193811864-vj7d671e3btucp1bopgidr8ulso973cd.apps.googleusercontent.com">
+
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="logout.js"></script>
 
@@ -51,12 +52,16 @@
 </c:choose>
 
 <nav class="navbar navbar-expand-md">
+
     <a class="navbar-brand" href="./index">Home</a>
+
     <button class="navbar-toggler navbar-dark" type="button" data-toggle="collapse" data-target="#main-navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="main-navigation">
         <ul class="navbar-nav">
+
             <c:choose>
 
                 <c:when test="${user.userName != null}">
