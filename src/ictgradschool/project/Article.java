@@ -46,10 +46,20 @@ public class Article implements Serializable {
         this.reactions = new ArrayList<>();
     }
 
+    /**
+     * Returns a copy of the provided string with all angle brackets replaced by appropriate html tags.
+     * This prevents unwanted <script> tags and the like from being executed.
+     * @param s The string to sanitise.
+     * @return the sanitised string.
+     */
     private String sanitise(String s) {
         return s.replace("<","&lt;").replace(">","&gt;");
     }
 
+    /**
+     * Returns up to 100 characters of the content of an article, with all html tags removed, for use as a post preview.
+     * @return the preview plaintext.
+     */
     public String getContentPreview() {
         String preview = content;
         while (preview.contains("<")) {
@@ -133,6 +143,11 @@ public class Article implements Serializable {
         this.reactions = reactions;
     }
 
+    /**
+     * This method sorts the provided list of Articles according to their popularity.
+     * The base point values of Comments, Likes and Dislikes on a primary article are defined here.
+     * @param articles The list of Articles to sort.
+     */
     public static void sortByPopularity(List<Article> articles) {
         int baseCommentVal = 5;
         int baseLikeVal = 9;
@@ -144,8 +159,17 @@ public class Article implements Serializable {
         Collections.sort(articles, c);
     }
 
+    /**
+     * This method determines the popularity score of a given article.
+     * Likes and Dislikes on comments, as well as comments to comments, have a reduced value on higher-level articles' popularity.
+     * @param a          The article being calculated.
+     * @param commentVal The current point value for a comment.
+     * @param likeVal    The current point value for a like.
+     * @param dislikeVal The current point value for a dislike.
+     * @return
+     */
     private static int getArticlePopularityScore(Article a, int commentVal, int likeVal, int dislikeVal) {
-        int score = a.children.size();
+        int score = a.children.size() * commentVal;
         for (ArticleReaction r: a.reactions)
             switch (r.getReaction()) {
                 case 1:
