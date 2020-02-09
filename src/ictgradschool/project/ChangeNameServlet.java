@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet(name = "ChangeNameServlet", urlPatterns = { "/ChangeName" })
+@WebServlet(name = "ChangeNameServlet", urlPatterns = {"/ChangeName"})
 
 public class ChangeNameServlet extends HttpServlet {
 
@@ -28,6 +28,13 @@ public class ChangeNameServlet extends HttpServlet {
 
 
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+            if (firstName.equals("")) {
+                firstName = ui.getFirstName();
+            }
+
+            if (lastName.equals("")) {
+                lastName = ui.getLastName();
+            }
 
             UserInfoDAO.updateName(ui, conn, firstName, lastName);
 

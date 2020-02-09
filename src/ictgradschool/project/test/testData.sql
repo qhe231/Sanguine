@@ -14,4 +14,4 @@ insert into articles_and_comments (datePosted, title, content, parentId, userBel
   ('2020-01-22 11:59:59', 'Sorry', 'You''re right, that was mean of me.', 4, 1),
   ('2020-01-22 11:59:59', 'Back on Topic', 'I actually prefer oranges.', 1, 1);
 
-  insert into user_info (userId, blogName, firstName, lastName, dateOfBirth, avatarURL, profile)
+DELETE FROM user_authentication WHERE userId =1000 OR userId =1001 OR userId =1002 OR userId =1003;
