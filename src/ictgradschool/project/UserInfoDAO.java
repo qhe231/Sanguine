@@ -12,8 +12,10 @@ public class UserInfoDAO {
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user_info INNER JOIN user_authentication USING (userId) WHERE userId = ?")) {
             stmt.setInt(1, userId);
             try (ResultSet rs = stmt.executeQuery()) {
-                rs.next();
-                return createANewUerInfo(rs);
+                if (rs.next())
+                    return createANewUerInfo(rs);
+                else
+                    return null;
             }
         }
     }
@@ -22,8 +24,10 @@ public class UserInfoDAO {
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM user_info INNER JOIN user_authentication USING (userId) WHERE userName = ?")) {
             stmt.setString(1, userName);
             try (ResultSet rs = stmt.executeQuery()) {
-                rs.next();
-                return createANewUerInfo(rs);
+                if (rs.next())
+                    return createANewUerInfo(rs);
+                else
+                    return null;
             }
         }
     }
