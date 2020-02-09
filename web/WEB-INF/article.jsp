@@ -46,10 +46,18 @@
         </div>
 
         <div class="right">
-            <input type="checkbox" class="reactionButton" id="like-${article.articleId}"><img src="./images/plus.png" class="reactionIcon">
-            <span class="reactionCounter" id="nLike-${article.articleId}"></span>
-            <input type="checkbox" class="reactionButton" id="dislike-${article.articleId}"><img src="./images/minus.png" class="reactionIcon">
-            <span class="reactionCounter" id="nDislike-${article.articleId}"></span>
+<span class="reactionBox">
+            <input type="checkbox" class="reactionButton" id="like-${article.articleId}">
+            <label for="like-${article.articleId}" class="reactionLabel"> <img src="./images/plus.png"
+                                                                               class="reactionIcon"></label>
+    <span class="reactionCounter" id="nLike-${article.articleId}"></span> </span>
+
+
+            <span class="reactionBox">
+            <input type="checkbox" class="reactionButton" id="dislike-${article.articleId}">
+            <label for="dislike-${article.articleId}" class="reactionLabel"><img src="./images/minus.png"
+                                                                                 class="reactionIcon"></label>
+                <span class="reactionCounter" id="nDislike-${article.articleId}"></span></span>
 
             <c:if test="${user != null and user.userId == article.author.userId}">
                 <button name="editArticle" class="editButton" id="edit-${article.articleId}">Edit</button>
@@ -57,7 +65,6 @@
             </c:if>
         </div>
 
-        <br>
 
         <c:set var="parent" value="${article}" scope="request"/>
         <c:set var="rootArticle" value="${article}" scope="request"/>
