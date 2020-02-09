@@ -142,3 +142,86 @@ a:link, a:visited, a:hover, a:active {
     height: 100px;
     border-radius: 50%;
 }
+
+.reactionIcon {
+    width: 25px;
+}
+
+hr {
+    border-color: darkgrey;
+}
+
+.reactionButton {
+    display:none;
+}
+
+.reactionBox input[type="checkbox"] + label {
+
+    filter: opacity(50%);
+}
+
+.reactionBox input[type="checkbox"]:checked + label {
+    filter: none;
+}
+
+/*--Media queries below*/
+
+.displaySm {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .hideSm {
+        display: none;
+    }
+
+    .displaySm {
+        display: initial;
+    }
+
+    .grey {
+        color: grey;
+    }
+
+    .centerSm {
+        text-align: center;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+}
+
+
+@media only screen and (max-width: 576px) {
+
+    .hideSm {
+        display: none;
+    }
+
+    .displaySm {
+        display: initial;
+    }
+
+    .grey {
+        color: grey;
+    }
+
+    .centerSm {
+        text-align: center;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .container {
+        background: white;
+        width: auto;
+    }
+
+}
+
+

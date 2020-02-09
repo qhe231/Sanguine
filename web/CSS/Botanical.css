@@ -151,6 +151,19 @@ hr {
     border-color: darkgrey;
 }
 
+.reactionButton {
+    display:none;
+}
+
+.reactionBox input[type="checkbox"] + label {
+
+    filter: opacity(50%);
+}
+
+.reactionBox input[type="checkbox"]:checked + label {
+    filter: none;
+}
+
 /*--Media queries below*/
 
 .displaySm {
