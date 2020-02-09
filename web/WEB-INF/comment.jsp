@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+
 <c:if test="${user != null}">
     <button class="addComment" id="comment-${parent.articleId}-${rootArticle.articleId}">Add Comment</button>
 </c:if>
@@ -25,12 +26,19 @@
                 <div class="articleContent" id="content-${comment.articleId}">${comment.content}</div>
 
             </div>
-            <div class="right">
-                <input type="checkbox" class="reactionButton" id="like-${comment.articleId}"><img src="./images/plus.png"></input>
+            <div class="row">
+<%--                <div class="right">--%>
+
+                    <div class="col-12">
+                <input type="checkbox" class="reactionButton" id="like-${comment.articleId}"><img src="./images/plus.png" class="reactionIcon">
                 <span class="reactionCounter" id="nLike-${comment.articleId}"></span>
-                <input type="checkbox" class="reactionButton" id="dislike-${comment.articleId}"><img src="./images/minus.png"></button>
+                <input type="checkbox" class="reactionButton" id="dislike-${comment.articleId}"><img src="./images/minus.png" class="reactionIcon">
                 <span class="reactionCounter" id="nDislike-${comment.articleId}"></span>
+            </div> <br><br>
+
+<%--                </div>--%>
                 <c:if test="${user != null}">
+    <div class="col-12">
                     <c:choose>
                     <c:when test="${user.userId == comment.author.userId}">
                         <button class="editButton" id="edit-${comment.articleId}">Edit</button>
@@ -40,8 +48,10 @@
                         <button class="deleteButton" id="delete-${comment.articleId}">Delete</button>
                     </c:when>
                     </c:choose>
+    </div> <br><br>
                 </c:if>
             </div>
+
 
             <c:set var="parent" value="${comment}" scope="request"/>
             <c:set var="rootArticle" value="${rootArticle}" scope="request"/>
@@ -49,7 +59,6 @@
             <jsp:include page="comment.jsp"/>
 
         </li>
-
     </c:forEach>
 
 </ul>

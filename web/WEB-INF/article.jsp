@@ -43,13 +43,12 @@
             <div class="row">
                 <div class="articleContent col" id="content-${article.articleId}">${article.content}</div>
             </div>
-
         </div>
 
         <div class="right">
-            <input type="checkbox" class="reactionButton" id="like-${article.articleId}"><img src="./images/plus.png"></input>
+            <input type="checkbox" class="reactionButton" id="like-${article.articleId}"><img src="./images/plus.png" class="reactionIcon">
             <span class="reactionCounter" id="nLike-${article.articleId}"></span>
-            <input type="checkbox" class="reactionButton" id="dislike-${article.articleId}"><img src="./images/minus.png"></button>
+            <input type="checkbox" class="reactionButton" id="dislike-${article.articleId}"><img src="./images/minus.png" class="reactionIcon">
             <span class="reactionCounter" id="nDislike-${article.articleId}"></span>
 
             <c:if test="${user != null and user.userId == article.author.userId}">
@@ -57,6 +56,8 @@
                 <button name="deleteArticle" class="deleteButton" id="delete-${article.articleId}">Delete</button>
             </c:if>
         </div>
+
+        <br>
 
         <c:set var="parent" value="${article}" scope="request"/>
         <c:set var="rootArticle" value="${article}" scope="request"/>

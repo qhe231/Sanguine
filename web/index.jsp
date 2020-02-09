@@ -18,60 +18,58 @@
     <script type="text/javascript" src="./sortIndex.js"></script>
 </head>
 <body>
-<div id="sortingDiv">
-    Rank articles in order of:
-    <select id="sortingSelector">
-        <option value="sort_date">Date Posted</option>
-        <option value="sort_popular">Popularity</option>
-    </select>
-</div>
+
 <header class="page-header header container-fluid">
     <div class="container">
 
         <div class="row">
-            <div class="col-md col-12 heading"><h1>Welcome to JESP Blog</h1></div>
+            <div class="col-md-6 col-12 heading"><h1>Welcome to JESP Blog</h1></div>
 
-            <div class="col-md col-12">
-                <button onclick="window.location.href ='./article?articleId=random'" class="right centerSm">View Random Article
+            <div class="col-md col-12centerSm">
+                <button onclick="window.location.href ='./article?articleId=random'" class="right">Random
+                    Article
                 </button>
             </div>
-<br>
-        </div>
-        <br>
 
-        <div class="row">
-            <div class="col"><h3>Newest Articles</h3></div>
-            <div class="col">
+            <div class="col-md-4 col-12">
                 <form action="./search" method="get">
-                    <input type="submit" value="Search" placeholder="Enter search term" class="button right centerSm">
-                    <input name="search" type="text" class="right centerSm">
+                    <input type="submit" value="Search" placeholder="Enter search term" class="button right">
+                    <input name="search" type="text" class="right">
                 </form>
             </div>
         </div>
+        <br>
 
-      <h3>Newest Articles</h3>
+
+        <div class="row">
+            <div class="col"><h3>Articles</h3></div>
+            <div id="sortingDiv" class="right">
+                Rank articles in order of:
+                <select id="sortingSelector">
+                    <option value="sort_date">Date Posted</option>
+                    <option value="sort_popular">Popularity</option>
+                </select>
+            </div>
+        </div>
+
 
         <div class="row hideSm">
-            <div class="col-3"><h4>Article</h4></div>
-            <div class="col-2"><h4>Author</h4></div>
-            <div class="col-2"><h4>Comments</h4></div>
-            <div class="col-2"><h4>Posted Time</h4></div>
-            <div class="col-2"><h4>Edited Time</h4></div>
+            <div class="col-3"><h5>Article</h5></div>
+            <div class="col-2"><h5>Author</h5></div>
+            <div class="col-2"><h5>Comments</h5></div>
+            <div class="col-2"><h5>Posted Time</h5></div>
+            <div class="col-2"><h5>Edited Time</h5></div>
         </div>
 
         <hr>
 
-
-
         <c:forEach var="article" items="${articles}">
 
-
             <div class="row articleRow" id="${article.articleId}">
-                <div class="col-3">
-                    <a href="./article?articleId=${article.articleId}">${article.title}</a> <br>
-                    <img src="./images/plus.png" class="reactionIcon"><span class="reactionCounter" id="nLike-${article.articleId}"></span>
-                    <img src="./images/minus.png" class="reactionIcon"><span class="reactionCounter" id="nDislike-${article.articleId}"></span><br>
-                            <td colspan="4" class="artImage">${article.contentPreview}</td>
+                <div class="col-md-3 col-12">
+                    <a href="./article?articleId=${article.articleId}">${article.title}</a>
+                    <br>${article.contentPreview}
+
                 </div>
                 <div class="col-md-2 col-12">
                     <span><img src="${article.author.getAvatarURL()}" width="64px"></span>
@@ -91,6 +89,14 @@
 
             </div>
 
+            <div class="row">
+                <div class="col-12">
+                    <img src="./images/plus.png" class="reactionIcon"> &nbsp;
+                    <span class="reactionCounter" id="nLike-${article.articleId}"> </span> &nbsp;
+                    <img src="./images/minus.png" class="reactionIcon"> &nbsp;
+                    <span class="reactionCounter" id="nDislike-${article.articleId}"></span>
+                </div>
+            </div>
 
             <hr>
         </c:forEach>
