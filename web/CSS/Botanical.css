@@ -1,6 +1,4 @@
 
-
-
 body {
     padding: 0;
     margin: 0;
@@ -67,7 +65,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     border: 8px solid #508650;
-    width: 30%;
+    width: 500px;
 }
 
 /*--- Override previous height attributes  ---*/
@@ -108,7 +106,7 @@ body {
 
 .left {
 
-    text-align: left;
+    float: left;
 }
 
 li {
@@ -135,7 +133,6 @@ a:link, a:visited, a:hover, a:active {
 
 }
 
-
 .artImage img {
     display: none;
 }
@@ -145,3 +142,86 @@ a:link, a:visited, a:hover, a:active {
     height: 100px;
     border-radius: 50%;
 }
+
+.reactionIcon {
+    width: 25px;
+}
+
+hr {
+    border-color: darkgrey;
+}
+
+.reactionButton {
+    display:none;
+}
+
+.reactionBox input[type="checkbox"] + label {
+
+    filter: opacity(50%);
+}
+
+.reactionBox input[type="checkbox"]:checked + label {
+    filter: none;
+}
+
+/*--Media queries below*/
+
+.displaySm {
+    display: none;
+}
+
+@media only screen and (max-width: 768px) {
+
+    .hideSm {
+        display: none;
+    }
+
+    .displaySm {
+        display: initial;
+    }
+
+    .grey {
+        color: grey;
+    }
+
+    .centerSm {
+        text-align: center;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+}
+
+
+@media only screen and (max-width: 576px) {
+
+    .hideSm {
+        display: none;
+    }
+
+    .displaySm {
+        display: initial;
+    }
+
+    .grey {
+        color: grey;
+    }
+
+    .centerSm {
+        text-align: center;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .container {
+        background: white;
+        width: auto;
+    }
+
+}
+
+
