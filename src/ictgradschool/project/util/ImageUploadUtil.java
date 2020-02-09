@@ -28,6 +28,11 @@ public class ImageUploadUtil {
     static File tempFolder;
     static final String imagesRelativePath = "/images";
 
+    /**
+     * This method initialises the directories server-side for image uploading (assuming they are needed).
+     * @param sc the ServletContext of the calling servlet.
+     * @return
+     */
     public static ServletFileUpload init(ServletContext sc) {
         // Get the upload folder, ensure it exists.
         uploadsFolder = new File(sc.getRealPath(imagesRelativePath));
@@ -44,11 +49,17 @@ public class ImageUploadUtil {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         factory.setSizeThreshold(4 * 1024);
         factory.setRepository(tempFolder);
-        ServletFileUpload upload = new ServletFileUpload(factory);
 
-        return upload;
+        return new ServletFileUpload(factory);
     }
 
+    /**
+     * This method confirms that fi is in fact an image and, if so, uploads it to the server.
+     * @param fi       The file to upload.
+     * @param isAvatar Avatars are resized to 100x100 when saved; other images are not.
+     * @return a string containing the path to where this image is now stored on the server.
+     * @throws Exception
+     */
     public static String uploadImage(FileItem fi, boolean isAvatar) throws Exception{
 
         File fullsizeImageFile = null;
@@ -72,12 +83,18 @@ public class ImageUploadUtil {
         return "";
     }
 
+    /**
+     * This method resizes a provided image to 100x100px.
+     * @param imageFile
+     * @return the resized image.
+     * @throws IOException
+     */
     private static File createThumbnail(File imageFile) throws IOException {
-        BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);
+        BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_ARGB);
         img.createGraphics().drawImage(ImageIO.read(imageFile).getScaledInstance(100, 100, Image.SCALE_SMOOTH), 0, 0, null);
 
         File thumbnailFile = new File(uploadsFolder, imageFile.getName());
-        ImageIO.write(img, "jpg", thumbnailFile);
+        ImageIO.write(img, "png", thumbnailFile);
 
         return thumbnailFile;
     }
