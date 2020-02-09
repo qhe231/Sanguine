@@ -2,6 +2,11 @@ package ictgradschool.project;
 
 import java.io.Serializable;
 
+/**
+ * Reaction values:
+ * 1    Like
+ * 2    Dislike
+ */
 public class ArticleReaction implements Serializable {
     int articleId;
     int userId;
