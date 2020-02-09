@@ -6,16 +6,16 @@ window.addEventListener("load", function () {
 
 
     const articleList = [];
-    const comments = document.querySelectorAll(".comment");
-    if (comments.length > 0) {
-        articleList.push(document.querySelector(".mainArticle").id);
-        for (let i = 0; i < comments.length; i++)
-            articleList.push(comments[i].id);
-    }
-    else {
+    if (document.querySelector(".articleRow") != null) {
         const rows = document.querySelectorAll(".articleRow");
         for (let i = 0; i < rows.length; i++)
             articleList.push(rows[i].id);
+    }
+    else {
+        articleList.push(document.querySelector(".mainArticle").id);
+        const comments = document.querySelectorAll(".comment");
+        for (let i = 0; i < comments.length; i++)
+            articleList.push(comments[i].id);
     }
 
     checkCurrentReactions();
