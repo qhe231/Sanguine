@@ -16,12 +16,21 @@ import java.sql.SQLException;
 @WebServlet(name = "login", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 
+    /**
+     * LoginServlet is the back end for a standard login. Username and password are verified and, if correct,
+     * user's session is initiated.
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        boolean isPassword = false;
+        boolean isPassword;
 
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
@@ -49,11 +58,8 @@ public class LoginServlet extends HttpServlet {
                 UserInfo ui = UserInfoDAO.getUserInfoById(conn, ua.getUserId());
                 req.getSession().setAttribute("user", ui);
                 req.setAttribute("user", ui);
-                //req.setAttribute("ownerId", ui.getUserId());
 
-                resp.sendRedirect("./userHomePage?owner=" + ui.getUserName());/*
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/userHomePage?ownerId=" + ui.getUserId());
-                requestDispatcher.forward(req, resp);*/
+                resp.sendRedirect("./userHomePage?owner=" + ui.getUserName());
 
 
 // If password is incorrect, set the error message

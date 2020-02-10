@@ -23,30 +23,18 @@ import java.util.Scanner;
 @WebServlet(name = "LoginGoogle", urlPatterns = {"/LoginGoogle"})
 public class LoginGoogleServlet extends HttpServlet {
 
-    private String createUserName(GoogleIdToken.Payload payload) {
-        String userNameLetters = "" + ((String)payload.get("given_name")).toLowerCase().charAt(0);
-        String family_name = ((String)payload.get("family_name")).toLowerCase();
-        if (family_name.length() < 4)
-            userNameLetters += family_name;
-        else
-            userNameLetters += family_name.substring(0, 3);
-        String userName = userNameLetters + "001";
-        try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
-            List<UserAuthentication> userAuthentications = UserAuthenticationDAO.getAllUserAuthentications(conn);
-            for (int userNameNum = 2; !UserNameServlet.checkUserName(userAuthentications, userName); userNameNum++) {
-                userName = userNameLetters;
-                if (userNameNum < 10) userName += "0";
-                if (userNameNum < 100) userName += "0";
-                userName += userNameNum;
-            }
-            return userName;
-        }
-        catch (SQLException | IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
+    /**
+     * GoogleLoginServlet is the back end for communicating with Google's verification server when someone logs
+     * in using a Google account.
+     * Name and username are generated from Google's name information; password is a randomly selected
+     * 15 characters from their Google session token, and their avatar is linked from Google's servers rather
+     * than being saved locally. All other personal details are initialised empty.
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -55,19 +43,16 @@ public class LoginGoogleServlet extends HttpServlet {
         while (s.hasNextLine())
             tokenString += s.nextLine();
 
-
         HttpTransport transport = new NetHttpTransport();
         JacksonFactory factory = new JacksonFactory();
-
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier(transport, factory);
 
         GoogleIdToken token = GoogleIdToken.parse(factory, tokenString);
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             if (verifier.verify(token)) {
                 GoogleIdToken.Payload payload = token.getPayload();
-                String googleId = (String)payload.get("sub");
-
-                //check for existing account for this user
+                String googleId = (String) payload.get("sub");
+//check for existing account for this user
                 UserAuthentication existingUser = UserAuthenticationDAO.getUseAuthenticationByThirdPartyId(conn, googleId);
                 if (existingUser != null) {
                     UserInfo ui = UserInfoDAO.getUserInfoByUserName(conn, existingUser.getUserName());
@@ -75,13 +60,13 @@ public class LoginGoogleServlet extends HttpServlet {
 
                     resp.sendRedirect("./userHomePage?owner=" + ui.getUserName());
                     return;
-                }
-                else {
+                } else {
+//if user not found, create an account for them
                     String userName = createUserName(payload);
                     if (userName == null)
                         return;
 
-                    int pwIndex = (int)(Math.random() * (tokenString.length() - 16));
+                    int pwIndex = (int) (Math.random() * (tokenString.length() - 16));
                     Password password = new Password(tokenString.substring(pwIndex, pwIndex + 15));
 
                     UserAuthentication ua = new UserAuthentication(null, userName, password.getHashedPassword(),
@@ -106,10 +91,42 @@ public class LoginGoogleServlet extends HttpServlet {
                     }
                 }
             }
-        } catch (Exception e) {//GeneralSecurityException | SQLException e) {
-            System.out.println(e.getStackTrace());
-            System.out.println();
-            System.out.println(e.getMessage());
+        } catch (GeneralSecurityException | SQLException e) {
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * This method creates a default username of the form 'xyyy001' for someone logging in from their Google
+     * account for the first time, where x is the first letter of their first name, yyy is the first 3 letters
+     * of their surname and 001 is a minimum-3-digit count of how many users have the 'xyyy' username
+     * (essentially it's the system UoA uses).
+     *
+     * @param payload The user's Google account information.
+     * @return
+     */
+    private String createUserName(GoogleIdToken.Payload payload) {
+        String userNameLetters = "" + ((String) payload.get("given_name")).toLowerCase().charAt(0);
+        String family_name = ((String) payload.get("family_name")).toLowerCase();
+        if (family_name.length() < 4)
+            userNameLetters += family_name;
+        else
+            userNameLetters += family_name.substring(0, 3);
+        if (userNameLetters.length() == 0)
+            userNameLetters = "unknown";
+        String userName = userNameLetters + "001";
+        try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+            List<UserAuthentication> userAuthentications = UserAuthenticationDAO.getAllUserAuthentications(conn);
+            for (int userNameNum = 2; !UserNameServlet.checkUserName(userAuthentications, userName); userNameNum++) {
+                userName = userNameLetters;
+                if (userNameNum < 10) userName += "0";
+                if (userNameNum < 100) userName += "0";
+                userName += userNameNum;
+            }
+            return userName;
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
