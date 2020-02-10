@@ -208,7 +208,7 @@ public class ArticleDAO {
      * This method returns an Article based on a provided ResultSet
      *
      * @param conn The DB connection to use.
-     * @param r The provided ResultSet.
+     * @param r    The provided ResultSet.
      * @return an Article based on the data in the ResultSet.
      * @throws SQLException
      */

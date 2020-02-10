@@ -55,7 +55,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <input type="submit" id="submitUser" class="button">
+                                <input type="submit" id="submitUser" class="button" value="Submit">
                                 <button type="button" onclick="hideForm('changeUsername', 'usernameBtn')"
                                         class="button">
                                     Cancel
@@ -100,7 +100,7 @@
                         <div class="row">
                             <div class="col">
 
-                                <input type="submit" class="button">
+                                <input type="submit" class="button" value="Submit">
                                 <button type="button" onclick="hideForm('changeName', 'nameBtn')" class="button">
                                     Cancel
                                 </button>
@@ -132,7 +132,7 @@
                         <div class="row">
                             <div class="col">
 
-                                <input type="submit" id="submit" class="button">
+                                <input type="submit" id="submit" class="button" value="Submit">
 
                                 <button type="button" onclick="hideForm('changeDesc', 'descBtn')" class="button">
                                     Cancel
@@ -164,7 +164,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <input type="submit" class="button">
+                                <input type="submit" class="button" value="Submit">
 
                                 <button onclick="hideForm('changeBlogName', 'blogNameBtn')" class="button">Cancel
                                 </button>
@@ -199,7 +199,7 @@
                         <br>
                         <div class="row">
                             <div class="col">
-                                <input type="submit" class="button">
+                                <input type="submit" class="button" value="Submit">
                                 <button onclick="hideForm('changeDateOfBirth', 'dobBtn')">Cancel</button>
                             </div>
                         </div>
@@ -309,7 +309,7 @@
                         <br>
                         <div class="row">
                             <div class="col">
-                                <input type="submit" id="submitTheme" class="button">
+                                <input type="submit" id="submitTheme" class="button" value="Submit">
                                 <button type="button" onclick="hideForm('changeTheme', 'themeBtn')" class="button">
                                     Cancel
                                 </button>
@@ -342,7 +342,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <input type="submit" class="button">
+                                <input type="submit" class="button" value="Submit">
                                 <button class="button" type="button"
                                         onclick="hideForm('uploadAvatar', 'uploadAvatarBtn')">Cancel
                                 </button>
@@ -421,7 +421,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <input type="submit" class="button">
+                            <input type="submit" class="button" value="Submit">
 
                             <button type="button" onclick="hideForm('chooseAvatar', 'chooseAvatarBtn')"
                                     class="button">Cancel
@@ -481,7 +481,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <input type="submit" id="submitPassword" class="button">
+                                <input type="submit" id="submitPassword" class="button" value="Submit">
 
                                 <button type="button" onclick="hideForm('changePassword', 'passwordBtn')"
                                         class="button">Cancel
@@ -511,7 +511,7 @@
 
                         <div class="row">
                             <div class="col">
-                                <input type="submit" class="button">
+                                <input type="submit" class="button" value="Submit">
 
                                 <button type="button" onclick="hideForm('deleteAccount', 'deleteBtn')" class="button">
                                     Cancel
