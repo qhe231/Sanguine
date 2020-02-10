@@ -172,6 +172,12 @@ hr {
     filter: none;
 }
 
+.comments {
+    background-color: whitesmoke;
+    padding: 10px;
+    border: 1px solid grey;
+}
+
 /*--Media queries below*/
 
 .displaySm {

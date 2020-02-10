@@ -51,6 +51,9 @@
     </c:otherwise>
 </c:choose>
 
+<link rel="stylesheet" type="text/css" href="../CSS/Botanical.css">
+
+
 <nav class="navbar navbar-expand-md">
 
     <a class="navbar-brand" href="./index">Home</a>
