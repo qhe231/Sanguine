@@ -15,6 +15,15 @@ import java.util.Scanner;
 
 @WebServlet(name = "articleReaction", urlPatterns = {"/articleReaction"})
 public class ArticleReactionServlet extends HttpServlet {
+
+    /**
+     * ArticleReactionServlet is called via ajax; it takes a list of Articles and returns a JSON array containing the
+     * reactions to each Article, as well as what the current user's reaction is.
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
