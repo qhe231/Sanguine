@@ -9,6 +9,7 @@
 
     #userInfo {
         max-width: 20vw;
+        min-width:20vw;
         background-color: white;
         width: fit-content;
         z-index: 1;
@@ -25,6 +26,8 @@
 
     #userInfo {
         max-width: 20.5vw;
+        min-width:20.5vw;
+
 
     }
 }
@@ -33,6 +36,8 @@
 
     #userInfo {
         max-width: 21vw;
+        min-width:21vw;
+
 
     }
 }
@@ -41,6 +46,8 @@
 
     #userInfo {
         max-width: 21.5vw;
+        min-width:21.5vw;
+
     }
 }
 
