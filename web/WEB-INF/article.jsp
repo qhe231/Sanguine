@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JEPS Blog: ${article.title}</title>
+    <title>Sanguine: ${article.title}</title>
     <script src="https://cdn.tiny.cloud/1/djtof1icz6but0e9v9pg9rgpweztf9nghye4u2u08y9gub17/tinymce/5/tinymce.min.js"
             referrerpolicy="origin"></script>
     <script type="text/javascript" src="./articleCommentEditDelete.js"></script>
@@ -64,19 +64,7 @@
             <c:if test="${user != null and user.userId == article.author.userId}">
                 <button name="editArticle" class="editButton" id="edit-${article.articleId}">Edit</button>
 
-
-                <%-- If the user presses the delete button, display a warning message--%>
-                <div style="display: none" id="show-delete-${article.articleId}">
-                    <span> Are you sure you want to delete?</span>
-                    <button name="deleteArticle" class="deleteButton" id="delete-${article.articleId}">Yes</button>
-                    <button id="do-not-delete-${article.articleId}" onclick="showForm('delete', 'show-delete-${article.articleId}')">No
-                    </button>
-                </div>
-
-                <%--Delete article button--%>
-                <button onclick="hideForm('delete', 'show-delete-${article.articleId}')"
-                        id="delete">Delete
-                </button>
+                <button class="deleteButton" id="delete-${article.articleId}">Delete</button>
 
             </c:if>
         </div>

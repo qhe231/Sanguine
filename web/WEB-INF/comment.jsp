@@ -32,62 +32,26 @@
 
                 <span class="reactionBox">
                 <input type="checkbox" class="reactionButton" id="like-${comment.articleId}">
-                <label for="like-${comment.articleId}" class="reactionLabel"> <img src="./images/site/plus.png" class="reactionIcon"></label>
+                <label for="like-${comment.articleId}" class="reactionLabel"> <img src="./images/site/plus.png"
+                                                                                   class="reactionIcon"></label>
                 <span class="reactionCounter" id="nLike-${comment.articleId}"></span></span>
 
 
                 <span class="reactionBox">
                 <input type="checkbox" class="reactionButton" id="dislike-${comment.articleId}">
-                <label for="dislike-${comment.articleId}" ><img src="./images/site/minus.png" class="reactionIcon"></label>
+                <label for="dislike-${comment.articleId}"><img src="./images/site/minus.png"
+                                                               class="reactionIcon"></label>
                     <span class="reactionCounter" id="nDislike-${comment.articleId}"></span></span>
 
                 <c:if test="${user != null}">
                     <c:choose>
                         <c:when test="${user.userId == comment.author.userId}">
                             <button class="editButton" id="edit-${comment.articleId}">Edit</button>
-
-                            <%--Delete article button--%>
-                            <button onclick="hideForm('deleteComment', 'show-delete-${comment.articleId}')"
-                                    id="deleteComment">Delete
-                            </button>
-
-                            <%-- If the user presses the delete button, display a warning message--%>
-                            <div style="display: none" id="show-delete-${comment.articleId}">
-
-                                <span> Are you sure you want to delete?</span>
-
-                                <button class="deleteButton" id="delete-${comment.articleId}">Yes
-                                </button>
-
-                                <button id="do-not-delete-${comment.articleId}"
-                                        onclick="showForm('deleteComment', 'show-delete-${comment.articleId}')">No
-                                </button>
-
-
-                            </div>
-
+                            <button class="deleteButton" id="delete-${comment.articleId}">Delete</button>
                         </c:when>
 
                         <c:when test="${user.userId == rootArticle.author.userId}">
-
-                            <%--Delete article button--%>
-                            <button onclick="hideForm('deleteComment', 'show-delete-${comment.articleId}')"
-                                    id="deleteComment">Delete
-                            </button>
-
-                            <%-- If the user presses the delete button, display a warning message--%>
-                            <div style="display: none" id="show-delete-${comment.articleId}">
-
-                                <span> Are you sure you want to delete?</span>
-
-                                <button class="deleteButton" id="delete-${comment.articleId}">Yes
-                                </button>
-
-                                <button id="do-not-delete-${comment.articleId}"
-                                        onclick="showForm('deleteComment', 'show-delete-${comment.articleId}')">No
-                                </button>
-                            </div
-
+                            <button class="deleteButton" id="delete-${comment.articleId}">Delete</button>
                         </c:when>
                     </c:choose>
                 </c:if>

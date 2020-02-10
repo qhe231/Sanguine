@@ -16,16 +16,15 @@ window.addEventListener("load", function () {
      * This function is called when the Edit button is pressed. It sets the div containing the article in question
      * to be a TinyMCE editor and caches its current content.
      */
-    function beginEdit() {
+    async function beginEdit() {
         const articleId = this.id.replace('edit-', '');
         initialText = document.querySelector(`#content-${articleId}`).innerHTML;
 
         for (let i = 0; i < addCommentButtons.length; i++)
             addCommentButtons[i].style.display = "none";
 
-
         const content = document.querySelector(`#content-${articleId}`);
-        tinymce.init({
+        await tinymce.init({
             selector: `#${content.id}`,
             inline: true,
             plugins: 'image autoresize',
@@ -34,10 +33,9 @@ window.addEventListener("load", function () {
             image_uploadtab: true,
             images_upload_url: './articleImage'
         });
-        content.classList.add("currentlyEditing");
-        tinymce.activeEditor.focus();
 
         setButtonsForEditing(articleId);
+        tinymce.activeEditor.focus();
     }
 
     /**
@@ -78,7 +76,6 @@ window.addEventListener("load", function () {
         tinymce.activeEditor.remove();
         const content = document.querySelector(`#content-${articleId}`);
         content.innerHTML = initialText;
-        content.classList.remove("currentlyEditing");
         resetButtonsFromEditing(articleId);
     }
 
@@ -110,12 +107,14 @@ window.addEventListener("load", function () {
     }
 
     /**
-     * This function is called when the Delete button is pressed on an article. It forwards the articleId to
-     * the DeleteArticle servlet.
+     * This function is called when the Delete button is pressed on an article. It prompts the user to confirm
+     * deletion, then forwards the articleId to the DeleteArticle servlet once confirmation is received.
      */
     function deleteArticle() {
-        const articleId = this.id.replace('delete-', '');
-        window.location.href = `./DeleteArticle?articleId=${articleId}`;
+        if (confirm("Are you sure you want to delete?")) {
+            const articleId = this.id.replace('delete-', '');
+            window.location.href = `./DeleteArticle?articleId=${articleId}`;
+        }
     }
 
     let hiddenCommentBtn;
@@ -124,7 +123,7 @@ window.addEventListener("load", function () {
      * This function is called when the Add Comment button is pressed. Only one comment writing form can be open
      * on the page at a time, so it first closes any existing comments-in-progress then creates a new editor.
      */
-    function newComment() {
+    async function newComment() {
         //if there's another comment form open, close it before continuing
         if (document.querySelector("#newCommentForm") != null)
             cancelNewComment();
@@ -180,7 +179,7 @@ window.addEventListener("load", function () {
         cancelButton.addEventListener("click", cancelNewComment);
 
         //text editor
-        tinymce.init({
+        await tinymce.init({
             selector: '#newComment',
             plugins: 'image autoresize',
             image_description: false,
