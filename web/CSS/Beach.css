@@ -36,7 +36,7 @@ body {
 
 .page-header {
     /* Photo by Fezbot2000 on Unsplash;*/
-    background-image: url('../images/beach.jpg');
+    background-image: url('../images/themes/beach.jpg');
     background-size: cover;
     background-position: center;
     position: sticky;

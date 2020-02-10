@@ -29,7 +29,7 @@ public class ChangeUsernameServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String newName = req.getParameter("newName");
+        String newName = req.getParameter("newUsername");
 
 //        Update username, set message depending on success or failure
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {

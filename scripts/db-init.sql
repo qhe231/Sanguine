@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS user_authentication
   hashedPassword CHAR(88)        NOT NULL,
   salt           VARCHAR(44)     NOT NULL,
   hashNum        INT             NOT NULL,
-  thirdPartyId   INT
+  thirdPartyId   VARCHAR(30)
 );
 
 CREATE TABLE IF NOT EXISTS user_info

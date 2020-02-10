@@ -36,7 +36,7 @@ body {
 
 .page-header {
     /*Photo by Annie Spratt on Unsplash;*/
-    background-image: url('../images/HotAirBalloons.jpg');
+    background-image: url('../images/themes/HotAirBalloons.jpg');
     background-size: cover;
     background-position: center;
     position: sticky;
