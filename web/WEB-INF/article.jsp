@@ -48,14 +48,14 @@
         <div class="right">
 <span class="reactionBox">
             <input type="checkbox" class="reactionButton" id="like-${article.articleId}">
-            <label for="like-${article.articleId}" class="reactionLabel"> <img src="./images/plus.png"
+            <label for="like-${article.articleId}" class="reactionLabel"> <img src="./images/site/plus.png"
                                                                                class="reactionIcon"></label>
     <span class="reactionCounter" id="nLike-${article.articleId}"></span> </span>
 
 
             <span class="reactionBox">
             <input type="checkbox" class="reactionButton" id="dislike-${article.articleId}">
-            <label for="dislike-${article.articleId}" class="reactionLabel"><img src="./images/minus.png"
+            <label for="dislike-${article.articleId}" class="reactionLabel"><img src="./images/site/minus.png"
                                                                                  class="reactionIcon"></label>
                 <span class="reactionCounter" id="nDislike-${article.articleId}"></span></span>
 
