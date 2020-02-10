@@ -223,7 +223,7 @@
                             <div class="col-md col-12">
                                 <img src="./images/Cropped_Images/plant_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Botanical" class="theme"> Botanical<br> <br>
-                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family: Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@anniespratt?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
                                    target="_blank" rel="noopener noreferrer"
                                    title="Download free do whatever you want high-resolution photos from Annie Spratt"><span
@@ -239,7 +239,7 @@
                             <div class="col-md col-12">
                                 <img src="./images/Cropped_Images/beach_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Beach" class="theme"> Beach <br><br>
-                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@fezbot2000?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
                                    target="_blank" rel="noopener noreferrer"
                                    title="Download free do whatever you want high-resolution photos from Fezbot2000"><span
@@ -257,7 +257,7 @@
                                 <img src="./images/Cropped_Images/balloons_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Hot Air Balloons" class="theme"> Hot Air
                                 Balloons <br><br>
-                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family: Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@kajhinkson?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
                                    target="_blank" rel="noopener noreferrer"
                                    title="Download free do whatever you want high-resolution photos from Kyle Hinkson"><span
@@ -273,7 +273,7 @@
                             <div class="col-md col-12">
                                 <img src="./images/Cropped_Images/stationery_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Stationery" class="theme"> Stationery <br><br>
-                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family: Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@joannakosinska?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
                                    target="_blank" rel="noopener noreferrer"
                                    title="Download free do whatever you want high-resolution photos from Joanna Kosinska"><span
@@ -290,7 +290,7 @@
                             <div class="col-md col-12">
                                 <img src="./images/Cropped_Images/snow_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Snow" class="theme"> Snow <br><br>
-                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:-apple-system, BlinkMacSystemFont, &quot;San Francisco&quot;, &quot;Helvetica Neue&quot;, Helvetica, Ubuntu, Roboto, Noto, &quot;Segoe UI&quot;, Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
+                                <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@paulfiedler?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
                                    target="_blank" rel="noopener noreferrer"
                                    title="Download free do whatever you want high-resolution photos from Paul Fiedler"><span
@@ -360,7 +360,7 @@
                         <div class="row">
 
                             <div class="col-2">
-                                <input type="radio" name="avatar" value="./images/1.png" class="avatar"><img
+                                <input type="radio" name="avatar" value="./images/avatars/1.png" class="avatar"><img
                                     src="./images/1.png"></div>
 
                             <div class="col-2">
@@ -384,44 +384,46 @@
                             </div>
 
                             <div class="col-2">
-                        <input type="radio" name="avatar" value="./images/6.png" class="avatar"><img
+                                <input type="radio" name="avatar" value="./images/6.png" class="avatar"><img
                                     src="./images/6.png"></div>
                         </div>
 
                         <div class="row">
                             <div class="col-2">
-                        <input type="radio" name="avatar" value="./images/7.png" class="avatar"><img
-                                    src="./images/7.png"> </div>
+                                <input type="radio" name="avatar" value="./images/7.png" class="avatar"><img
+                                    src="./images/7.png"></div>
 
                             <div class="col-2">
-                        <input type="radio" name="avatar" value="./images/8.png" class="avatar"><img
-                                    src="./images/8.png"> </div>
+                                <input type="radio" name="avatar" value="./images/8.png" class="avatar"><img
+                                    src="./images/8.png"></div>
 
                             <div class="col-2">
-                        <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img
-                                    src="./images/9.png"></div></div>
+                                <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img
+                                    src="./images/9.png"></div>
+                        </div>
 
                         <div class="row">
                             <div class="col-2">
-                        <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img
-                                    src="./images/10.png"></div></div>
+                                <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img
+                                    src="./images/10.png"></div>
+                        </div>
                     </form>
 
-                        <br>
-                        <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a
-                                href="https://www.iconfinder.com/iconsets/business-avatar-1"
-                                target="_blank"><em>slack</em></a>
-                        </p>
+                    <br>
+                    <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a
+                            href="https://www.iconfinder.com/iconsets/business-avatar-1"
+                            target="_blank"><em>slack</em></a>
+                    </p>
 
-                        <div class="row">
-                            <div class="col">
-                                <input type="submit" class="button">
+                    <div class="row">
+                        <div class="col">
+                            <input type="submit" class="button">
 
-                                <button type="button" onclick="hideForm('chooseAvatar', 'chooseAvatarBtn')"
-                                        class="button">Cancel
-                                </button>
-                            </div>
+                            <button type="button" onclick="hideForm('chooseAvatar', 'chooseAvatarBtn')"
+                                    class="button">Cancel
+                            </button>
                         </div>
+                    </div>
                     </form>
                 </div>
 
