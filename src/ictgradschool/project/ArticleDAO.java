@@ -15,13 +15,13 @@ public class ArticleDAO {
      * @return list of all articles
      * @throws SQLException
      */
-    public static List<Article> getArticles(Connection conn, int parentId, int userId) throws SQLException {
+    public static List<Article> getArticles(Connection conn, int parentId, int userId, boolean descOrder) throws SQLException {
         List<Article> articles = new ArrayList<>();
 
         String sqlString = "select * from articles_and_comments where parentId " + ((parentId == -1) ? "is" : "=") + " ?";
         if (userId != -1)
             sqlString += " and userBelongedId = ?";
-        sqlString += " order by datePosted desc;";
+        sqlString += " order by datePosted " + (descOrder ? "desc" : "asc") + ";";
 
         try (PreparedStatement s = conn.prepareStatement(sqlString)) {
             if (parentId == -1) {
@@ -39,7 +39,7 @@ public class ArticleDAO {
                     UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
                     List<ArticleReaction> reactions = ArticleReactionDAO.getReactionsToArticle(conn, articleId);
                     Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2),
-                            getArticles(conn, articleId, -1), parentId, r.getTimestamp(7), reactions);
+                            getArticles(conn, articleId, -1, false), parentId, r.getTimestamp(7), reactions);
                     articles.add(a);
                 }
             }
@@ -68,7 +68,7 @@ public class ArticleDAO {
                     if (r.wasNull())
                         parentId = -1;
                     return new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2),
-                            getArticles(conn, articleId, -1), parentId, r.getTimestamp(7), reactions);
+                            getArticles(conn, articleId, -1, false), parentId, r.getTimestamp(7), reactions);
                 }
             }
         }
@@ -168,7 +168,7 @@ public class ArticleDAO {
                     List<ArticleReaction> reactions = ArticleReactionDAO.getReactionsToArticle(conn, articleId);
 
                     Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2),
-                            getArticles(conn, articleId, -1), r.getInt(5), r.getTimestamp(7), reactions);
+                            getArticles(conn, articleId, -1, false), r.getInt(5), r.getTimestamp(7), reactions);
                     articles.add(a);
                 }
             }
