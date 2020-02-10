@@ -172,12 +172,7 @@ public class ArticleDAO {
 
             try (ResultSet r = stmt.executeQuery()) {
                 while (r.next()) {
-                    int articleId = r.getInt(1);
-                    UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
-                    List<ArticleReaction> reactions = ArticleReactionDAO.getReactionsToArticle(conn, articleId);
-
-                    Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2),
-                            getArticles(conn, articleId, -1, false), r.getInt(5), r.getTimestamp(7), reactions);
+                    Article a = createAnArticle(conn, r);
                     articles.add(a);
                 }
             }
@@ -186,5 +181,50 @@ public class ArticleDAO {
         return articles;
     }
 
+    /**
+     * This method returns a list of comments based on a provided userId.
+     *
+     * @param conn   The DB connection to use.
+     * @param userId The userId of the specific user.
+     * @return all the comments that a specific user wrote.
+     * @throws SQLException
+     */
+
+    public static List<Article> getAllCommentsForSpecificUser(Connection conn, int userId) throws SQLException {
+        List<Article> allComments = new ArrayList<>();
+        try (PreparedStatement s = conn.prepareStatement("select * from articles_and_comments where userBelongedId = ? and parentId is not null;")) {
+            s.setInt(1, userId);
+            try (ResultSet r = s.executeQuery()) {
+                while (r.next()) {
+                    Article a = createAnArticle(conn, r);
+                    allComments.add(a);
+                }
+            }
+        }
+        return allComments;
+    }
+
+    /**
+     * This method returns an Article based on a provided ResultSet
+     *
+     * @param conn The DB connection to use.
+     * @param r The provided ResultSet.
+     * @return an Article based on the data in the ResultSet.
+     * @throws SQLException
+     */
+
+    public static Article createAnArticle(Connection conn, ResultSet r) throws SQLException {
+        int articleId = r.getInt(1);
+        UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
+        List<ArticleReaction> reactions = ArticleReactionDAO.getReactionsToArticle(conn, articleId);
+
+        Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2),
+                getArticles(conn, articleId, -1, false), r.getInt(5), r.getTimestamp(7), reactions);
+
+        return a;
+    }
 
 }
+
+
+
