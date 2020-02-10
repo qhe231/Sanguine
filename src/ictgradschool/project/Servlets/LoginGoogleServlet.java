@@ -32,7 +32,7 @@ public class LoginGoogleServlet extends HttpServlet {
      * GoogleLoginServlet is the back end for communicating with Google's verification server when someone logs
      * in using a Google account.
      * Name and username are generated from Google's name information; password is a randomly selected
-     * 15 characters from their Google session token, and their avatar is linked from Google's servers rather
+     * 15 characters from their Google session token and their avatar is linked from Google's servers rather
      * than being saved locally. All other personal details are initialised empty.
      *
      * @param req

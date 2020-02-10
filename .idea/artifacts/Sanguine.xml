@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Sanguine">
+    <output-path>$PROJECT_DIR$/out/artifacts/Sanguine</output-path>
+    <root id="archive" name="Sanguine.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="pgcit-final-project" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="lib" />
+          <element id="library" level="project" name="libs" />
+          <element id="library" level="project" name="Java EE 6-Java EE 62" />
+          <element id="library" level="module" name="JUnit4" module-name="pgcit-final-project" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="pgcit-final-project/web/Web" />
+    </root>
+  </artifact>
+</component>

@@ -31,13 +31,13 @@
 
                 <span class="reactionBox">
                 <input type="checkbox" class="reactionButton" id="like-${comment.articleId}">
-                <label for="like-${comment.articleId}" class="reactionLabel"> <img src="./images/plus.png" class="reactionIcon"></label>
+                <label for="like-${comment.articleId}" class="reactionLabel"> <img src="./images/site/plus.png" class="reactionIcon"></label>
                 <span class="reactionCounter" id="nLike-${comment.articleId}"></span></span>
 
 
                 <span class="reactionBox">
                 <input type="checkbox" class="reactionButton" id="dislike-${comment.articleId}">
-                <label for="dislike-${comment.articleId}" ><img src="./images/minus.png" class="reactionIcon"></label>
+                <label for="dislike-${comment.articleId}" ><img src="./images/site/minus.png" class="reactionIcon"></label>
                     <span class="reactionCounter" id="nDislike-${comment.articleId}"></span></span>
 
                 <c:if test="${user != null}">
