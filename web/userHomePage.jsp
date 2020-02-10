@@ -48,7 +48,7 @@
         <%--Buttons to post new article and view all comments--%>
         <c:if test="${user.userId == owner.userId}">
             <form action="./newArticle.jsp" method="post">
-                <input type="submit" name="postANewArticle" value="Post a New Article" class="button">
+                <input type="submit" name="postANewArticle" value="Create a New Article" class="button">
             </form>
 
 
