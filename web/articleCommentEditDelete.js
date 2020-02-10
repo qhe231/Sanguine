@@ -170,6 +170,7 @@ window.addEventListener("load", function () {
         submitButton.type = "submit";
         submitButton.name = "submit";
         submitButton.id = "submitButton";
+        submitButton.value = "Submit";
         newCommentForm.appendChild(submitButton);
         const cancelButton = document.createElement("button");
         cancelButton.innerText = "Cancel";

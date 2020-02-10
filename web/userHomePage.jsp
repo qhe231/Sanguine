@@ -26,7 +26,7 @@
         <jsp:param name="user" value="${user}"/>
     </jsp:include>
     <script type="text/javascript" src="commentsJS.js"></script>
-    <link href="./CSS/userInfo.css" rel="stylesheet" type="text/css">
+    <link href="./css/userInfo.css" rel="stylesheet" type="text/css">
 </head>
 
 
