@@ -1,34 +1,42 @@
-// If the passwords match, display a success message, else display error message and disable submit button
+/**
+ * This function checks whether the passwords entered in both boxes match.
+ */
 function checkPassword() {
-    if (document.getElementById("password").value === document.getElementById("confirmPassword").value) {
-        document.getElementById("message").style.color = 'green';
-        document.getElementById("message").innerHTML = "Passwords match";
-        document.getElementById("submit").disabled = false;
-    } else {
-        document.getElementById("message").style.color = "red";
-        document.getElementById("message").innerHTML = "Passwords do not match";
-        document.getElementById("submit").disabled = true;
+    const messageDiv = document.querySelector("#message");
+    const submitBtn = document.querySelector("#submit");
 
+    if (document.querySelector("#password").value === document.querySelector("#confirmPassword").value) {
+        messageDiv.style.color = 'green';
+        messageDiv.innerHTML = "Passwords match";
+        submitBtn.disabled = false;
+    } else {
+        messageDiv.style.color = "red";
+        messageDiv.innerHTML = "Passwords do not match";
+        submitBtn.disabled = true;
     }
 }
 
-/** Send the possible username to UsernameServlet
- If the username is available, display a success message, else display error message and disable submit button **/
+/**
+ *  This function sends the possible username to UsernameServlet. If the username is available it displays
+ *  a success message; otherwise it displays an error message and disables the submit button.
+ */
 async function checkUserName() {
     const possibleUserName = document.querySelector("#userName").value;
 
     const response = await fetch(`./UserNameList?possibleUserName=${possibleUserName}`);
-
     const json = await response.json();
 
+    const messageDiv = document.querySelector("#userNameMessage");
+    const submitBtn = document.querySelector("#submit");
+
     if (json.isAvailable) {
-        document.getElementById("userNameMessage").style.color = 'green';
-        document.getElementById("userNameMessage").innerHTML = "Username available";
-        document.getElementById("submit").disabled = false;
+        messageDiv.style.color = 'green';
+        messageDiv.innerHTML = "Username available";
+        submitBtn.disabled = false;
     } else {
-        document.getElementById("userNameMessage").style.color = "red";
-        document.getElementById("userNameMessage").innerHTML = "Username not available";
-        document.getElementById("submit").disabled = true;
+        messageDiv.style.color = "red";
+        messageDiv.innerHTML = "Username not available";
+        submitBtn.disabled = true;
     }
 
 }

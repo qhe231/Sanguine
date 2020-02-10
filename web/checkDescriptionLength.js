@@ -1,5 +1,6 @@
-
-
+/**
+ * This function ensures that a user's profile text is within the maximum character count.
+ */
 function checkLength() {
     const profileText = document.querySelector("#profileText");
     const profilePrompt = document.querySelector("#profilePrompt");

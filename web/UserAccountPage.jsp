@@ -49,7 +49,8 @@
                 <%--Form to change username--%>
                 <div style="display: none" id="changeUsername">
                     <form action="./ChangeUsername">
-                        New username: <input type="text" name="newUsername" id="username" required>
+                        New username: <input type="text" name="newUsername" id="userName" oninput="checkUserName();" required>
+                        <span id="userNameMessage"></span>
                         <br><br>
 
                         <div class="row">

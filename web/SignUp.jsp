@@ -58,20 +58,20 @@
 
                     <div class="row">
                         <div class="col-2 rightText"><label>User Name: </label></div>
-                        <div class="col-3"><input name="userName" onblur="checkUserName()" id="userName" required></div>
+                        <div class="col-3"><input name="userName" oninput="checkUserName()" id="userName" required></div>
                         <div class="col-3"><span id="userNameMessage" class="left"></span></div>
                     </div>
                     <br>
 
                     <div class="row">
                         <div class="col-2 rightText"><label>Password: </label></div>
-                        <div class="col-3"><input type="password" name="password" onkeyup='checkPassword()'
+                        <div class="col-3"><input type="password" name="password" oninput='checkPassword()'
                                                   id="password" required></div>
                     </div>
 
                     <div class="row">
                         <div class="col-2 rightText"><label>Confirm Password: </label></div>
-                        <div class="col-3"><input type="password" name="password" onkeyup='checkPassword()'
+                        <div class="col-3"><input type="password" name="password" oninput='checkPassword()'
                                                   id="confirmPassword" required></div>
                         <div class="col-3"><span id="message"></span></div>
                     </div>

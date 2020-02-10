@@ -1,4 +1,7 @@
 window.addEventListener("load", function () {
+    /**
+     * This function updates the custom avatar display when the user selects a file.
+     */
     document.querySelector("#ownAvatarFile").onchange = function (event) {
         const ownAvatarPic = document.querySelector("#ownAvatarPic");
         const ownAvatar = document.querySelector("#ownAvatar");
@@ -12,14 +15,6 @@ window.addEventListener("load", function () {
         ownAvatarPic.appendChild(image);
         ownAvatar.checked = true;
         ownAvatar.value = "./images/" + event.target.files[0].name;
-
-
     };
 
 });
-
-async function uploadAvatar() {
-    const avatarCondition = document.querySelector("#changeAvatarMessage");
-    avatarCondition.style.color = "green";
-    avatarCondition.innerHTML = "uploading now";
-}
