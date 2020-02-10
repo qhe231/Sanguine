@@ -20,6 +20,7 @@ public class DeleteArticleServlet extends HttpServlet {
      * DeleteArticleServlet is the back end for deleting an article or comment.
      * It deletes the article from the database, then attempts to reload the root article's page (or index if the
      * article deleted was root).
+     *
      * @param req
      * @param resp
      * @throws ServletException
@@ -33,9 +34,12 @@ public class DeleteArticleServlet extends HttpServlet {
             articleId = Integer.parseInt(req.getParameter("articleId"));
         } catch (NumberFormatException e) {
             resp.sendRedirect("./index");
+            return;
         }
-        if (articleId == -1)
+        if (articleId == -1) {
             resp.sendRedirect("./index");
+            return;
+        }
 
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             Article article = ArticleDAO.getSpecificArticle(conn, articleId);
