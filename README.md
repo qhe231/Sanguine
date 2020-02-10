@@ -1,15 +1,20 @@
 # PGCertIT Final Project - A Personal Blogging System
 
-**TODO:** Include some information about your team's project within this README. The following information must be included:
+Team JEPS
 
-- Team name
+http://trex-sandwich.com/team-jeps_sanguine
 
-- Website URL on the course server (trex-sandwich)
+Our extra features were:
+- Ability to like or dislike a comment or article
+- Ability to sort articles by popularity (using an algorithm based on likes, dislikes and number of comments)
+- Search box; matching words entered in the search box with words from articles and comments
+- Ability to view a random article
+- Ability to change themes
+- If an article or comment has been edited, state the date/time the change occurred
+- Ability to view all comments you previously made
 
-- A list of your extra features
+There are no extra setup instructions.
 
-- Are there any special setup instructions, beyond initializing the database and running your servlet project?
-
-- At least one username / password combination for an existing user in your system, with some already-created articles & comments
-
-- Any other instructions / comments you wish to make to your markers.
+Test username/password:
+tolkeinfan
+hobbit
