@@ -10,6 +10,7 @@ body {
     background: #508650;
 }
 
+
 .nav-link, .navbar-brand {
     color: white;
     cursor: pointer;
@@ -128,6 +129,13 @@ a:link, a:visited, a:hover, a:active {
 }
 
 
+@media (min-width: 1780px) {
+
+    #userInfo {
+        border: solid 4px #508650;
+    }
+}
+
 .heading {
     color: #508650;
 
@@ -152,7 +160,7 @@ hr {
 }
 
 .reactionButton {
-    display:none;
+    display: none;
 }
 
 .reactionBox input[type="checkbox"] + label {

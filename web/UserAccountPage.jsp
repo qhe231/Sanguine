@@ -39,7 +39,7 @@
             </c:when>
             <c:otherwise>
 
-                <h1>Account settings</h1>
+                <h1 class="heading">Account settings</h1>
 
                 <%--Button to change username--%>
                 <h3>Username</h3>

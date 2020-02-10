@@ -5,15 +5,42 @@
     text-align: center;
 }
 
-@media (min-width: 1500px) {
+@media (min-width: 1780px) {
+
     #userInfo {
-        width: 200px;
+        max-width: 20vw;
         background-color: white;
-        position: absolute;
+        width: fit-content;
         z-index: 1;
-        top: 30px;
-        left: 30px;
+        top: 1vw;
+        left: 1vw;
         overflow-x: hidden;
         padding: 10px 10px;
+        position: absolute;
+        align-content: center;
     }
 }
+
+@media (min-width: 1810px) {
+
+    #userInfo {
+        max-width: 20.5vw;
+
+    }
+}
+
+@media (min-width: 1840px) {
+
+    #userInfo {
+        max-width: 21vw;
+
+    }
+}
+
+@media (min-width: 1880px) {
+
+    #userInfo {
+        max-width: 21.5vw;
+    }
+}
+
