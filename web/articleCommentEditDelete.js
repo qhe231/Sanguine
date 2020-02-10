@@ -20,6 +20,10 @@ window.addEventListener("load", function () {
         const articleId = this.id.replace('edit-', '');
         initialText = document.querySelector(`#content-${articleId}`).innerHTML;
 
+        for (let i = 0; i < addCommentButtons.length; i++)
+            addCommentButtons[i].style.display = "none";
+
+
         const content = document.querySelector(`#content-${articleId}`);
         tinymce.init({
             selector: `#${content.id}`,
@@ -43,6 +47,9 @@ window.addEventListener("load", function () {
     async function submitEdit() {
         const articleId = this.id.replace('edit-', '');
 
+        for (let i = 0; i < addCommentButtons.length; i++)
+            addCommentButtons[i].style.display = "initial";
+
         const text = tinymce.activeEditor.getContent({format: 'html'});
         tinymce.activeEditor.remove();
 
@@ -63,6 +70,10 @@ window.addEventListener("load", function () {
      * the TinyMCE editor from the div and sets the div's content back to the cached copy of its original content.
      */
     function cancelEdit() {
+
+        for (let i = 0; i < addCommentButtons.length; i++)
+            addCommentButtons[i].style.display = "initial";
+
         const articleId = this.id.replace('delete-', '');
         tinymce.activeEditor.remove();
         const content = document.querySelector(`#content-${articleId}`);
