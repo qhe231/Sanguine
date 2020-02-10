@@ -53,7 +53,7 @@ public class TestArticleDAO {
 
     @Test
     public void testAGetAllRootArticles() throws SQLException {
-        List<Article> articles = ArticleDAO.getArticles(conn, -1, -1);
+        List<Article> articles = ArticleDAO.getArticles(conn, -1, -1, true);
         String titles = getTitles(articles);
         String lastTitles = titles.substring(titles.length() - 12);
         assertEquals("TitleDTitleA", lastTitles);
@@ -61,21 +61,21 @@ public class TestArticleDAO {
 
     @Test
     public void testBGetAllChildrenOfAnArticle() throws SQLException {
-        List<Article> articles = ArticleDAO.getArticles(conn, 2000, -1);
+        List<Article> articles = ArticleDAO.getArticles(conn, 2000, -1, true);
         String titles = getTitles(articles);
         assertEquals("TitleFTitleETitleB", titles);
     }
 
     @Test
     public void testCGetAllRootArticlesBelongedToAUser() throws SQLException {
-        List<Article> articles = ArticleDAO.getArticles(conn, -1, 1000);
+        List<Article> articles = ArticleDAO.getArticles(conn, -1, 1000, true);
         String titles = getTitles(articles);
         assertEquals("TitleDTitleA", titles);
     }
 
     @Test
     public void testDGetAllChildrenOfAnArticleBelongedToAUser() throws SQLException {
-        List<Article> articles = ArticleDAO.getArticles(conn, 2000, 1001);
+        List<Article> articles = ArticleDAO.getArticles(conn, 2000, 1001, true);
         String titles = getTitles(articles);
         assertEquals("TitleFTitleB", titles);
     }
