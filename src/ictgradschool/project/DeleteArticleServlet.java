@@ -16,7 +16,7 @@ public class DeleteArticleServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("A");
+
         int articleId = -1;
         try {
             articleId = Integer.parseInt(req.getParameter("articleId"));
@@ -26,19 +26,21 @@ public class DeleteArticleServlet extends HttpServlet {
         }
         if (articleId == -1)
             resp.sendRedirect("./index");
-        System.out.println(articleId);
 
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             Article article = ArticleDAO.getSpecificArticle(conn, articleId);
+            if (article == null) {
+                return;
+            }
             ArticleDAO.deleteArticle(conn, articleId);
 
-            System.out.println("B");
             if (article.getParentId() == -1)
                 resp.sendRedirect("./index");
             else {
                 Article parent = ArticleDAO.getSpecificArticle(conn, article.getParentId());
-                while (parent.getParentId() != -1)
-                    parent = ArticleDAO.getSpecificArticle(conn, article.getParentId());
+                while (parent.getParentId() != -1) {
+                    parent = ArticleDAO.getSpecificArticle(conn, parent.getParentId());
+                }
                 req.getRequestDispatcher("./article?articleId=" + parent.getArticleId()).forward(req, resp);
             }
         }
