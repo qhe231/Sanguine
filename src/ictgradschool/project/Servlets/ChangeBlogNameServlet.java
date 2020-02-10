@@ -1,8 +1,9 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
+import ictgradschool.project.DAOs.UserInfoDAO;
+import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,11 +14,12 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet(name = "ChooseAvatarServlet", urlPatterns = {"/ChooseAvatar"})
-public class ChooseAvatarServlet extends HttpServlet {
+@WebServlet(name = "ChangeBlogNameServlet", urlPatterns = {"/ChangeBlogName"})
+public class ChangeBlogNameServlet extends HttpServlet {
 
     /**
-     *  ChooseAvatarServlet is the back end for changing the user's avatar to a predefined avatar.
+     * ChangeBlogNameServlet is the backend for changing the name of the user's own personal blog.
+     *
      * @param req
      * @param resp
      * @throws ServletException
@@ -26,28 +28,27 @@ public class ChooseAvatarServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
         HttpSession session = req.getSession();
         UserInfo ui = (UserInfo) session.getAttribute("user");
 
-        String newAvatar = req.getParameter("avatar");
+        String newBlogName = req.getParameter("newBlogName");
 
-//      Update avatar, set message depending on success or failure
+//      Update blog name, set message depending on success or failure
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
-            UserInfoDAO.updateAvatarURL(ui, conn, newAvatar);
+            UserInfoDAO.updateBlogName(ui, conn, newBlogName);
 
-            String message = "Avatar updated successfully";
-            req.setAttribute("changeAvatarMessage", message);
+            String message = "Blog name successfully updated to " + newBlogName;
+            req.setAttribute("changeBlogNameMessage", message);
 
         } catch (SQLException e) {
 
-            String message = "Avatar could not be changed";
-            req.setAttribute("changeAvatarMessage", message);
-
+            String message = "Unable to update blog name";
+            req.setAttribute("changeBlogNameMessage", message);
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
-        dispatcher.forward(req, resp);
-
+        req.getRequestDispatcher("/UserAccountPage.jsp").forward(req, resp);
     }
+
 }

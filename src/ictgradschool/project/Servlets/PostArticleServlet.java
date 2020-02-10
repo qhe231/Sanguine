@@ -1,8 +1,10 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
+import ictgradschool.project.Article;
+import ictgradschool.project.DAOs.ArticleDAO;
+import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

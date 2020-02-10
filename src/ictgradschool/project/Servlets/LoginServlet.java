@@ -1,9 +1,12 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
+import ictgradschool.project.DAOs.UserAuthenticationDAO;
+import ictgradschool.project.DAOs.UserInfoDAO;
+import ictgradschool.project.UserAuthentication;
+import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 import ictgradschool.project.util.PasswordUtil;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

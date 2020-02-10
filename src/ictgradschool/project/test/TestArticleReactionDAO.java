@@ -1,7 +1,7 @@
 package ictgradschool.project.test;
 
 import ictgradschool.project.ArticleReaction;
-import ictgradschool.project.ArticleReactionDAO;
+import ictgradschool.project.DAOs.ArticleReactionDAO;
 import ictgradschool.project.util.DBConnectionUtils;
 import org.junit.*;
 import org.junit.runners.MethodSorters;

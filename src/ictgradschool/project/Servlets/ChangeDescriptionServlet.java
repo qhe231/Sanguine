@@ -1,8 +1,9 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
+import ictgradschool.project.DAOs.UserInfoDAO;
+import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,13 +14,12 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet(name = "ChangeThemeServlet", urlPatterns = {"/ChangeTheme"})
+@WebServlet(name = "ChangeDescriptionServlet", urlPatterns = {"/ChangeDesc"})
 
-
-public class ChangeThemeServlet extends HttpServlet {
+public class ChangeDescriptionServlet extends HttpServlet {
 
     /**
-     * ChangeThemeServlet is the back end for changing the user's theme.
+     * ChangeDescriptionServlet is the back end for changing the user's public description.
      *
      * @param req
      * @param resp
@@ -32,20 +32,19 @@ public class ChangeThemeServlet extends HttpServlet {
         HttpSession session = req.getSession();
         UserInfo ui = (UserInfo) session.getAttribute("user");
 
-        String theme = req.getParameter("theme");
+        String desc = req.getParameter("desc");
 
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
-            UserInfoDAO.updateTheme(ui, conn, theme);
+            UserInfoDAO.updateProfile(ui, conn, desc);
 
-            String message = "Theme successfully updated to " + theme;
-            req.setAttribute("changeThemeMessage", message);
-
+            String message = "Description successfully updated to " + desc;
+            req.setAttribute("changeDescMessage", message);
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            String message = "Unable to update theme";
-            req.setAttribute("changeThemeMessage", message);
+
+            String message = "Unable to update description";
+            req.setAttribute("changeDescMessage", message);
         }
 
         req.getRequestDispatcher("/UserAccountPage.jsp").forward(req, resp);

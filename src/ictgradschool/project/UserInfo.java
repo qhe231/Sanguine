@@ -16,11 +16,6 @@ public class UserInfo implements Serializable {
     private String userName;
     private String theme;
 
-
-    public UserInfo() {
-
-    }
-
     public UserInfo(Integer userId, String blogName, String firstName, String lastName, Date dateOfBirth, String avatarURL, String profile, String theme, String userName) {
         this.userId = userId;
         this.userName = userName;
@@ -33,6 +28,13 @@ public class UserInfo implements Serializable {
         this.profile = profile;
     }
 
+    /**
+     * Returns a copy of the provided string with all angle brackets replaced by appropriate html tags.
+     * This prevents unwanted <script> tags and the like from being executed.
+     *
+     * @param s The string to sanitise.
+     * @return the sanitised string.
+     */
     private String sanitise(String s) {
         return s.replace("<","&lt;").replace(">","&gt;");
     }

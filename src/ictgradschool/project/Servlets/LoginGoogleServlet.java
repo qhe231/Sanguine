@@ -1,10 +1,15 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
+import ictgradschool.project.DAOs.UserAuthenticationDAO;
+import ictgradschool.project.DAOs.UserInfoDAO;
+import ictgradschool.project.Password;
+import ictgradschool.project.UserAuthentication;
+import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 
 import javax.servlet.ServletException;
@@ -53,7 +58,7 @@ public class LoginGoogleServlet extends HttpServlet {
                 GoogleIdToken.Payload payload = token.getPayload();
                 String googleId = (String) payload.get("sub");
 //check for existing account for this user
-                UserAuthentication existingUser = UserAuthenticationDAO.getUseAuthenticationByThirdPartyId(conn, googleId);
+                UserAuthentication existingUser = UserAuthenticationDAO.getUserAuthenticationByThirdPartyId(conn, googleId);
                 if (existingUser != null) {
                     UserInfo ui = UserInfoDAO.getUserInfoByUserName(conn, existingUser.getUserName());
                     req.getSession().setAttribute("user", ui);

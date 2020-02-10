@@ -1,4 +1,4 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
 
 import javax.servlet.ServletException;

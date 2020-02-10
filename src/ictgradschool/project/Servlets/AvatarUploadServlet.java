@@ -1,5 +1,7 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
+import ictgradschool.project.DAOs.UserInfoDAO;
+import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 import ictgradschool.project.util.ImageUploadUtil;
 import org.apache.commons.fileupload.FileItem;

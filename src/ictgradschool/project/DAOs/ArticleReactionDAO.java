@@ -1,4 +1,6 @@
-package ictgradschool.project;
+package ictgradschool.project.DAOs;
+
+import ictgradschool.project.ArticleReaction;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

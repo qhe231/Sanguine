@@ -1,8 +1,11 @@
-package ictgradschool.project;
+package ictgradschool.project.DAOs;
+
+import ictgradschool.project.Article;
+import ictgradschool.project.ArticleReaction;
+import ictgradschool.project.UserInfo;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ArticleDAO {

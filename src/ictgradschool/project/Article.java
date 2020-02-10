@@ -14,7 +14,7 @@ public class Article implements Serializable {
     private String title;
     private String content;
     private Timestamp postedTimeStamp;
-    private Timestamp editedTimeStamp;  //Add edit time for the article
+    private Timestamp editedTimeStamp;
 
     private List<ArticleReaction> reactions;
 
@@ -31,7 +31,7 @@ public class Article implements Serializable {
         this.postedTimeStamp = postedTimeStamp;
         this.children = children;
         this.parentId = parentId;
-        this.editedTimeStamp = editedTimeStamp; //Add edit time for the article
+        this.editedTimeStamp = editedTimeStamp;
         this.reactions = reactions;
     }
 

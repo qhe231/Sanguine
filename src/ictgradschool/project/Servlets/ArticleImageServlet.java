@@ -1,4 +1,4 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
 import ictgradschool.project.util.ImageUploadUtil;
 import org.apache.commons.fileupload.FileItem;
