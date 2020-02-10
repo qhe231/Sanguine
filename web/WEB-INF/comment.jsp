@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script type="text/javascript" src="./UserAccountJS.js"></script>
 
 
 <c:if test="${user != null}">
@@ -44,10 +45,49 @@
                     <c:choose>
                         <c:when test="${user.userId == comment.author.userId}">
                             <button class="editButton" id="edit-${comment.articleId}">Edit</button>
-                            <button class="deleteButton" id="delete-${comment.articleId}">Delete</button>
+
+                            <%--Delete article button--%>
+                            <button onclick="hideForm('deleteComment', 'show-delete-${comment.articleId}')"
+                                    id="deleteComment">Delete
+                            </button>
+
+                            <%-- If the user presses the delete button, display a warning message--%>
+                            <div style="display: none" id="show-delete-${comment.articleId}">
+
+                                <span> Are you sure you want to delete?</span>
+
+                                <button class="deleteButton" id="delete-${comment.articleId}">Yes
+                                </button>
+
+                                <button id="do-not-delete-${comment.articleId}"
+                                        onclick="showForm('deleteComment', 'show-delete-${comment.articleId}')">No
+                                </button>
+
+
+                            </div>
+
                         </c:when>
+
                         <c:when test="${user.userId == rootArticle.author.userId}">
-                            <button class="deleteButton" id="delete-${comment.articleId}">Delete</button>
+
+                            <%--Delete article button--%>
+                            <button onclick="hideForm('deleteComment', 'show-delete-${comment.articleId}')"
+                                    id="deleteComment">Delete
+                            </button>
+
+                            <%-- If the user presses the delete button, display a warning message--%>
+                            <div style="display: none" id="show-delete-${comment.articleId}">
+
+                                <span> Are you sure you want to delete?</span>
+
+                                <button class="deleteButton" id="delete-${comment.articleId}">Yes
+                                </button>
+
+                                <button id="do-not-delete-${comment.articleId}"
+                                        onclick="showForm('deleteComment', 'show-delete-${comment.articleId}')">No
+                                </button>
+                            </div
+
                         </c:when>
                     </c:choose>
                 </c:if>

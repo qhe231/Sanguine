@@ -15,6 +15,8 @@
             referrerpolicy="origin"></script>
     <script type="text/javascript" src="./articleCommentEditDelete.js"></script>
     <script type="text/javascript" src="./articleReaction.js"></script>
+    <script type="text/javascript" src="./UserAccountJS.js"></script>
+
 
     <jsp:include page="./NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
@@ -61,7 +63,21 @@
 
             <c:if test="${user != null and user.userId == article.author.userId}">
                 <button name="editArticle" class="editButton" id="edit-${article.articleId}">Edit</button>
-                <button name="deleteArticle" class="deleteButton" id="delete-${article.articleId}">Delete</button>
+
+
+                <%-- If the user presses the delete button, display a warning message--%>
+                <div style="display: none" id="show-delete-${article.articleId}">
+                    <span> Are you sure you want to delete?</span>
+                    <button name="deleteArticle" class="deleteButton" id="delete-${article.articleId}">Yes</button>
+                    <button id="do-not-delete-${article.articleId}" onclick="showForm('delete', 'show-delete-${article.articleId}')">No
+                    </button>
+                </div>
+
+                <%--Delete article button--%>
+                <button onclick="hideForm('delete', 'show-delete-${article.articleId}')"
+                        id="delete">Delete
+                </button>
+
             </c:if>
         </div>
 
