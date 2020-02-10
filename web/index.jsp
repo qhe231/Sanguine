@@ -58,7 +58,7 @@
             <div class="col-2"><h5>Author</h5></div>
             <div class="col-2"><h5>Comments</h5></div>
             <div class="col-2"><h5>Posted Time</h5></div>
-            <div class="col-2"><h5>Edited Time</h5></div>
+            <div class="col-2"><h5>Last Edited</h5></div>
         </div>
 
         <hr>
@@ -91,9 +91,9 @@
 
             <div class="row">
                 <div class="col-12">
-                    <img src="images/site/plus.png" class="reactionIcon"> &nbsp;
+                    Likes: &nbsp;
                     <span class="reactionCounter" id="nLike-${article.articleId}"> </span> &nbsp;
-                    <img src="images/site/minus.png" class="reactionIcon"> &nbsp;
+                    Dislikes: &nbsp;
                     <span class="reactionCounter" id="nDislike-${article.articleId}"></span>
                 </div>
             </div>
