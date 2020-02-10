@@ -40,9 +40,7 @@ public class LoginServlet extends HttpServlet {
                 String message = "Username not found. ";
                 req.setAttribute("ErrorMessage", message);
 
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/login.jsp");
-                requestDispatcher.forward(req, resp);
-
+                req.getRequestDispatcher("/login.jsp").forward(req, resp);
                 return;
 // If the username exists, check the password
             } else {
@@ -61,15 +59,12 @@ public class LoginServlet extends HttpServlet {
 
                 resp.sendRedirect("./userHomePage?owner=" + ui.getUserName());
 
-
 // If password is incorrect, set the error message
             } else {
                 String message = "Incorrect password. ";
                 req.setAttribute("ErrorMessage", message);
 
-                RequestDispatcher requestDispatcher = req.getRequestDispatcher("/login.jsp");
-                requestDispatcher.forward(req, resp);
-
+                req.getRequestDispatcher("/login.jsp").forward(req, resp);
             }
 
         } catch (SQLException e) {

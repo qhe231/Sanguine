@@ -20,6 +20,7 @@ public class DeleteAccountServlet extends HttpServlet {
 
     /**
      * DeleteAccountServlet is the back end for deleting the user's account.
+     *
      * @param req
      * @param resp
      * @throws ServletException
@@ -46,28 +47,17 @@ public class DeleteAccountServlet extends HttpServlet {
                 req.getSession().invalidate();
 
                 resp.sendRedirect("./index");
-
+                return;
             }
 //          If user entered incorrect password, set error message
             else {
-
-                String message = "Entered password does not match current password";
-                req.setAttribute("deleteAccountMessage", message);
-
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/UserAccountPage.jsp");
-                dispatcher.forward(req, resp);
-
+                req.setAttribute("deleteAccountMessage", "Entered password does not match current password");
             }
         } catch (SQLException e) {
-
-            String message = "Account could not be deleted";
-            req.setAttribute("deleteAccountMessage", message);
-
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
-            dispatcher.forward(req, resp);
-
+            req.setAttribute("deleteAccountMessage", "Account could not be deleted");
         }
 
+        req.getRequestDispatcher("/UserAccountPage.jsp").forward(req, resp);
     }
 
 }

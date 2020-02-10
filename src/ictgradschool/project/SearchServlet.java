@@ -15,6 +15,15 @@ import java.util.List;
 
 @WebServlet(name = "search", urlPatterns = {"/search"})
 public class SearchServlet extends HttpServlet {
+
+    /**
+     * SearchServlet is the back end for the searchbar.
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String search = req.getParameter("search");
@@ -25,8 +34,7 @@ public class SearchServlet extends HttpServlet {
             req.setAttribute("users", users);
             req.setAttribute("articles", articles);
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/searchResult.jsp");
-            dispatcher.forward(req, resp);
+            req.getRequestDispatcher("/searchResult.jsp").forward(req, resp);
 
         } catch (SQLException e) {
             e.printStackTrace();

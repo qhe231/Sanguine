@@ -30,7 +30,6 @@ public class ArticleServlet extends HttpServlet {
             String articleIdStr = req.getParameter("articleId");
             Article article;
 
-//          If user requests an article with an id of "random", choose random number
             if (articleIdStr.equalsIgnoreCase("random")) {
                 List<Article> articles = ArticleDAO.getArticles(conn, -1, -1, true);
                 int randomIndex = (int) (Math.random() * articles.size());
