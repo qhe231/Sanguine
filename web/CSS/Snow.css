@@ -187,6 +187,13 @@ hr {
     }
 
 }
+@media (min-width: 1780px) {
+
+    #userInfo {
+        border: solid 4px #495F6D;
+    }
+}
+
 
 
 @media only screen and (max-width: 576px) {

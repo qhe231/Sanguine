@@ -170,6 +170,14 @@ hr {
     display: none;
 }
 
+@media (min-width: 1780px) {
+
+    #userInfo {
+        border: solid 4px #D7A00D;
+    }
+}
+
+
 @media only screen and (max-width: 768px) {
 
     .hideSm {

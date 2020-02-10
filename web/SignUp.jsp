@@ -30,7 +30,7 @@
 
 <header class="page-header header container-fluid">
 
-    <div id="contain" class="container heightVh">
+    <div id="contain" class="container">
         <div id="left">
 
             <h1 class="center">Sign Up</h1>

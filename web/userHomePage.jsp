@@ -56,8 +56,13 @@
 
         <div id="userInfo">
             <h2>About Me</h2>
+
+
             <img src="${owner.avatarURL}"><br><br>
+
             <p><strong>Username:</strong> ${owner.userName}</p>
+
+
             <p><strong>Name:</strong> ${owner.firstName} ${owner.lastName}</p>
             <p><strong>Date of Birth:</strong> ${owner.dateOfBirth}</p>
             <p><strong>Description:</strong> ${owner.profile}</p>
@@ -67,7 +72,7 @@
 
             <c:when test="${articles[0].title != null}">
                 <%--Display all articles associated with the blog--%>
-                <h2>Articles</h2>
+                <h2 class="heading">Articles</h2>
                 <div class="row hideSm">
                     <div class="col-4"><h4>Article</h4></div>
                     <div class="col-2"><h4>Comments</h4></div>
@@ -110,7 +115,7 @@
             </c:when>
 
             <c:otherwise>
-                You have not posted any articles.
+               ${owner.userName} has not posted any articles.
             </c:otherwise>
 
         </c:choose>
