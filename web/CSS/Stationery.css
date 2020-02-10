@@ -36,7 +36,7 @@ body {
 
 .page-header {
     /* Photo by Joanna Kosinska on Unsplash*/
-    background-image: url('../images/stationery.jpg');
+    background-image: url('../images/themes/stationery.jpg');
     background-size: cover;
     background-position: center;
     position: sticky;

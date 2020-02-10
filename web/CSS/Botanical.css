@@ -37,7 +37,7 @@ body {
 
 .page-header {
     /*Photo by Annie Spratt on Unsplash;*/
-    background-image: url('../images/flower.jpg');
+    background-image: url('../images/themes/flower.jpg');
     background-size: cover;
     background-position: center;
     position: sticky;

@@ -36,7 +36,7 @@ body {
 
 .page-header {
     /*Snow Photo by Paul Fiedler on Unsplash;*/
-    background-image: url('../images/snow.jpg');
+    background-image: url('../images/themes/snow.jpg');
     background-size: cover;
     background-position: center;
     position: sticky;
