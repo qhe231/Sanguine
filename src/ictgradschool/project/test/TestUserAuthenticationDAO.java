@@ -1,7 +1,7 @@
 package ictgradschool.project.test;
 
 import ictgradschool.project.UserAuthentication;
-import ictgradschool.project.UserAuthenticationDAO;
+import ictgradschool.project.DAOs.UserAuthenticationDAO;
 import ictgradschool.project.util.DBConnectionUtils;
 import ictgradschool.project.util.PasswordUtil;
 import org.junit.*;
@@ -63,14 +63,14 @@ public class TestUserAuthenticationDAO {
 
     @Test
     public void testDGetUseAuthenticationByValidThirdPartyId() throws SQLException {
-        UserAuthentication ua = UserAuthenticationDAO.getUseAuthenticationByThirdPartyId(conn, "1");
+        UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByThirdPartyId(conn, "1");
         String username = ua.getUserName();
         assertEquals("a", username);
     }
 
     @Test
     public void testEGetUseAuthenticationByInvalidThirdPartyId() throws SQLException {
-        UserAuthentication ua = UserAuthenticationDAO.getUseAuthenticationByThirdPartyId(conn, "0");
+        UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByThirdPartyId(conn, "0");
         assertNull(ua);
     }
 
@@ -91,7 +91,7 @@ public class TestUserAuthenticationDAO {
 
     @Test
     public void testGUpdateUserName() throws SQLException {
-        UserAuthentication ua = UserAuthenticationDAO.getUseAuthenticationByThirdPartyId(conn, "2");
+        UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByThirdPartyId(conn, "2");
         UserAuthenticationDAO.updateUserName(ua, conn, "B");
         String username = ua.getUserName();
 

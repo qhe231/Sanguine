@@ -1,12 +1,10 @@
 package ictgradschool.project.test;
 
 import ictgradschool.project.UserInfo;
-import ictgradschool.project.UserInfoDAO;
+import ictgradschool.project.DAOs.UserInfoDAO;
 import ictgradschool.project.util.DBConnectionUtils;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
-
-import javax.jws.soap.SOAPBinding;
 
 import static org.junit.Assert.*;
 
