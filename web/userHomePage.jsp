@@ -25,8 +25,8 @@
     <jsp:include page="./WEB-INF/NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
     </jsp:include>
-
     <script type="text/javascript" src="commentsJS.js"></script>
+    <link href="css/userInfo.css" rel="stylesheet" type="text/css">
 </head>
 
 
@@ -48,11 +48,20 @@
         <%--Buttons to post new article and view all comments--%>
         <c:if test="${user.userId == owner.userId}">
             <form action="./newArticle.jsp" method="post">
-                <input type="submit" name="postANewArticle" value="Post a New Article" class="button">
+                <input type="submit" name="postANewArticle" value="Create a New Article" class="button">
             </form>
 
 
         </c:if>
+
+        <div id="userInfo">
+            <h2>About Me</h2>
+            <img src="${owner.avatarURL}"><br><br>
+            <p><strong>Username:</strong> ${owner.userName}</p>
+            <p><strong>Name:</strong> ${owner.firstName} ${owner.lastName}</p>
+            <p><strong>Date of Birth:</strong> ${owner.dateOfBirth}</p>
+            <p><strong>Description:</strong> ${owner.profile}</p>
+        </div>
 
         <c:choose>
 
@@ -154,9 +163,9 @@
                     </c:otherwise>
                 </c:choose>
             </c:if>
-            <script>console.log(${comments.size()})</script>
         </div>
     </div>
 </header>
+
 </body>
 </html>

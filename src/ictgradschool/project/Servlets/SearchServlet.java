@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "search", urlPatterns = {"/search"})
@@ -33,9 +34,15 @@ public class SearchServlet extends HttpServlet {
 
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             List<UserAuthentication> users = UserAuthenticationDAO.getUserAuthenticationsBySearch(conn, search);
+            List<Article> articlesOfUsers = new ArrayList<>();
+            for (UserAuthentication user : users) {
+                List<Article> articlesOfTheUser = ArticleDAO.getArticles(conn, -1, user.getUserId(), true);
+                articlesOfUsers.addAll(articlesOfTheUser);
+            }
             List<Article> articles = ArticleDAO.getArticlesBySearch(conn, search);
             req.setAttribute("users", users);
             req.setAttribute("articles", articles);
+            req.setAttribute("articlesOfUsers", articlesOfUsers);
 
             req.getRequestDispatcher("/searchResult.jsp").forward(req, resp);
 

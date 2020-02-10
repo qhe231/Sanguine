@@ -16,13 +16,13 @@
     <title>Sign Up</title>
     <script type="text/javascript" src="SignUpJS.js"></script>
     <script type="text/javascript" src="uploadAvatar.js"></script>
+    <script type="text/javascript" src="checkDescriptionLength.js"></script>
 
 
     <%--Sign up page--%>
     <jsp:include page="./WEB-INF/NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
     </jsp:include>
-
 
 
 </head>
@@ -87,8 +87,9 @@
 
                     <div class="row">
                         <div class="col-2 rightText"><label>Profile: </label></div>
-                        <div class="col-1"><textarea name="profile" value="" rows="4" cols="40"></textarea></div>
+                        <div class="col-1"><textarea name="profile" rows="4" cols="40" id="profileText" onkeyup='checkLength()'></textarea></div>
                     </div>
+                    <div id="profilePrompt"></div>
                     <br>
 
                     <div class="row">

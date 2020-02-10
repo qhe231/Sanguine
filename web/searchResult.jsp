@@ -49,10 +49,13 @@
         <%--display the articles that match--%>
         <h2>Articles and Comments</h2>
         <c:choose>
-            <c:when test="${articles.size()==0}">
+            <c:when test="${articles.size()==0 && users.size==0}">
                 <p>Sorry, no article matches your search.</p>
             </c:when>
             <c:otherwise>
+                <c:forEach var="userArticle" items="${articlesOfUsers}">
+                    <p><a href="./article?articleId=${userArticle.articleId}">${userArticle.title}</a></p>
+                </c:forEach>
                 <c:forEach var="article" items="${articles}">
                     <p><a href="./article?articleId=${article.articleId}">${article.title}</a></p>
                 </c:forEach>
