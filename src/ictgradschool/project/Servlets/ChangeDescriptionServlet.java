@@ -1,8 +1,9 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
+import ictgradschool.project.DAOs.UserInfoDAO;
+import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,10 +14,18 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet(name = "ChangeDescriptionServlet", urlPatterns = { "/ChangeDesc" })
+@WebServlet(name = "ChangeDescriptionServlet", urlPatterns = {"/ChangeDesc"})
 
 public class ChangeDescriptionServlet extends HttpServlet {
 
+    /**
+     * ChangeDescriptionServlet is the back end for changing the user's public description.
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -38,7 +47,6 @@ public class ChangeDescriptionServlet extends HttpServlet {
             req.setAttribute("changeDescMessage", message);
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
-        dispatcher.forward(req, resp);
+        req.getRequestDispatcher("/UserAccountPage.jsp").forward(req, resp);
     }
 }

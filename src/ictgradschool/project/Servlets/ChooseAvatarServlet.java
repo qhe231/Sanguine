@@ -1,5 +1,7 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
+import ictgradschool.project.DAOs.UserInfoDAO;
+import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -13,9 +15,16 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet(name = "ChooseAvatarServlet", urlPatterns = { "/ChooseAvatar" })
+@WebServlet(name = "ChooseAvatarServlet", urlPatterns = {"/ChooseAvatar"})
 public class ChooseAvatarServlet extends HttpServlet {
 
+    /**
+     *  ChooseAvatarServlet is the back end for changing the user's avatar to a predefined avatar.
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

@@ -1,9 +1,9 @@
 package ictgradschool.project.test;
 
 import ictgradschool.project.Article;
-import ictgradschool.project.ArticleDAO;
+import ictgradschool.project.DAOs.ArticleDAO;
 import ictgradschool.project.UserInfo;
-import ictgradschool.project.UserInfoDAO;
+import ictgradschool.project.DAOs.UserInfoDAO;
 import ictgradschool.project.util.DBConnectionUtils;
 import org.junit.*;
 import org.junit.runners.MethodSorters;

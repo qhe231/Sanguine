@@ -1,8 +1,10 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
+import ictgradschool.project.DAOs.UserAuthenticationDAO;
+import ictgradschool.project.UserAuthentication;
+import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,11 +14,18 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet(name = "ChangeUsernameServlet", urlPatterns = { "/ChangeUsername" })
-public class ChangeUsernameServlet extends HttpServlet  {
+@WebServlet(name = "ChangeUsernameServlet", urlPatterns = {"/ChangeUsername"})
+public class ChangeUsernameServlet extends HttpServlet {
 
+    /**
+     * ChangeUsernameServlet is the back end for changing the user's username.
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -43,8 +52,7 @@ public class ChangeUsernameServlet extends HttpServlet  {
             req.setAttribute("changeUsernameMessage", message);
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
-        dispatcher.forward(req, resp);
+        req.getRequestDispatcher("/UserAccountPage.jsp").forward(req, resp);
 
 
     }

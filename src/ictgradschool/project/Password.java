@@ -1,8 +1,11 @@
 package ictgradschool.project;
 
-import com.sun.xml.internal.ws.api.pipe.PipelineAssembler;
 import ictgradschool.project.util.PasswordUtil;
 
+/**
+ * This class just stores password info for checking and contains the hashing process so we don't have to
+ * repeat ourselves in multiple places.
+ */
 public class Password {
 
     private String salt;

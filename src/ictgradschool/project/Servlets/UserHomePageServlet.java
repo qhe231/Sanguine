@@ -1,8 +1,11 @@
-package ictgradschool.project;
+package ictgradschool.project.Servlets;
 
+import ictgradschool.project.Article;
+import ictgradschool.project.DAOs.ArticleDAO;
+import ictgradschool.project.DAOs.UserInfoDAO;
+import ictgradschool.project.UserInfo;
 import ictgradschool.project.util.DBConnectionUtils;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +19,14 @@ import java.util.List;
 
 @WebServlet(name = "userHomePage", urlPatterns = {"/userHomePage"})
 public class UserHomePageServlet extends HttpServlet {
+    /**
+     * UserHomePageServlet is the back end for loading a user's homepage.
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Object userObj = req.getSession().getAttribute("user");
@@ -29,7 +40,7 @@ public class UserHomePageServlet extends HttpServlet {
             for (Article a : articles) {
 
                 //add each article's comment in the comments list
-                for (Article c : a.getChildren()){
+                for (Article c : a.getChildren()) {
                     comments.add(c);
                 }
             }
@@ -37,11 +48,9 @@ public class UserHomePageServlet extends HttpServlet {
             req.setAttribute("articles", articles);
             req.setAttribute("user", user);
             req.setAttribute("owner", owner);
-            req.setAttribute("comments",comments);
+            req.setAttribute("comments", comments);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/userHomePage.jsp");
-            dispatcher.forward(req, resp);
-
+            req.getRequestDispatcher("/userHomePage.jsp").forward(req, resp);
 
         } catch (SQLException e) {
             e.printStackTrace();

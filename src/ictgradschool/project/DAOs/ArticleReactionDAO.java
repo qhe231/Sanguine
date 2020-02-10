@@ -1,4 +1,6 @@
-package ictgradschool.project;
+package ictgradschool.project.DAOs;
+
+import ictgradschool.project.ArticleReaction;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,6 +13,7 @@ public class ArticleReactionDAO {
 
     /**
      * This method returns all the reactions for the provided Article.
+     *
      * @param conn      The DB connection to use.
      * @param articleId The ID of the Article to retrieve reactions for.
      * @return a list of ArticleReactions.
@@ -44,6 +47,7 @@ public class ArticleReactionDAO {
 
     /**
      * This method inserts/updates the database entry for the User in question's reaction to the provided Article.
+     *
      * @param conn      The DB connection to use.
      * @param articleId The ID of the Article to retrieve reactions for.
      * @param userId    The ID of the User whose reaction is being updated.

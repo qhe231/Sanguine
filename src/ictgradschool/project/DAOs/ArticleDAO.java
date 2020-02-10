@@ -1,14 +1,18 @@
-package ictgradschool.project;
+package ictgradschool.project.DAOs;
+
+import ictgradschool.project.Article;
+import ictgradschool.project.ArticleReaction;
+import ictgradschool.project.UserInfo;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ArticleDAO {
 
     /**
      * This method returns a list of Articles.
+     *
      * @param conn     The DB connection to use.
      * @param parentId If we only want to return children of a specified Article, this is its ID; -1 if we want root articles.
      * @param userId   If we only want to return Articles written by a specific user, this is their ID; -1 if we want posts from all users.
@@ -50,6 +54,7 @@ public class ArticleDAO {
 
     /**
      * This method returns the given Article.
+     *
      * @param conn      The DB connection to use.
      * @param articleId The ID of the Article to retrieve.
      * @return the Article requested
@@ -78,6 +83,7 @@ public class ArticleDAO {
 
     /**
      * This method adds a new Article into the database.
+     *
      * @param conn    The DB connection to use.
      * @param article The Article to add to the database.
      * @return whether the insert was successful.
@@ -112,6 +118,7 @@ public class ArticleDAO {
 
     /**
      * This method updates the given article's database entry.
+     *
      * @param conn    The DB connection to use.
      * @param article The Article to update in the database (if Article does not already exist, use insertArticle instead).
      * @return whether the update was successful.
@@ -132,6 +139,7 @@ public class ArticleDAO {
 
     /**
      * This method deletes an article from the database.
+     *
      * @param conn      The DB connection to use.
      * @param articleID The ID of the Article to remove from the database.
      * @return Whether deletion was successful.
@@ -149,6 +157,7 @@ public class ArticleDAO {
 
     /**
      * This method returns a list of articles based on a provided search string.
+     *
      * @param conn   The DB connection to use.
      * @param search The search string.
      * @return all Articles where the search string is contained in either the title or content.
