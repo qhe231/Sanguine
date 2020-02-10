@@ -13,9 +13,17 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet(name = "ChangeBlogNameServlet", urlPatterns = { "/ChangeBlogName" })
+@WebServlet(name = "ChangeBlogNameServlet", urlPatterns = {"/ChangeBlogName"})
 public class ChangeBlogNameServlet extends HttpServlet {
 
+    /**
+     * ChangeBlogNameServlet is the backend for changing the name of the user's own personal blog.
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -28,7 +36,7 @@ public class ChangeBlogNameServlet extends HttpServlet {
 //      Update blog name, set message depending on success or failure
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
-           UserInfoDAO.updateBlogName(ui, conn, newBlogName);
+            UserInfoDAO.updateBlogName(ui, conn, newBlogName);
 
             String message = "Blog name successfully updated to " + newBlogName;
             req.setAttribute("changeBlogNameMessage", message);
@@ -39,8 +47,7 @@ public class ChangeBlogNameServlet extends HttpServlet {
             req.setAttribute("changeBlogNameMessage", message);
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
-        dispatcher.forward(req, resp);
+        req.getRequestDispatcher("/UserAccountPage.jsp").forward(req, resp);
     }
 
 }

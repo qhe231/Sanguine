@@ -17,6 +17,14 @@ import java.sql.SQLException;
 
 public class ChangeNameServlet extends HttpServlet {
 
+    /**
+     * ChangeNameServlet is the back end for changing the user's first and last names.
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -48,7 +56,6 @@ public class ChangeNameServlet extends HttpServlet {
             req.setAttribute("changeNameMessage", message);
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
-        dispatcher.forward(req, resp);
+        req.getRequestDispatcher("/UserAccountPage.jsp").forward(req, resp);
     }
 }

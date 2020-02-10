@@ -20,6 +20,7 @@ public class ArticleServlet extends HttpServlet {
     /**
      * ArticleServlet takes a parameter for the articleId. If that parameter is the word "random" then it randomly
      * selects a root article to display.
+     *
      * @param req
      * @param resp
      */
@@ -31,7 +32,7 @@ public class ArticleServlet extends HttpServlet {
 
 //          If user requests an article with an id of "random", choose random number
             if (articleIdStr.equalsIgnoreCase("random")) {
-                List<Article> articles = ArticleDAO.getArticles(conn, -1, -1);
+                List<Article> articles = ArticleDAO.getArticles(conn, -1, -1, true);
                 int randomIndex = (int) (Math.random() * articles.size());
                 article = articles.get(randomIndex);
             } else {
@@ -41,8 +42,7 @@ public class ArticleServlet extends HttpServlet {
             req.setAttribute("article", article);
             req.setAttribute("user", req.getSession().getAttribute("user"));
 
-            RequestDispatcher rd = req.getRequestDispatcher("./WEB-INF/article.jsp");
-            rd.forward(req, resp);
+            req.getRequestDispatcher("./WEB-INF/article.jsp").forward(req, resp);
         } catch (SQLException | IOException | NumberFormatException | ServletException e) {
             System.out.println(e.getMessage());
         }

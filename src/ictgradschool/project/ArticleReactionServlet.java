@@ -19,6 +19,7 @@ public class ArticleReactionServlet extends HttpServlet {
     /**
      * ArticleReactionServlet is called via ajax; it takes a list of Articles and returns a JSON array containing the
      * reactions to each Article, as well as what the current user's reaction is.
+     *
      * @param req
      * @param resp
      * @throws ServletException
@@ -27,7 +28,7 @@ public class ArticleReactionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        UserInfo user = (UserInfo)req.getSession().getAttribute("user");
+        UserInfo user = (UserInfo) req.getSession().getAttribute("user");
 
         Scanner s = new Scanner(req.getInputStream());
         String content = "";
@@ -45,7 +46,7 @@ public class ArticleReactionServlet extends HttpServlet {
                 dislikes[i] = 0;
                 userResponse[i] = (user == null) ? -1 : 0;
                 List<ArticleReaction> reactions = ArticleReactionDAO.getReactionsToArticle(conn, ids[i]);
-                for (ArticleReaction r: reactions) {
+                for (ArticleReaction r : reactions) {
                     switch (r.getReaction()) {
                         case 1:
                             likes[i]++;
@@ -58,15 +59,14 @@ public class ArticleReactionServlet extends HttpServlet {
                         userResponse[i] = r.getReaction();
                 }
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
         String responseString = "[";
         for (int i = 0; i < ids.length; i++) {
-            responseString += "{\"likes\":"+likes[i]+",\"dislikes\":"+dislikes[i]+",\"user\":" + userResponse[i] + "}";
-            if (i<ids.length-1)
+            responseString += "{\"likes\":" + likes[i] + ",\"dislikes\":" + dislikes[i] + ",\"user\":" + userResponse[i] + "}";
+            if (i < ids.length - 1)
                 responseString += ",";
             else
                 responseString += "]";

@@ -18,48 +18,55 @@ import java.sql.SQLException;
 
 public class DeleteAccountServlet extends HttpServlet {
 
+    /**
+     * DeleteAccountServlet is the back end for deleting the user's account.
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        UserInfo user = (UserInfo)req.getSession().getAttribute("user");
+        UserInfo user = (UserInfo) req.getSession().getAttribute("user");
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             UserAuthentication ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, user.getUserName());
 
-        String password = req.getParameter("password");
+            String password = req.getParameter("password");
 
-        byte[] salt = PasswordUtil.base64Decode(ua.getSalt());
-        byte[] expectedHash = PasswordUtil.base64Decode(ua.getHashedPassword());
+            byte[] salt = PasswordUtil.base64Decode(ua.getSalt());
+            byte[] expectedHash = PasswordUtil.base64Decode(ua.getHashedPassword());
 
-        boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(password.toCharArray(), salt, ua.getHashNum(), expectedHash);
+            boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(password.toCharArray(), salt, ua.getHashNum(), expectedHash);
 
 //        If user entered correct password, delete the account
-        if (isPasswordCorrect) {
+            if (isPasswordCorrect) {
 
-            UserAuthenticationDAO.deleteUser(ua, conn);
-            req.getSession().invalidate();
+                UserAuthenticationDAO.deleteUser(ua, conn);
+                req.getSession().invalidate();
 
-            resp.sendRedirect("./index");
+                resp.sendRedirect("./index");
 
             }
 //          If user entered incorrect password, set error message
-         else {
+            else {
 
-            String message = "Entered password does not match current password";
+                String message = "Entered password does not match current password";
+                req.setAttribute("deleteAccountMessage", message);
+
+                RequestDispatcher dispatcher = req.getRequestDispatcher("/UserAccountPage.jsp");
+                dispatcher.forward(req, resp);
+
+            }
+        } catch (SQLException e) {
+
+            String message = "Account could not be deleted";
             req.setAttribute("deleteAccountMessage", message);
 
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/UserAccountPage.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
             dispatcher.forward(req, resp);
 
         }
-    } catch (SQLException e) {
-
-        String message = "Account could not be deleted";
-        req.setAttribute("deleteAccountMessage", message);
-
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
-        dispatcher.forward(req, resp);
-
-    }
 
     }
 

@@ -14,17 +14,24 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-@WebServlet(name = "ChangePasswordServlet", urlPatterns = { "/ChangePassword" })
+@WebServlet(name = "ChangePasswordServlet", urlPatterns = {"/ChangePassword"})
 
 public class ChangePasswordServlet extends HttpServlet {
 
+    /**
+     * ChangePasswordServlet is the back end for changing the user's password.
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         HttpSession session = req.getSession();
         UserInfo ui = (UserInfo) session.getAttribute("user");
         UserAuthentication ua = null;
-
 
 
         String currentPasswordPlainText = req.getParameter("currentPassword");
@@ -63,8 +70,7 @@ public class ChangePasswordServlet extends HttpServlet {
 
         }
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
-        dispatcher.forward(req, resp);
+        req.getRequestDispatcher("/UserAccountPage.jsp").forward(req, resp);
     }
 
 }

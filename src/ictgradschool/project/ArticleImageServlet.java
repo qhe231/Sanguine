@@ -11,12 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "articleImage", urlPatterns = { "/articleImage" })
+@WebServlet(name = "articleImage", urlPatterns = {"/articleImage"})
 public class ArticleImageServlet extends HttpServlet {
 
     /**
      * ArticleImageServlet provides the backend for TinyMCE's image upload capability.
      * It provides a response containing the needed JSON object with the server location of the uploaded image file.
+     *
      * @param req
      * @param resp
      * @throws ServletException

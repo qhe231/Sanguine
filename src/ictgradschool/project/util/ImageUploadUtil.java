@@ -30,6 +30,7 @@ public class ImageUploadUtil {
 
     /**
      * This method initialises the directories server-side for image uploading (assuming they are needed).
+     *
      * @param sc the ServletContext of the calling servlet.
      * @return
      */
@@ -55,12 +56,13 @@ public class ImageUploadUtil {
 
     /**
      * This method confirms that fi is in fact an image and, if so, uploads it to the server.
+     *
      * @param fi       The file to upload.
      * @param isAvatar Avatars are resized to 100x100 when saved; other images are not.
      * @return a string containing the path to where this image is now stored on the server.
      * @throws Exception
      */
-    public static String uploadImage(FileItem fi, boolean isAvatar) throws Exception{
+    public static String uploadImage(FileItem fi, boolean isAvatar) throws Exception {
 
         File fullsizeImageFile = null;
 
@@ -74,8 +76,7 @@ public class ImageUploadUtil {
                 fi.write(tempImageFile);
                 fullsizeImageFile = createThumbnail(tempImageFile);
                 tempImageFile.delete();
-            }
-            else
+            } else
                 fi.write(fullsizeImageFile);
             return "./images/" + fullsizeImageFile.getName();
         }
@@ -85,6 +86,7 @@ public class ImageUploadUtil {
 
     /**
      * This method resizes a provided image to 100x100px.
+     *
      * @param imageFile
      * @return the resized image.
      * @throws IOException

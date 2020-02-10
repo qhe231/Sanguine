@@ -19,6 +19,7 @@ import java.util.List;
 public class AvatarUploadServlet extends HttpServlet {
     /**
      * AvatarUploadServlet handles the uploading of user avatars.
+     *
      * @param req
      * @param resp
      * @throws ServletException
