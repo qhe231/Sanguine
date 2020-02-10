@@ -17,6 +17,12 @@ import java.util.List;
 @WebServlet(name = "article", urlPatterns = {"/article"})
 public class ArticleServlet extends HttpServlet {
 
+    /**
+     * ArticleServlet takes a parameter for the articleId. If that parameter is the word "random" then it randomly
+     * selects a root article to display.
+     * @param req
+     * @param resp
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try (Connection conn = DBConnectionUtils.getConnectionFromWebInf(this, "./res/connection.properties")) {
