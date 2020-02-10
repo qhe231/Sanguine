@@ -53,6 +53,9 @@
                 <p>Sorry, no article matches your search.</p>
             </c:when>
             <c:otherwise>
+                <c:forEach var="userArticle" items="${articlesOfUsers}">
+                    <p><a href="./article?articleId=${userArticle.articleId}">${userArticle.title}</a></p>
+                </c:forEach>
                 <c:forEach var="article" items="${articles}">
                     <p><a href="./article?articleId=${article.articleId}">${article.title}</a></p>
                 </c:forEach>
