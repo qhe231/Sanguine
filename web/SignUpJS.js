@@ -9,7 +9,7 @@ function checkPassword() {
         document.getElementById("message").innerHTML = "Passwords do not match";
         document.getElementById("submit").disabled = true;
 
-        }
+    }
 }
 
 /** Send the possible username to UsernameServlet

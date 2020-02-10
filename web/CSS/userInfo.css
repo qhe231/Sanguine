@@ -1,0 +1,19 @@
+#userInfo {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+@media (min-width: 1500px) {
+    #userInfo {
+        width: 200px;
+        background-color: white;
+        position: absolute;
+        z-index: 1;
+        top: 30px;
+        left: 30px;
+        overflow-x: hidden;
+        padding: 10px 10px;
+    }
+}
