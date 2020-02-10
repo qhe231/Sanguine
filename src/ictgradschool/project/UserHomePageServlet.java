@@ -24,7 +24,7 @@ public class UserHomePageServlet extends HttpServlet {
 
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
             UserInfo owner = UserInfoDAO.getUserInfoByUserName(conn, req.getParameter("owner"));
-            List<Article> articles = ArticleDAO.getArticles(conn, -1, owner.getUserId());
+            List<Article> articles = ArticleDAO.getArticles(conn, -1, owner.getUserId(), true);
 
             for (Article a : articles) {
 

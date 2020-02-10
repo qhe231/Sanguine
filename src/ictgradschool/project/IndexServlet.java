@@ -21,7 +21,7 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
 
-            List<Article> articles = ArticleDAO.getArticles(conn, -1, -1);
+            List<Article> articles = ArticleDAO.getArticles(conn, -1, -1, true);
 
             String sorting = "sort_date";
             Cookie[] cookies = req.getCookies();

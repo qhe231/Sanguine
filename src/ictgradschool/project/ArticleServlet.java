@@ -17,6 +17,12 @@ import java.util.List;
 @WebServlet(name = "article", urlPatterns = {"/article"})
 public class ArticleServlet extends HttpServlet {
 
+    /**
+     * ArticleServlet takes a parameter for the articleId. If that parameter is the word "random" then it randomly
+     * selects a root article to display.
+     * @param req
+     * @param resp
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try (Connection conn = DBConnectionUtils.getConnectionFromWebInf(this, "./res/connection.properties")) {
@@ -25,7 +31,7 @@ public class ArticleServlet extends HttpServlet {
 
 //          If user requests an article with an id of "random", choose random number
             if (articleIdStr.equalsIgnoreCase("random")) {
-                List<Article> articles = ArticleDAO.getArticles(conn, -1, -1);
+                List<Article> articles = ArticleDAO.getArticles(conn, -1, -1, true);
                 int randomIndex = (int) (Math.random() * articles.size());
                 article = articles.get(randomIndex);
             } else {

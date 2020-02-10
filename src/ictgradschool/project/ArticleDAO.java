@@ -8,19 +8,20 @@ import java.util.List;
 public class ArticleDAO {
 
     /**
-     * @param conn     The DB connection to use
+     * This method returns a list of Articles.
+     * @param conn     The DB connection to use.
      * @param parentId If we only want to return children of a specified Article, this is its ID; -1 if we want root articles.
      * @param userId   If we only want to return Articles written by a specific user, this is their ID; -1 if we want posts from all users.
-     * @return List of all articles
+     * @return list of all articles
      * @throws SQLException
      */
-    public static List<Article> getArticles(Connection conn, int parentId, int userId) throws SQLException {
+    public static List<Article> getArticles(Connection conn, int parentId, int userId, boolean descOrder) throws SQLException {
         List<Article> articles = new ArrayList<>();
 
         String sqlString = "select * from articles_and_comments where parentId " + ((parentId == -1) ? "is" : "=") + " ?";
         if (userId != -1)
             sqlString += " and userBelongedId = ?";
-        sqlString += " order by datePosted desc;";
+        sqlString += " order by datePosted " + (descOrder ? "desc" : "asc") + ";";
 
         try (PreparedStatement s = conn.prepareStatement(sqlString)) {
             if (parentId == -1) {
@@ -38,20 +39,20 @@ public class ArticleDAO {
                     UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
                     List<ArticleReaction> reactions = ArticleReactionDAO.getReactionsToArticle(conn, articleId);
                     Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2),
-                            getArticles(conn, articleId, -1), parentId, r.getTimestamp(7), reactions);
+                            getArticles(conn, articleId, -1, false), parentId, r.getTimestamp(7), reactions);
                     articles.add(a);
                 }
             }
         }
 
-
         return articles;
     }
 
     /**
-     * @param conn      The DB connection to use
-     * @param articleId The ID of the Article to retrieve
-     * @return The Article requested
+     * This method returns the given Article.
+     * @param conn      The DB connection to use.
+     * @param articleId The ID of the Article to retrieve.
+     * @return the Article requested
      * @throws SQLException
      */
     public static Article getSpecificArticle(Connection conn, int articleId) throws SQLException {
@@ -67,7 +68,7 @@ public class ArticleDAO {
                     if (r.wasNull())
                         parentId = -1;
                     return new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2),
-                            getArticles(conn, articleId, -1), parentId, r.getTimestamp(7), reactions);
+                            getArticles(conn, articleId, -1, false), parentId, r.getTimestamp(7), reactions);
                 }
             }
         }
@@ -76,9 +77,10 @@ public class ArticleDAO {
     }
 
     /**
-     * @param conn    The DB connection to use
-     * @param article The Article to add to the database
-     * @return Whether the insert was successful
+     * This method adds a new Article into the database.
+     * @param conn    The DB connection to use.
+     * @param article The Article to add to the database.
+     * @return whether the insert was successful.
      * @throws SQLException
      */
     public static boolean insertArticle(Connection conn, Article article) throws SQLException {
@@ -109,9 +111,10 @@ public class ArticleDAO {
     }
 
     /**
-     * @param conn    The DB connection to use
-     * @param article The Article to update in the database (if Article does not already exist, use insertArticle instead)
-     * @return Whether the update was successful
+     * This method updates the given article's database entry.
+     * @param conn    The DB connection to use.
+     * @param article The Article to update in the database (if Article does not already exist, use insertArticle instead).
+     * @return whether the update was successful.
      * @throws SQLException
      */
     public static boolean editArticle(Connection conn, Article article) throws SQLException {
@@ -128,19 +131,10 @@ public class ArticleDAO {
     }
 
     /**
-     * @param conn    The DB connection to use
-     * @param article The Article object to remove from the database
-     * @return Whether deletion was successful
-     * @throws SQLException
-     */
-    public static boolean deleteArticle(Connection conn, Article article) throws SQLException {
-        return deleteArticle(conn, article.getArticleId());
-    }
-
-    /**
-     * @param conn      The DB connection to use
-     * @param articleID The ID of the Article to remove from the database
-     * @return Whether deletion was successful
+     * This method deletes an article from the database.
+     * @param conn      The DB connection to use.
+     * @param articleID The ID of the Article to remove from the database.
+     * @return Whether deletion was successful.
      * @throws SQLException
      */
     public static boolean deleteArticle(Connection conn, int articleID) throws SQLException {
@@ -153,26 +147,29 @@ public class ArticleDAO {
         return true;
     }
 
+    /**
+     * This method returns a list of articles based on a provided search string.
+     * @param conn   The DB connection to use.
+     * @param search The search string.
+     * @return all Articles where the search string is contained in either the title or content.
+     * @throws SQLException
+     */
     public static List<Article> getArticlesBySearch(Connection conn, String search) throws SQLException {
-
         List<Article> articles = new ArrayList<>();
 
         try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM articles_and_comments WHERE title LIKE ? OR content LIKE ? ORDER BY datePosted DESC;")) {
             stmt.setString(1, "%" + search + "%");
             stmt.setString(2, "%" + search + "%");
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    int articleId = rs.getInt(1);
-                    Timestamp postedTime = rs.getTimestamp(2);
-                    String title = rs.getString(3);
-                    String content = rs.getString(4);
-                    int parentId = rs.getInt(5);
-                    UserInfo author = UserInfoDAO.getUserInfoById(conn, rs.getInt(6));
-                    List<Article> children = getArticles(conn, articleId, -1);
-                    Timestamp editedTime = rs.getTimestamp(7);
+
+            try (ResultSet r = stmt.executeQuery()) {
+                while (r.next()) {
+                    int articleId = r.getInt(1);
+                    UserInfo author = UserInfoDAO.getUserInfoById(conn, r.getInt(6));
                     List<ArticleReaction> reactions = ArticleReactionDAO.getReactionsToArticle(conn, articleId);
-                    Article article = new Article(articleId, author, title, content, postedTime, children, parentId, editedTime, reactions);
-                    articles.add(article);
+
+                    Article a = new Article(articleId, author, r.getString(3), r.getString(4), r.getTimestamp(2),
+                            getArticles(conn, articleId, -1, false), r.getInt(5), r.getTimestamp(7), reactions);
+                    articles.add(a);
                 }
             }
         }

@@ -17,6 +17,13 @@ import java.util.List;
 
 @WebServlet(name = "uploadImage", urlPatterns = {"/avatarUpload"})
 public class AvatarUploadServlet extends HttpServlet {
+    /**
+     * AvatarUploadServlet handles the uploading of user avatars.
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
