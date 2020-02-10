@@ -221,7 +221,7 @@
 
                         <div class="row">
                             <div class="col-md col-12">
-                                <img src="./images/Cropped_Images/plant_crop.jpg" class="crop">
+                                <img src="images/themes/cropped/plant_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Botanical" class="theme"> Botanical<br> <br>
                                 <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family: Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@anniespratt?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
@@ -237,7 +237,7 @@
                             </div>
 
                             <div class="col-md col-12">
-                                <img src="./images/Cropped_Images/beach_crop.jpg" class="crop">
+                                <img src="images/themes/cropped/beach_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Beach" class="theme"> Beach <br><br>
                                 <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@fezbot2000?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
@@ -254,7 +254,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md col-12">
-                                <img src="./images/Cropped_Images/balloons_crop.jpg" class="crop">
+                                <img src="images/themes/cropped/balloons_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Hot Air Balloons" class="theme"> Hot Air
                                 Balloons <br><br>
                                 <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family: Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
@@ -271,7 +271,7 @@
 
 
                             <div class="col-md col-12">
-                                <img src="./images/Cropped_Images/stationery_crop.jpg" class="crop">
+                                <img src="images/themes/cropped/stationery_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Stationery" class="theme"> Stationery <br><br>
                                 <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family: Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@joannakosinska?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
@@ -288,7 +288,7 @@
                         <br>
                         <div class="row">
                             <div class="col-md col-12">
-                                <img src="./images/Cropped_Images/snow_crop.jpg" class="crop">
+                                <img src="images/themes/cropped/snow_crop.jpg" class="crop">
                                 <input type="radio" name="theme" value="Snow" class="theme"> Snow <br><br>
                                 <a style="background-color:darkgrey;color:white;text-decoration:none;padding:4px 6px;font-family:Arial, sans-serif;font-size:12px;font-weight:bold;line-height:1.2;display:inline-block;border-radius:3px"
                                    href="https://unsplash.com/@paulfiedler?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"
@@ -361,51 +361,51 @@
 
                             <div class="col-2">
                                 <input type="radio" name="avatar" value="./images/avatars/1.png" class="avatar"><img
-                                    src="./images/1.png"></div>
+                                    src="./images/avatars/1.png"></div>
 
                             <div class="col-2">
-                                <input type="radio" name="avatar" value="./images/2.png" class="avatar"><img
-                                    src="./images/2.png"></div>
+                                <input type="radio" name="avatar" value="./images/avatars/2.png" class="avatar"><img
+                                    src="./images/avatars/2.png"></div>
 
                             <div class="col-2">
-                                <input type="radio" name="avatar" value="./images/3.png" class="avatar"><img
-                                    src="./images/3.png"></div>
+                                <input type="radio" name="avatar" value="./images/avatars/3.png" class="avatar"><img
+                                    src="./images/avatars/3.png"></div>
                         </div>
                         <div class="row">
                             <div class="col-2">
 
-                                <input type="radio" name="avatar" value="./images/4.png" class="avatar"><img
-                                    src="./images/4.png"></div>
+                                <input type="radio" name="avatar" value="./images/avatars/4.png" class="avatar"><img
+                                    src="./images/avatars/4.png"></div>
 
 
                             <div class="col-2">
-                                <input type="radio" name="avatar" value="./images/5.png" class="avatar"><img
-                                    src="./images/5.png">
+                                <input type="radio" name="avatar" value="./images/avatars/5.png" class="avatar"><img
+                                    src="./images/avatars/5.png">
                             </div>
 
                             <div class="col-2">
-                                <input type="radio" name="avatar" value="./images/6.png" class="avatar"><img
-                                    src="./images/6.png"></div>
+                                <input type="radio" name="avatar" value="./images/avatars/6.png" class="avatar"><img
+                                    src="./images/avatars/6.png"></div>
                         </div>
 
                         <div class="row">
                             <div class="col-2">
-                                <input type="radio" name="avatar" value="./images/7.png" class="avatar"><img
-                                    src="./images/7.png"></div>
+                                <input type="radio" name="avatar" value="./images/avatars/7.png" class="avatar"><img
+                                    src="./images/avatars/7.png"></div>
 
                             <div class="col-2">
-                                <input type="radio" name="avatar" value="./images/8.png" class="avatar"><img
-                                    src="./images/8.png"></div>
+                                <input type="radio" name="avatar" value="./images/avatars/8.png" class="avatar"><img
+                                    src="./images/avatars/8.png"></div>
 
                             <div class="col-2">
-                                <input type="radio" name="avatar" value="./images/9.png" class="avatar"><img
-                                    src="./images/9.png"></div>
+                                <input type="radio" name="avatar" value="./images/avatars/9.png" class="avatar"><img
+                                    src="./images/avatars/9.png"></div>
                         </div>
 
                         <div class="row">
                             <div class="col-2">
-                                <input type="radio" name="avatar" value="./images/10.png" class="avatar"><img
-                                    src="./images/10.png"></div>
+                                <input type="radio" name="avatar" value="./images/avatars/10.png" class="avatar"><img
+                                    src="./images/avatars/10.png"></div>
                         </div>
                     </form>
 
