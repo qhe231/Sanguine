@@ -19,6 +19,15 @@ import java.util.stream.Collectors;
 @WebServlet(name = "EditArticle", urlPatterns = {"/EditArticle"})
 public class EditArticleServlet extends HttpServlet {
 
+    /**
+     * EditArticleServlet is the back end for editing an article or comment. Once the user has made their changes
+     * in the TinyMCE editor, this servlet is called via ajax to save those changes to the database.
+     *
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
@@ -31,11 +40,10 @@ public class EditArticleServlet extends HttpServlet {
             int articleId = Integer.parseInt(req.getParameter("articleId"));
             Article article = ArticleDAO.getSpecificArticle(conn, articleId);
             article.setContent(content);
-            article.setEditedTimeStamp( new Timestamp((new Date()).getTime()));
+            article.setEditedTimeStamp(new Timestamp((new Date()).getTime()));
             ArticleDAO.editArticle(conn, article);
 
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }

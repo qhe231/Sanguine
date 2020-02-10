@@ -17,6 +17,16 @@ import java.util.List;
 
 @WebServlet(name = "index", urlPatterns = {"", "/index"})
 public class IndexServlet extends HttpServlet {
+
+    /**
+     * IndexServlet loads the index page. It retrieves a list of all root articles sorted by date descending,
+     * determines whether the user has opted to sort by popularity instead, then forwards those articles to the JSP
+     * once sorting is complete.
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {

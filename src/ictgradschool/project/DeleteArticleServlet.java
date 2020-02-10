@@ -14,14 +14,22 @@ import java.sql.SQLException;
 @WebServlet(name = "DeleteArticle", urlPatterns = {"/DeleteArticle"})
 public class DeleteArticleServlet extends HttpServlet {
 
+    /**
+     * DeleteArticleServlet is the back end for deleting an article or comment.
+     * It deletes the article from the database, then attempts to reload the root article's page (or index if the
+     * article deleted was root).
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int articleId = -1;
         try {
             articleId = Integer.parseInt(req.getParameter("articleId"));
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             resp.sendRedirect("./index");
         }
         if (articleId == -1)
@@ -43,8 +51,7 @@ public class DeleteArticleServlet extends HttpServlet {
                 }
                 req.getRequestDispatcher("./article?articleId=" + parent.getArticleId()).forward(req, resp);
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.getMessage();
         }
     }
