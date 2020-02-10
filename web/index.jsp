@@ -91,9 +91,9 @@
 
             <div class="row">
                 <div class="col-12">
-                    <img src="./images/plus.png" class="reactionIcon"> &nbsp;
+                    <img src="images/site/plus.png" class="reactionIcon"> &nbsp;
                     <span class="reactionCounter" id="nLike-${article.articleId}"> </span> &nbsp;
-                    <img src="./images/minus.png" class="reactionIcon"> &nbsp;
+                    <img src="images/site/minus.png" class="reactionIcon"> &nbsp;
                     <span class="reactionCounter" id="nDislike-${article.articleId}"></span>
                 </div>
             </div>
