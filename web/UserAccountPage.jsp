@@ -13,6 +13,7 @@
     <title>Account Settings</title>
     <script type="text/javascript" src="UserAccountJS.js"></script>
     <script type="text/javascript" src="uploadAvatar.js"></script>
+    <script type="text/javascript" src="checkDescriptionLength.js"></script>
     <style>
 
     </style>
@@ -122,13 +123,15 @@
                 <div style="display: none" id="changeDesc">
                     <form action="./ChangeDesc">
                         <textarea rows="5" cols="50" name="desc" maxlength="1000" placeholder="New description"
-                                  required> </textarea>
-                        <br><br>
+                                  required id="profileText" onkeyup='checkLength()'> </textarea>
+                        <br>
+                        <div id="profilePrompt"></div>
+                        <br>
 
                         <div class="row">
                             <div class="col">
 
-                                <input type="submit" class="button">
+                                <input type="submit" id="submit" class="button">
 
                                 <button type="button" onclick="hideForm('changeDesc', 'descBtn')" class="button">
                                     Cancel
