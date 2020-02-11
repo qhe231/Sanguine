@@ -13,7 +13,6 @@
     <title>New Article</title>
 
 
-
     <jsp:include page="./WEB-INF/NavigationBar.jsp">
         <jsp:param name="user" value="${user}"/>
     </jsp:include>
@@ -46,8 +45,8 @@
             <input name="title" required><br>
             <textarea id="articleEditor" name="content"></textarea><br>
             <input type="submit" name="submit" id="submitButton" class="button" value="Submit">
-            <button name="cancel" id="cancelButton" onclick="window.history.back();">Cancel</button>
-        </form>
+        </form> <br>
+        <button name="cancel" id="cancelButton" onclick="window.history.back();">Cancel</button>
     </div>
 </header>
 

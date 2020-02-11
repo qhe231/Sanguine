@@ -49,7 +49,7 @@ public class SignUpServlet extends HttpServlet {
                     else {
                         String av = fields.get("avatar");
                         if (!av.substring(av.length() - 4).equals(".png"))
-                            fields.put("avatar", "./images/1.png");
+                            fields.put("avatar", "./images/avatars/1.png");
                     }
                 }
             }

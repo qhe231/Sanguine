@@ -41,39 +41,33 @@ public class ChangePasswordServlet extends HttpServlet {
         String currentPasswordPlainText = req.getParameter("currentPassword");
         String newPasswordPlainText = req.getParameter("newPassword");
 
-        Password existingPassword = new Password(ua.getSalt(), ua.getHashNum(), ua.getHashedPassword());
+        try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
+            ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, ui.getUserName());
+            Password existingPassword = new Password(ua.getSalt(), ua.getHashNum(), ua.getHashedPassword());
 
-        boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPasswordPlainText.toCharArray(), existingPassword.getSaltByte(), existingPassword.getHashNum(),
-                existingPassword.getHashByte());
+            boolean isPasswordCorrect = PasswordUtil.isExpectedPassword(currentPasswordPlainText.toCharArray(), existingPassword.getSaltByte(), existingPassword.getHashNum(),
+                    existingPassword.getHashByte());
 
 //          If user entered correct password, update password and set success message
-        if (isPasswordCorrect) {
-
-            try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
-
-                ua = UserAuthenticationDAO.getUserAuthenticationByUserName(conn, ui.getUserName());
+            if (isPasswordCorrect) {
                 UserAuthenticationDAO.updatePassword(ua, conn, newPasswordPlainText);
 
                 String message = "Password was successfully changed";
                 req.setAttribute("changePasswordMessage", message);
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-                String message = "Password could not be changed";
-                req.setAttribute("changePasswordMessage", message);
-
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
-                dispatcher.forward(req, resp);
-
-            }
 //          If user entered incorrect password, set error message
-        } else {
-
-            String message = "Entered password does not match current password";
+            } else {
+                String message = "Entered password does not match current password";
+                req.setAttribute("changePasswordMessage", message);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            String message = "Password could not be changed";
             req.setAttribute("changePasswordMessage", message);
 
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/UserAccountPage.jsp");
+            dispatcher.forward(req, resp);
         }
-
         req.getRequestDispatcher("/UserAccountPage.jsp").forward(req, resp);
     }
 

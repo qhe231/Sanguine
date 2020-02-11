@@ -411,7 +411,6 @@
                                 <input type="radio" name="avatar" value="./images/avatars/10.png" class="avatar"><img
                                     src="./images/avatars/10.png"></div>
                         </div>
-                    </form>
 
                     <br>
                     <p>These predefined avatars are from <strong>Hopnguyen Mr</strong> at <a
