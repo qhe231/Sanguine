@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -40,7 +42,8 @@ public class EditArticleServlet extends HttpServlet {
             int articleId = Integer.parseInt(req.getParameter("articleId"));
             Article article = ArticleDAO.getSpecificArticle(conn, articleId);
             article.setContent(content);
-            article.setEditedTimeStamp(new Timestamp((new Date()).getTime()));
+            ZonedDateTime t = ZonedDateTime.now().withZoneSameInstant(ZoneId.of("Pacific/Auckland"));
+            article.setEditedTimeStamp(Timestamp.valueOf(t.toLocalDateTime()));
             ArticleDAO.editArticle(conn, article);
 
         } catch (SQLException e) {
