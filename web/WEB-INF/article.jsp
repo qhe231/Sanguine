@@ -48,6 +48,9 @@
         </div>
 
         <div class="right">
+            <c:if test="${article.postedTimeStamp < article.editedTimeStamp}">
+                <i>Last edited: ${article.editedTimeStamp}</i>
+            </c:if>
 <span class="reactionBox">
             <input type="checkbox" class="reactionButton" id="like-${article.articleId}">
             <label for="like-${article.articleId}" class="reactionLabel"> <img src="./images/site/plus.png"
