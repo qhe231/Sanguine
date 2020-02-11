@@ -85,7 +85,7 @@
                             <div class="col">
                                 New first name:
                             </div>
-                            <input type="text" name="firstName" required>
+                            <input type="text" name="firstName">
                             <div class="col"></div>
                         </div>
 
@@ -93,7 +93,7 @@
                             <div class="col">
                                 New last name:
                             </div>
-                            <input type="text" name="lastName" required>
+                            <input type="text" name="lastName">
                             <div class="col"></div>
                         </div>
 

@@ -59,7 +59,7 @@ public class ImageUploadUtil {
      */
     public static String uploadImage(FileItem fi, boolean isAvatar) throws Exception {
 
-        File fullsizeImageFile = null;
+        File finalImageFile;
 
         if (fi.getContentType().substring(0, 6).equals("image/")) {
             String fileName = fi.getName().substring(0, fi.getName().indexOf(".")) + "_" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC) +
@@ -69,13 +69,13 @@ public class ImageUploadUtil {
             if (isAvatar) {
                 File tempImageFile = new File(tempFolder, fileName);
                 fi.write(tempImageFile);
-                fullsizeImageFile = createThumbnail(tempImageFile);
+                finalImageFile = createThumbnail(tempImageFile);
                 tempImageFile.delete();
             } else {
-                fullsizeImageFile = new File(imageFolder, fileName);
-                fi.write(fullsizeImageFile);
+                finalImageFile = new File(imageFolder, fileName);
+                fi.write(finalImageFile);
             }
-            return "./images/" + (isAvatar ? "avatars/" : "") + fullsizeImageFile.getName();
+            return "./images/" + (isAvatar ? "avatars/" : "") + finalImageFile.getName();
         }
 
         return "";
