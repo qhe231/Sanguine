@@ -154,7 +154,7 @@
                         <input type="radio" name="avatar" value="own" class="avatar" id="ownAvatar"><span
                             id="ownAvatarPic"> Your Own Avatar</span></div>
                         <div class="col-4">
-                        <input type="file" id="ownAvatarFile" accept="image/*"></div>
+                        <input type="file" name="avatarUpload" id="ownAvatarFile" accept="image/*"></div>
 
                         <span id="changeAvatarMessage"></span>
                     </div>
