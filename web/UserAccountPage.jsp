@@ -123,7 +123,7 @@
                 <%--Form to change description--%>
                 <div style="display: none" id="changeDesc">
                     <form action="./ChangeDesc">
-                        <textarea rows="5" cols="50" name="desc" maxlength="1000" placeholder="New description"
+                        <textarea rows="5" cols="30" name="desc" maxlength="1000" placeholder="New description"
                                   required id="profileText" onkeyup='checkLength()'> </textarea>
                         <br>
                         <div id="profilePrompt"></div>

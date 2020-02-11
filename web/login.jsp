@@ -32,13 +32,13 @@
                 <form action="./login" method="post">
 
                     <div class="row">
-                        <div class="col-4 right"><label>Username: </label></div>
-                        <div class="col-4 left"><input name="username" required></div>
+                        <div class="col-sm-4 col-12 right"><label>Username: </label></div>
+                        <div class="col-sm-4 col-12 left"><input name="username" required></div>
                     </div>
 
                     <div class="row">
-                        <div class="col-4 right"><label>Password: </label></div>
-                        <div class="col-4 left"><input type="password" name="password" required></div>
+                        <div class="col-sm-4 col-12 right"><label>Password: </label></div>
+                        <div class="col-sm-4 col-12 left"><input type="password" name="password" required></div>
                     </div>
 
                     <br>
