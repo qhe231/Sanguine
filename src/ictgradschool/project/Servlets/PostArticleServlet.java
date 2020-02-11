@@ -13,8 +13,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.*;
 
 @WebServlet(name = "postArticle", urlPatterns = {"/postArticle"})
 public class PostArticleServlet extends HttpServlet {
@@ -32,8 +33,10 @@ public class PostArticleServlet extends HttpServlet {
         String parent = req.getParameter("parentId");
         int parentId = (parent == null) ? -1 : Integer.parseInt(parent);
 
+        ZonedDateTime t = ZonedDateTime.now().withZoneSameInstant(ZoneId.of("Pacific/Auckland"));
+
         Article article = new Article(((UserInfo) req.getSession(false).getAttribute("user")),
-                req.getParameter("title"), req.getParameter("content"), new Timestamp((new Date()).getTime()),
+                req.getParameter("title"), req.getParameter("content"), Timestamp.valueOf(t.toLocalDateTime()),
                 new ArrayList<>(), parentId);
 
         try (Connection conn = DBConnectionUtils.getConnectionFromClasspath("connection.properties")) {
