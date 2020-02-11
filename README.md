@@ -2,7 +2,7 @@
 
 Team JEPS
 
-http://trex-sandwich.com/team-jeps_sanguine
+https://trex-sandwich.com/team-jeps_Sanguine
 
 Our extra features were:
 - Ability to like or dislike a comment or article
