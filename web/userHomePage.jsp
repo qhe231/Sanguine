@@ -86,14 +86,9 @@
 
                         <div class="col-md-4 col-12"><a
                                 href="./article?articleId=${article.articleId}">${article.title}</a>
-                            <c:choose>
-                                <c:when test="${article.content.length() <= 100}">
-                                    <td colspan="4">${article.content}</td>
-                                </c:when>
-                                <c:otherwise>
-                                    <td colspan="4">${article.content.substring(0,99)}...</td>
-                                </c:otherwise>
-                            </c:choose></div>
+
+                              <br>  ${article.contentPreview}
+                        </div>
 
                         <div class="col-md-2 col-12"><span
                                 class="displaySm grey">Comments: </span>${article.children.size()}</div>
