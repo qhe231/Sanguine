@@ -24,20 +24,26 @@
 
         <div class="row">
             <div class="col-md-6 col-12 heading"><h1>Welcome to Sanguine</h1></div>
+        </div>
 
-            <div class="col-md col-12centerSm">
+        <div class="row">
+            <div class="col-12 right centerSm">
                 <button onclick="window.location.href ='./article?articleId=random'" class="right">Random
                     Article
                 </button>
             </div>
+        </div>
+        <br>
 
-            <div class="col-md-4 col-12">
+        <div class="row">
+            <div class="col-12 right">
                 <form action="./search" method="get">
                     <input type="submit" value="Search" placeholder="Enter search term" class="button right">
                     <input name="search" type="text" class="right">
                 </form>
             </div>
         </div>
+
         <br>
 
 
@@ -72,7 +78,7 @@
 
                 </div>
                 <div class="col-md-2 col-12">
-                    <span><img src="${article.author.getAvatarURL()}" width="64px"></span>
+                    <span><img src="${article.author.getAvatarURL()}" width="64px"></span> <br>
                     <span><a
                             href="./userHomePage?owner=${article.author.getUserName()}">${article.author.getUserName()}</a></span>
                 </div>
