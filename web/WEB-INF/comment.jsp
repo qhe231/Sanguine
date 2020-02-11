@@ -29,6 +29,9 @@
             </div>
 
             <div class="right">
+                <c:if test="${comment.postedTimeStamp < comment.editedTimeStamp}">
+                    <i>Last edited: ${comment.editedTimeStamp}</i>
+                </c:if>
 
                 <span class="reactionBox">
                 <input type="checkbox" class="reactionButton" id="like-${comment.articleId}">
