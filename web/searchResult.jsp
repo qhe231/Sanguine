@@ -49,7 +49,7 @@
         <%--display the articles that match--%>
         <h2>Articles and Comments</h2>
         <c:choose>
-            <c:when test="${articles.size()==0 && users.size==0}">
+            <c:when test="${articles.size()==0 && users.size()==0}">
                 <p>Sorry, no article matches your search.</p>
             </c:when>
             <c:otherwise>
