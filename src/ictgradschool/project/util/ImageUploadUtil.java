@@ -75,7 +75,7 @@ public class ImageUploadUtil {
                 finalImageFile = new File(imageFolder, fileName);
                 fi.write(finalImageFile);
             }
-            return "./images/" + (isAvatar ? "avatars/" : "") + finalImageFile.getName();
+            return "./images/" + (isAvatar ? "avatars/" : "upload/") + finalImageFile.getName();
         }
 
         return "";
